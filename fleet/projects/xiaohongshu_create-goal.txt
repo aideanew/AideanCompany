@@ -1,0 +1,19 @@
+﻿项目代号 xiaohongshu_create（CTXHS 本地 AI 内容生产工作流平台）。
+目标：完成项目剩余收尾工作 —— CTXHS_03_新需求可执行规划.md 中阶段四的两项受阻遗留：
+(A) Step 26 数据获取方式（R2 受阻项）：需要 Settings 持久化设施 —— SQLite 新表 app_settings + GET/PUT /api/settings + Settings 页表单（dataSource: none|redfox|toutiao|coze|knowledge-base + credentialRef），none 时 Workflow 跳过 collect Step（when 条件，产物 SKIPPED）；
+(B) Step 27 违规检测半边（R3 受阻项）：把已实现的 violation-check skill 挂进 workflows/image-text.yaml（在 caption-writing 之后新增 violation-check Step，入参按 README §22 对接 title/content/hashtags/images/platforms，failOn medium，confirm true），并把 apps/web/src/server/model-readiness.ts 的 evaluateModelReadiness 扩展出 evaluateWorkflowReadiness（工作流引用了 violation-check 技能时校验对话模型绑定，保持既有 9 例 phase4 测试全绿并新增用例）。
+工作目录：E:\Code\NPX\xiaohongshu_create（git 仓库，当前 HEAD 7eb3514）。
+项目规范：以仓库内 AGENTS.md 为最高架构约束（strict TypeScript、Zod 校验、@ctxhs 分层、敏感信息不进日志/Artifact、先读 CTXHS_02/CTXHS_03 对应原子节再动手）。npm test 当前基线 420 pass / 0 fail（12 workspace），npm run build / typecheck / lint 全绿——完成后不得低于该基线。
+拆解要求：
+- 任务给谁（be-2 / be-3 后端、worker-a / fe-2 前端、worker-c 测试）你按职责定；A 项含后端(storage/app.ts+settings.ts)与前端(settings.tsx)，B 项偏后端与 Workflow YAML；
+- 可并行的并行，有依赖的等依赖；同一文件禁止两人同时改；
+- 每个任务包包含：编号/目标/工作目录(绝对路径)/允许与禁止改动范围/要产出的文件/验收命令清单（推荐 grep:相对路径:令牌 形式或 npx tsx --test 指定文件）/报告格式要求（六节报告，落盘到 E:\Code\NPX\xiaohongshu_create\reports\ 下以员工ID命名的子目录）；
+- 全部完成后你亲自跑验收命令（npm test --workspaces 与 npx tsx --test apps/web/test/phase4.test.ts 等）与静态检查，判定 PASS/PARTIAL/REWORK/BLOCKED，REWORK 就带证据派返工包（上限 3 次），最后写六节报告到 E:\Code\AideanCompany\fleet\reports\xiaohongshu_create-20260914.md 并给我执行就绪总表。
+铁律：
+- 禁止 git push / git commit（只改工作区文件，由我方统一提交）；
+- 禁止运行真实 POST /api/tasks 消耗一次性卡额度（1994 活体只允许 GET 只读，且先做端口三元归属取证）；
+- 禁止改动 packages/storage/src/schema.ts 的既有表结构与 license 子系统；app_settings 为新增表；
+- 禁止把任何 API Key 明文写进代码/测试/报告；
+- PowerShell 5.1 环境写 .ps1 必须 UTF-8 带 BOM；npm 命令在 E:\Code\NPX\xiaohongshu_create 下执行；
+- 遇 429 等待 60-120 秒退避重试；某个工作包 BLOCKED 不阻塞其他无依赖包，最后如实标注。
+Full Auto模式：不要问我，自动派活、验收、返工，直到全部完成。

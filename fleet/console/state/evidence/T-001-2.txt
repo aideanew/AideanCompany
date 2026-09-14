@@ -1,0 +1,9 @@
+$ grep:docs/player-guide.md:空格键,5410
+[cwd] E:\Demo\Test0912
+[exit_ok] True
+[time] 2026-09-12 15:02:33
+
+[grep-gate] file=docs/player-guide.md size=1418B
+tokens=空格键,5410
+missing=无
+=> PASS

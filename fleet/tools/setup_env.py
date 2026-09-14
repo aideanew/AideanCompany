@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""Append ModelScope key + agent name to worker .env files (encoding-safe)."""
+import pathlib
+
+MS_KEY = "<KEY-见.env><见.env>"
+HOME = pathlib.Path(r"C:\Users\EDY\AppData\Local\hermes\profiles")
+NAMES = {"worker-a": "Worker-A", "worker-b": "Worker-B", "worker-c": "Worker-C"}
+
+def read_any(p):
+    raw = p.read_bytes()
+    for enc in ("utf-8-sig", "gbk"):
+        try:
+            return raw.decode(enc), enc
+        except UnicodeDecodeError:
+            continue
+    return raw.decode("utf-8", errors="replace"), "utf-8"
+
+for prof, name in NAMES.items():
+    env = HOME / prof / ".env"
+    text, enc = read_any(env)
+    lines = [l for l in text.splitlines() if l.strip()]
+    for kv in (f"HERMES_CUSTOM_API_MODELSCOPE_API_KEY={MS_KEY}", f"A2A_AGENT_NAME={name}"):
+        k = kv.split("=", 1)[0]
+        lines = [l for l in lines if not l.startswith(k + "=")]
+        lines.append(kv)
+    env.write_text("\n".join(lines) + "\n", encoding=enc)
+    print(f"[OK] {prof}: env updated (codec={enc})")
+print("ENV DONE")

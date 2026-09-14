@@ -1,0 +1,13 @@
+reviewer-1（9911）两次调用均超时（"agent did not reply in time"），按派工规则 4 不再反复重试，标记 BLOCKED 上报。
+
+【执行就绪总表】
+| 员工 | 验收状态 | 执行状态 | 等待对象 | 等待条件 | 下一步动作 |
+|---|---|---|---|---|---|
+| reviewer-1 | 未收到（超时 x2） | 不执行 | 用户 | reviewer-1 网关（9911）在线 | 控制台启动 reviewer-1 后重试 |
+
+【BLOCKED 说明】
+- 已完整将审查请求原文发送 reviewer-1（ctx-b6ae8d5db92640c8），两次均 15s 级超时，无回复内容。
+- 证据：a2a_call 返回 "agent did not reply in time"。
+- T-016 本身机器验收为 exit_ok=True（ruff / mypy / pytest 170 passed+2 skipped），代码侧未发现问题，仅审查环节卡在对端离线。
+
+请在控制台确认 reviewer-1 已启动后告诉我，我立即重发（同 context_id 续轮或全新发送均可）；或者你可以指派其他在线员工代审。

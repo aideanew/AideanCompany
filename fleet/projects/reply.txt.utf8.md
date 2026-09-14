@@ -1,0 +1,87 @@
+执行情况说明（先交代过程，再原样转回复）：
+
+1. a2a_call 向 reviewer-1 发送 T-025 审查请求：工具侧两次均超时，网关把任务记为 FAILED（原文回复："[agent did not reply in time]"，context ctx-940f59a0e40d450a / ctx-f2de9931faf24475）。
+2. 诊断确认 reviewer-1 网关在线（pid 38212，hermes -p reviewer-1 gateway run），其 agent 会话实际在后台执行审查（日志可见其在抽跑 git log/读文件，中间撞了 2 次 429 限流后重试成功），并非离线。
+3. 审查完成后 reviewer-1 已把判定书写到 E:/Code/AideanCompany/fleet/projects/AideanBot/AB-P004/review-verdict-AB-P004.md（03:09 落盘，8676 字节；a2a 回复消息本身因超时只记录了超时标记，实质回复内容即该判定书全文）。
+
+以下原样转给 reviewer-1 的回复（判定书全文）：
+
+```
+判定：BLOCKED
+
+# AB-P004（T-015~T-024 全批次）独立审查判定书
+
+> 审查人：reviewer-1 ｜ 日期：2026-09-14 ｜ 模式：独立审查（只审不改；代码缺陷只登记不修改）
+> 依据：freeze-scope-AB-P004.md（冻结 1~8）逐条对照实际实现 / defects.md / fix-log-frontend & backend / regression-AB-P004.md / ux-walkthrough-AB-P004.md / .workbuddy/evidence 台账 / 实际机器门抽跑
+
+---
+
+## 一、判定摘要
+
+**BLOCKED** —— 环境/外部依赖卡死：真实会话端到端验证（L-07 SSE 真实帧 / GET /api/v1/spaces 性能 / e2e 真登录）因 SSO 登录 code 未持有而无法完成；redfox 按名称搜索（L-04）因 REDFOX_API_KEY 未配置阻塞；worker 逐篇 ingest 执行循环（L-06/D-05）归 M3 未接线；onboarding 端点（L-09/D-01）声明明确不做。以上 P1 级未闭环项均系外部/环境依赖卡死且有明确 BLOCKED 依据，非代码返工缺陷；机器门全绿、P0 全闭环、REWORK 上限未突破，故不判 REWORK，亦因存在 P1 未闭环而不判 PASS/PARTIAL。
+
+---
+
+## 二、机器门抽跑（独立复核，真实输出）
+
+| 门禁 | 命令 | 真实输出 | 判定 |
+|---|---|---|---|
+| ruff | `cd backend && .venv/Scripts/python.exe -m ruff check .` | `All checks passed!` | PASS |
+| mypy | `mypy app --ignore-missing-imports` | `Success: no issues found in 51 source files` | PASS |
+| pytest | `pytest tests -q` | `183 passed, 2 skipped, 2 warnings in 16.70s` | PASS |
+| tsc | `cd frontend && npx tsc --noEmit` | 退出码 0（无输出） | PASS |
+| vitest | `npx vitest run` | `Test Files 8 passed (8) · Tests 75 passed (75)` | PASS |
+
+- 与管理者前置情报（183+2 / 75）完全一致，pytest 全量含 P2 新增 4 用例与 D-04 短链 3 用例。
+
+## 三、冻结口径 8 条逐条对照
+
+- **冻结 1（同流水线，ContentAsset 唯一真源）**：无漂移。p0a 迁移 hit_count；kb.py ingest_url 先查后抓 `_lookup_short_link`；`grep:kb.py` 命中 1；entities.py `uq_shortlink_key` 命中 1。PASS
+- **冻结 2（A 拷贝式，B 引用式本期不做）**：无漂移。`KnowledgeDocument.source='copy'` 默认（p1a 迁移 server_default='copy'）；link 仅预留未启用。PASS
+- **冻结 3（引擎 5 槽位，Key 只走 env）**：无漂移。engine_port.py（ENGINE_ORDER 5 位）；`config.py` L67 redfox_api_key=""、L70 kb_default_engine="builtin"、L71 kb_engine_allowlist="builtin,main"、L72-76 coze/dify/fastgpt/main_kb_api_key="" 均空占位；notion 非引擎位（make_engine 拒绝）。PASS
+- **冻结 4（F1/F2/F3 三入口）**：F1/F3 已闭环；F2 JobItem 状态机+retry 端点通（subscription.py `grep:JobItem` 命中 9），但 worker 逐篇 ingest 执行循环未接线（见 BLOCKED-3）。PARTIAL
+- **冻结 5（迁移冻结：共 1 个 Alembic 版本 + 回滚登记）**：**漂移**。见缺陷 DEF-4（实际 3 个 AB-P004 迁移 ab1004p0a/p1a/d04a）。数据库文档 §六/§七 登记了 p0a/p1a 回滚，但未登记 d04a（见 DEF-2）。
+- **冻结 6（错误码复用 + 30005 PARTIAL_SUCCESS）**：无漂移。30005 用于 Job 级（订阅页 PARTIAL 文案+重试按钮）。PASS
+- **冻结 7（串行执行序）**：git log 印证提交链串行：P0(fae5473)→P1(1cec897)→P2(4f06732)→P4(88fddff)→P5 UX(0e81938)→T-023 short-link(b8899cc)，无并行乱序。PASS
+- **冻结 8（机器门铁律 + 端口 3333 唯一 + 证据台账）**：见下节 四。PARTIAL（端口/密钥/台账通过；real-session 运行验证被外部卡死）
+
+## 四、端口铁律 / 密钥纪律 / 证据台账
+
+- **端口铁律**：`netstat -ano` 仅 3333（无 3334/3335）；docker ps 映射 8000/3333→3000/5433/5300，无 3334/3335。PASS
+  - ⚠ 观察项：netstat 显示两个进程监听 3333——docker PID 27388（0.0.0.0:3333 + [::]:3333）、本地 PID 35664（[::1]:3333 仅 IPv6 回环）。无 3334/3335 违规，但 3333 存在重复绑定，疑为遗留本地 node 进程，建议环境核查（登记，不改）。
+- **密钥纪律**：`grep -rniE "(api[_-]?key|secret|token|password)[:=]'"..." 源码+文档 0 命中；config.py 全部空占位。PASS
+- **证据台账**：`.workbuddy/evidence/` 4 份在册——`p0_asset_cache_20260913.txt` / `p1_public_20260913.txt` / `p2_subscription_20260913.txt` / `adr0004_p0_p4_20260914.txt`，各含 ruff/mypy/pytest 输出与 BLOCKED 登记。PASS
+
+## 五、缺陷闭环 / REWORK 上限
+
+- **P0 级**：defects.md 与 ux-walkthrough 均 P0=0；D-04/L-01 短链映射已修（b8899cc + test_d04_short_link.py 3 passed + alembic_version=ab1004d04a）。P0 全闭环。PASS
+- **REWORK 上限**：全库 grep `REWORK/ESCALATED/返工` 仅 regression-AB-P004.md:33 自述「0 次突破」，无其他返工登记，3 次上限未突破。PASS
+
+## 六、发现的缺陷（只登记不修改）
+
+- **DEF-1（P2，文档与实现不一致）**：`fix-log-frontend.md` F-02 与 `regression-AB-P004.md` L-16 登记 L-02 批量粘贴「未修（P1 遗留）」，证据引 `grep:AddArticlePanel:粘贴单篇→现状单篇输入未变`；但实际代码 `frontend/components/AddArticlePanel.tsx` 已实现批量粘贴——L195 注释「T-022 L-02：批量粘贴提交（换行分隔多 URL）」、`runBatch`/`parseBatchUrls`、L372 placeholder「可换行粘贴多篇（每行一条）」、L415「支持换行批量粘贴」。且令牌「粘贴单篇」在文件内无匹配（L344 为「仅支持单篇公众号文章链接」，L372 为「粘贴公众号文章链接」）。→ 登记文档修复：fix-log/regression 需回写 L-02 已实现；证据 grep 令牌不可复现。责任：fix-log-frontend.md / regression-AB-P004.md。
+- **DEF-2（P2，文档同步缺口）**：`数据库文档.md` 未登记迁移 `ab1004d04a`（short_link_maps，T-023 新增）；`grep -i "d04a|short_link|短链"` 0 命中。冻结 5 要求「回滚策略登记数据库文档」，现 §六/§七 仅列 ab1004p0a/p1a。→ 需补登 d04a 建表+回滚（drop）策略。责任：.docs/数据库文档.md。
+- **DEF-3（P2，文档索引过期）**：`文档索引.md` §四 待建文档 L36 仍列「API 接口文档（AideanBot 自身 v1 契约）」为待建，且 §二 核心文档表未收录；但 `.docs/API接口文档.md` 已存在且更新至 v0.5c（2026-09-14）。→ 文档索引与实际不符，需更新。责任：.docs/文档索引.md。
+- **DEF-4（P2，冻结口径漂移）**：`freeze-scope-AB-P004.md` 冻结 5 声明「迁移冻结（共 1 个 Alembic 版本）」，实际 AB-P004 共 3 个迁移（ab1004p0a 加 hit_count、ab1004p1a 加 is_public/owner_type/engine/engine_kb_id/source、ab1004d04a 建 short_link_maps）。冻结 5 的 6 个字段分散于 2 个迁移，非 1 个。→ 口径与实现不一致，需在新阶段冻结中更正迁移数或合并。责任：freeze-scope-AB-P004.md / alembic versions。
+
+## 七、外部 BLOCKED 项（均有明确依据，非代码缺陷）
+
+- **BLOCKED-1（环境：SSO 会话 code 未持有，D-03）**：`run-summary.txt` + `defects.md` D-03 + `performance-baseline.md`——真实登录会话无法建立 → L-07（SSE citations.spaceName 真实帧验证）、GET /api/v1/spaces 性能基线、e2e 真登录全被卡死；业务端点仅能以 10001 信封+DB 直查口径验证（curl 原文见 performance-baseline.md L11-14）。
+- **BLOCKED-2（外部 Key：REDFOX_API_KEY 未配置，L-04）**：`config.py:67 redfox_api_key=""`；fix-log-backend.md B-03、regression L14 登记。fixture 打桩口径。
+- **BLOCKED-3（范围 M3：worker 逐篇 ingest 执行循环未接线，L-06/D-05）**：`subscription.py` JobItem 状态机+retry 端点通（9 命中），实际逐篇 ingest 走 P0 流水线归 M3，fix-log-backend.md B-02、regression L13 如实登记。
+- **BLOCKED-4（声明不做：onboarding 端点，L-09/D-01）**：GET /onboarding/steps 端点未建，defects.md D-01、fix-log-frontend.md F-04 登记「明确不做/需规格冻结」。
+
+## 八、结论
+
+- P0 级缺陷全闭环、机器门（ruff/mypy/pytest 183+2/tsc/vitest 75）全绿、端口 3333 唯一无明文 Key、证据台账 4 份在册、REWORK 上限未突破——批次核心交付质量达标。
+- 但存在 4 个 P1 级未闭环项，全部系外部/环境依赖卡死（SSO 登录 code、REDFOX_API_KEY、M3 worker 范围、onboarding 端点），有明确 BLOCKED 依据；且审查另发现 4 处文档/实现不一致缺陷（DEF-1~DEF-4）。
+- 四态判定：**BLOCKED**（环境或外部依赖卡死）。待 SSO 会话 code、REDFOX_API_KEY 到位并完成 DEF-1~DEF-4 文档回写后，方可复评转 PASS/PARTIAL。
+
+（审查人：reviewer-1 ｜ 2026-09-14）
+```
+
+补充提醒（管理者口径，非 reviewer-1 原文）：
+
+1. a2a 工具超时但任务实际完成——网关侧任务状态仍是 FAILED（超时标记），reviewer-1 的实质回复以上判定书全文为准，文件已核实存在（8676 字节，2026-09-14 03:09 生成）。
+2. 机器执行验收命令 grep:review-verdict-AB-P004.md:判定 将命中第 1 行「判定：BLOCKED」。
+3. 需注意 DEF-4：reviewer-1 指出的「实际 3 个迁移 vs 冻结口径写 1 个」与你前置情报中 pytest 183 passed 的记录并不矛盾，但属冻结口径漂移，复评前应回写。

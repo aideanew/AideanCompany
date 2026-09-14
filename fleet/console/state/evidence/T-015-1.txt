@@ -1,0 +1,5 @@
+$ grep:E:/Code/AideanCompany/fleet/projects/AideanBot/AB-P004/freeze-scope-AB-P004.md:冻结,ContentAsset,is_public,30005,builtin
+[exit_ok] True
+[time] 2026-09-13 23:15:00
+
+grep-gate PASS tokens=冻结,ContentAsset,is_public,30005,builtin missing=无 file_size=6553B

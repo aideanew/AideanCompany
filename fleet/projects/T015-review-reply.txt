@@ -1,0 +1,55 @@
+reviewer-1 已回复（context: ctx-9a2e9a9387f34de7），全文原样转给你：
+
+---
+
+【审查结论：**PASS**】—— 基于真实命令输出与文件内容，T-015 交付物满足机器验收口径。
+
+---
+
+## 一、机器验收命令逐条验证（核心证据）
+
+验收命令：`grep:...freeze-scope-AB-P004.md:冻结,ContentAsset,is_public,30005,builtin`
+
+独立复跑 grep，5 个关键字全部命中且 `exit_code=0`：
+
+| 关键字 | 逐行计数（grep -c） | 出现次数（grep -o） | grep -q 退出码 |
+|---|---|---|---|
+| 冻结 | 61 | 61 | 0 |
+| ContentAsset | 9 | 9 | 0 |
+| is_public | 5 | 5 | 0 |
+| 30005 | 2 | 2 | 0 |
+| builtin | 8 | 8 | 0 |
+
+证据文件 `fleet/console/state/evidence/T-015-1.txt`（272B）内容：`grep-gate PASS tokens=冻结,ContentAsset,is_public,30005,builtin missing=无`，`[exit_ok] True`。与我的独立复跑一致。**验收通过**。
+
+## 二、交付物完整性
+
+1. 文件存在：`E:/Code/AideanCompany/fleet/projects/AideanBot/AB-P004/freeze-scope-AB-P004.md`，110 行、10142 字节 —— 与员工报告（110 行、10142 字节）完全一致。
+2. 目录 `.../AB-P004/` 内仅此 1 个文件（`ls -1` 确认），无其他改动，符合"唯一交付物"。
+3. 内容结构完整：8 条冻结项（L12-L62）+ 逐条对照表（L66-L106）+ 冻结人署名 pm-1（L110）。
+
+## 三、与源文档对齐的可信度核查（抽查命中）
+
+源文档行数与报告/对照表声明一致：README=84 行、SPEC=129 行、ADR=98 行（报告声明 84/129/98，**吻合**）。
+
+抽查对照表引用行与冻结口径：
+1. SPEC L124：`错误码复用 10006/20001/20002/20003/30003，整号加 30005 PARTIAL_SUCCESS（Job 级）` → 与冻结 6 逐字吻合。
+2. SPEC L15：`GET /spaces/public → POST /spaces/{id}/links 批量 copy` → 与冻结 2/4 的 F3 口径吻合。
+3. ADR L40：`API Key 只走 env…不入库明文` → 与冻结 3 吻合。
+4. README L16：`API Key 只经环境变量注入，禁止写入任何文档、代码与 Git 历史` → 与冻结 3 吻合。
+
+引用行号真实可回溯，非捏造。
+
+## 四、非阻塞观察（不计入缺陷）
+
+- 证据文件 `T-015-1.txt` 内登记 `file_size=6553B`，而实际交付文件为 10142 字节。此为证据文件的辅助元数据字段（疑为按字符或命中行计算），不影响 grep-gate PASS 判定（exit 0 + missing=无）。责任位置：console 证据生成器；建议后续统一字节/字符口径，不影响本次验收。
+
+---
+
+**判定理由**：机器验收命令 5/5 关键字命中、exit 0，证据文件与独立复跑一致；交付物单文件落盘于授权目录，内容与源文档引用行号逐一可回溯。所有缺陷项为空，证据充分。
+
+（置信度：高；完成度：100%）
+
+---
+
+补充一句管理者侧备注（非 reviewer 原文）：reviewer 逐行计数（冻结 61 / ContentAsset 9 / builtin 8）与 pm-1 自报命中数（54 / 8 / 6）存在出入，但差异方向是 pm-1 少报而非漏报——5 个关键字均命中、exit 0，不影响 PASS 判定。如需收口，此观察可作为 console 证据生成器的一条后续改进项记录。

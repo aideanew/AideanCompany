@@ -1,0 +1,78 @@
+T-022 任务包已投递 worker-a（ctx-953fee7643ba4bba）。它网关在线但 LLM 回复持续超时：前 3 次调用撞"did not reply in time"、第 4 次"response interrupted"（期间它侧出现 WSL relay 报错），我未重复轰炸，改为以磁盘侧铁证跟踪（fix-log 开写 → 3 个前端文件+onboarding 目录陆续落地 → 最终收口）。第 5 次调用它交回了完整报告。我随后亲自独立复验了机器门（tsc rc=0、vitest 9 files/89 passed、commit b5477ce 存在、工作树干净、grep 令牌逐项命中）。
+
+下面是 worker-a 的回复原文，原样转发：
+
+━━━━━━━━━━━━━━━━━━━━━━
+【1】git 提交结果
+
+```
+commit b5477cef3fe786af703f1656269a404997d848a7   （短指纹 b5477ce）
+作者 CodingHeader <coderheader@github.com>   2026-09-14 03:18:18 +0800
+docs(DEF): AB-P004 T-025 独立审查 DEF-1~DEF-4 文档回写 + T-022/T-024 前端修复落库（…vitest 89 passed）
+
+ .docs/数据库文档.md                  |  14 +      ← T-025 文档，非我提交
+ .docs/文档索引.md                    |  14 +-     ← T-025 文档，非我提交
+ frontend/app/onboarding/page.tsx     | 334 +++   ← 我的
+ frontend/app/subscriptions/page.tsx  |  48 +-    ← 我的
+ frontend/components/AddArticlePanel.tsx | 340 ++ ← 我的
+ frontend/lib/api.ts                  |  31 +     ← 我的
+ frontend/tests/t022-fixes.spec.ts    | 218 +++   ← 我的
+ 7 files changed, 965 insertions(+), 34 deletions(-)
+```
+
+如实说明：我的 `git add` 已把这 5 个文件暂存（`.docs` 两份按你要求未 add），但我在 03:18 执行 `git commit` 时因本仓库未配 `user.name/user.email` 返回 rc=128（Author identity unknown）而失败；管理者随即用自己的身份代提交，把我的暂存内容 + `.docs` 两份文档**合并进了同一个 commit `b5477ce`**。内容核验（`git show b5477ce:<file>`）：`parseBatchUrls`×4、`createSpace`×1、`三步建好你的知识库`×1、`networkPauseMessage`×2、`POLL_NET_FAIL_THRESHOLD`×2 —— 全部落库。`git status --porcelain` 现为空（工作树干净）。如需拆分出独立 T-022 指纹，需要你重做身份配置后 `reset --soft b8899cc` 重提。
+
+【2】最终报告
+
+### 结论
+部分完成 —— 前端类 7 项：完全修复 5、部分修复 1、BLOCKED 1；**无 P0 缺陷**（空集满足）。等待管理者验收。
+
+### 执行过程
+按任务包顺序侦察 → 跑基线机器门 → 逐 P1→P2 修 → 每项配机器证据 → 写 fix-log → 提交。改动前先取证基线：`tsc` rc=0、`vitest` 8 files/73 passed、git 工作树仅有 worker-b 的 D-04 改动。全程只碰 `frontend/` 5 个文件，未改 worker-b 后端文件与 `.docs`。
+
+### 改动文件清单
+| 文件 | 改动 | 关联缺陷 |
+|---|---|---|
+| `frontend/lib/api.ts` | +31 行：`parseBatchUrls`、预览断点三函数、`POLL_NET_FAIL_THRESHOLD`/`networkPauseMessage`、`createSpace` | L-02/L-03/L-05/L-09 |
+| `frontend/components/AddArticlePanel.tsx` | +340/-28：input→textarea 多行批量队列、进度 i/N、去重提示、断点横幅 | L-02/L-03 |
+| `frontend/app/subscriptions/page.tsx` | +48/-：连续失败横幅、重试按钮 worker 接线标注 | L-05/L-06 |
+| `frontend/app/onboarding/page.tsx` | 新建 334 行：3 步引导 + localStorage 断点续做 | L-09/D-01 |
+| `frontend/tests/t022-fixes.spec.ts` | 新建 218 行 16 用例 | L-02/03/05/09 |
+
+### 验证记录
+- `npx tsc --noEmit` → **rc=0**（0 错误）
+- `npx vitest run` → **9 files / 89 passed**（基线 73 → 89，净增 16）
+- curl 真调（3333 唯一端口）：`GET /onboarding` → **HTTP 200**（chunk 4 令牌命中）；`GET /spaces/sp-001` → HTTP 200（chunk 6 令牌命中）
+- `fix-log-frontend.md` 每条缺陷四段证据齐全，已登记
+
+### 证据链（逐缺陷）
+- **F-01｜L-08 已修**：tsc rc=0；vitest 89 passed；`grep:app/chat/page.tsx:需先「一键引入」到你的空间才可问答`→hits=1（line 336）
+- **F-02｜L-02 已修**（修正 02:50 版误登记的「未修」）：tsc rc=0；vitest 14 例中 L-02 5 例（顺序/去重 duplicatedCount=2/非法行过滤/空与全非法/CRLF）；curl 命中 6 令牌；`grep:frontend/lib/api.ts:parseBatchUrls`→hits=1（line 743）
+- **F-03｜L-05 已修**：tsc rc=0；vitest L-05 2 例；`grep:frontend/lib/api.ts:POLL_NET_FAIL_THRESHOLD`→hits=1（line 829，值 3）
+- **F-04｜L-06 部分完成**：文案侧 tsc rc=0；`grep:frontend/app/subscriptions/page.tsx:worker 执行循环 M3 接线前仅重置任务状态`→hits=1（line 273）。**执行层 BLOCKED（M3 后端 worker 接线）**
+- **F-05｜L-09/D-01 已修**：curl `/onboarding` HTTP 200；vitest L-09 3 例；`grep:frontend/app/onboarding/page.tsx:三步建好你的知识库`→hits=1（line 157）
+- **F-06｜L-03 已修**：vitest L-03 4 例；`grep:frontend/lib/api.ts:readPreviewCheckpoint`→hits=1（line 778）
+- **F-07｜L-04 BLOCKED**：后端 `subscriptions.py` 仅 6 个路由无搜索端点，无契约前端不能造接口。**更正**：02:50 版「REDFOX_API_KEY 未配置」判断错误，`docker/.env` 第 3 行实已配真实值（此处不抄写其值，符合密钥纪律），真实卡点是端点缺失，归 worker-b/be-2
+- **P0 空集证据**：`ux-walkthrough-AB-P004.md` §二原文「遗漏清单 9 条（**P0=0** / P1=5 / P2=4）」；`defects.md` D-01~D-05 等级列无 P0
+
+### 未完成事项与风险
+1. **L-04 BLOCKED**（后端无 redfox 搜索端点契约）——需 worker-b 先定端点形状与缓存控费口径。
+2. **L-06 执行层 BLOCKED**（M3）——文案 M3 接线后须同步修订，否则与实际行为不符。
+3. **L-05 复发风险中**：横幅依赖 5s 轮询，连续 3 轮全失败才触发；「一好一坏交替」不触发（文案已写「连续 N 次」）。
+4. **L-09 复发风险中**：断点为本地口径，多设备/清缓存丢进度；端点补齐后需换远端权威进度（TODO 已写进组件头注）。
+5. commit 未拆出独立指纹（见上），如需请告知，我可在工作树干净的前提下由你配置 git 身份后重提。
+
+**回归交接（fix-log-frontend.md 末尾原文，供 T-024）**：缺陷清单前端类 7 项 → 已修 5（F-01/F-02/F-03/F-05/F-06）+ 部分完成 1（F-04 文案侧）+ BLOCKED 1（F-07）；未修原因均依赖后端新端点或 M3 执行循环，前端无法单独完成，不冒充完成；机器门快照 `tsc` rc=0 / `vitest` 9 files 89 passed；curl 快照 3333 端口 `/onboarding` 200、`/spaces/sp-001` 200；未移交项：F-04 文案待 M3 修订、F-05 端点补齐后换远端进度。
+━━━━━━━━━━━━━━━━━━━━━━
+
+管理者独立复验（机器证据，非转述）：
+1. `npx tsc --noEmit`（frontend/ 下）→ rc=0，0 错误。已亲跑。
+2. `npx vitest run` → 9 files / 89 passed。已亲跑，与 fix-log 一致。
+3. grep 令牌亲验：`parseBatchUrls`（api.ts:743）、`POLL_NET_FAIL_THRESHOLD=3`（api.ts:829）、`三步建好你的知识库`（onboarding/page.tsx:157）、`readPreviewCheckpoint`、onboarding 目录及 t022-fixes.spec.ts 均在，且已落库进 b5477ce（`git show b5477ce` 内容逐文件核验命中）。
+4. `git log` 首提交 = b5477ce，`git status --porcelain` 为空，工作树干净。
+
+管理者判定：T-022 前端侧 **PASS（附 2 项如实 BLOCKED 移交）**——完成标准"fix-log 每条 P0 四段证据 + git 提交"满足（P0 集合经引用证据确认为空集，各 P1/P2 项四段证据齐全且我独立复验通过）。遗留：F-07（L-04 redfox 搜索，后端无端点契约→移交 worker-b/be-2）与 F-04 执行层（L-06 M3 worker 接线→移交后端）。
+
+两点需你知晓：
+- commit b5477ce 里混入了 .docs 两份文档改动（属 T-025 的 DEF-1~DEF-4 文档回写，非 worker-a 工作），是我代提交时把工作区全部暂存内容一并提交所致。功能无碍；若要拆出纯 T-022 指纹，需配好 git 身份后 `git reset --soft b8899cc` 重提，我可代执行（属改写本地提交历史，等你批准）。
+- worker-a 全程 5 次 A2A 调用中 4 次超时/中断（其侧 WSL relay 偶发报错），网关在线、工作正常，但响应通道不稳定，后续派工建议任务包要求"边做边落盘 fix-log、报告可后置"，验收以磁盘证据为准。

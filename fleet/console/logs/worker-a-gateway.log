@@ -1,0 +1,156 @@
+2026-09-13 16:26:05,724 WARNING gateway.lifecycle_ledger: Previous gateway life (pid=52064, started_at=2026-09-12T14:45:32.370388+00:00) exited UNCLEANLY (no exit path ran — SIGKILL / OOM / VM death). last_heartbeat_at=2026-09-13T06:54:11.609604+00:00 last_mem=None suspected_oom=False
+2026-09-13 16:27:08,301 WARNING tools.mcp_tool: Failed to connect to MCP server 'exa' (command=npx): CancelledError
+2026-09-13 16:27:08,317 WARNING gateway.run: No env user allowlists configured. Messaging platforms default to pairing/allowlist policies and will deny unknown senders unless you configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id) or explicitly opt in with GATEWAY_ALLOW_ALL_USERS=true plus dm_policy/group_policy: open on the platform.
+2026-09-13 16:27:08,438 WARNING gateway.platforms.weixin: [Weixin] WEIXIN_GROUP_POLICY=pairing is set, but QR-login connects an iLink bot identity (e.g. ...@im.bot) which typically cannot be invited into ordinary WeChat groups. iLink usually does not deliver ordinary-group events for these accounts, so group messages may never reach Hermes regardless of this policy. If group delivery doesn't work, the limitation is on the iLink side, not in Hermes.
+2026-09-13 16:27:08,647 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 16:27:08,667 WARNING tools.registry: check_fn _a2a_tools_available returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,672 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,673 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,674 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,675 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,676 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,681 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,682 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,684 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,685 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,689 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,694 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,707 WARNING tools.registry: check_fn check_computer_use_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,707 WARNING tools.registry: check_fn check_discord_tool_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,714 WARNING tools.registry: check_fn _check_feishu returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,716 WARNING tools.registry: check_fn _check_ha_available returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,727 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,730 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,733 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,756 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,761 WARNING tools.registry: check_fn check_react_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,768 WARNING tools.registry: check_fn _check_spotify_available returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,889 WARNING tools.registry: check_fn check_video_generation_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,900 WARNING tools.registry: check_fn check_x_search_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,901 WARNING tools.registry: check_fn _check_xai_video_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:27:08,910 WARNING tools.registry: check_fn _check_yuanbao returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,707 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,707 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,709 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,710 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,710 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,714 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,715 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,717 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,718 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,720 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,722 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,723 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:34,724 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tools will be unavailable this turn
+2026-09-13 16:28:36,620 WARNING agent.title_generator: Title generation failed: Error code: 400 - {'error': {'message': 'inference request is invalid', 'type': 'invalid_request_error', 'code': '400'}}
+2026-09-13 16:28:58,554 WARNING tools.environments.base: init_session failed (session=3eb6aae50afd): snapshot bootstrap failed with exit code 1 — falling back to bash -l per command
+2026-09-13 16:28:58,741 WARNING agent.tool_executor: Tool terminal returned error (0.90s): {"output": "<3>WSL (76847 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null}
+2026-09-13 16:28:58,923 WARNING agent.tool_executor: Tool terminal returned error (0.18s): {"output": "<3>WSL (76850 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null}
+2026-09-13 16:29:11,192 WARNING agent.tool_executor: Tool search_files returned error (0.18s): {"total_count": 0, "error": "Terminal environment unavailable: could not stat E:\\Code\\AideanBot (the sandbox may still be starting or was removed). Retry shortly."}
+2026-09-13 16:29:17,695 WARNING agent.tool_executor: Tool search_files returned error (0.18s): {"total_count": 0, "error": "Terminal environment unavailable: could not stat E:\\Code\\AideanBot (the sandbox may still be starting or was removed). Retry shortly."}
+
+[Tool loop warning: repeated_exa
+2026-09-13 16:29:57,711 WARNING agent.tool_executor: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:\\Code\\AideanBot\\frontend\\a
+2026-09-13 16:29:57,716 WARNING agent.tool_executor: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:\\Code\\AideanBot\\frontend\\a
+2026-09-13 16:37:08,826 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 16:40:44,938 WARNING agent.tool_executor: Tool execute_code returned error (0.01s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"C:\\Users\\EDY\\AppData\\Local\\Temp\\hermes_kernel_fd51mk86\\hermes_kernel_runner.py\", line 118, in run_
+2026-09-13 16:46:44,689 WARNING tools.environments.base: init_session failed (session=35835812a543): snapshot bootstrap failed with exit code 1 — falling back to bash -l per command
+2026-09-13 16:46:44,865 WARNING agent.tool_executor: Tool terminal returned error (0.52s): {"output": "<3>WSL (81173 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null, "exit_code_meaning": "No matches found (not an 
+2026-09-13 16:47:09,010 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 16:51:01,925 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for session agent:main:a2a:dm:ctx-be8e2611a3e34636: streamed=False previewed=False content_delivered=False transformed=False final_len=5854 — possible duplicate send (see wecom ack-timeout RCA).
+2026-09-13 16:57:09,212 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 17:07:09,399 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 17:17:09,576 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 17:27:09,762 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 17:37:09,969 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 17:47:10,134 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 17:57:10,312 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 18:07:10,499 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 18:17:10,687 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 18:27:10,851 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 18:37:11,033 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 18:47:11,186 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 18:57:11,325 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 19:07:11,480 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 19:17:11,656 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 19:27:11,834 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 19:37:11,983 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 19:47:12,151 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 19:57:12,343 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 20:07:12,547 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 20:17:12,681 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 20:27:12,822 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 20:37:12,989 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 20:47:13,136 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 20:57:13,310 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 21:07:13,508 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 21:17:13,665 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 21:27:13,854 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 21:37:14,048 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 21:47:14,240 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 21:57:14,423 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 22:07:14,624 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 22:17:14,815 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 22:27:14,966 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 22:37:15,143 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 22:47:15,326 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 22:57:15,505 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 23:07:15,716 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 23:17:15,914 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 23:27:16,115 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 23:37:16,323 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 23:47:16,502 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-13 23:57:16,663 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:07:16,865 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:17:17,016 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:27:17,183 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:37:17,351 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:47:17,543 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:57:17,724 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:07:17,875 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:17:18,060 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:27:18,218 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:37:18,374 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:47:18,524 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:57:18,744 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:07:18,894 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:17:19,110 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:27:19,280 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:37:19,445 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:38:46,447 WARNING agent.title_generator: Title generation failed: Error code: 400 - {'error': {'message': 'inference request is invalid', 'type': 'invalid_request_error', 'code': '400'}}
+2026-09-14 02:38:55,364 WARNING tools.environments.base: init_session failed (session=c805db1b4ac9): snapshot bootstrap failed with exit code 1 — falling back to bash -l per command
+2026-09-14 02:38:55,827 WARNING agent.tool_executor: Tool read_file returned error (0.86s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:/Code/AideanCompany/fleet/proj
+2026-09-14 02:38:55,837 WARNING agent.tool_executor: Tool read_file returned error (0.86s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:/Code/AideanCompany/fleet/proj
+2026-09-14 02:38:56,064 WARNING agent.tool_executor: Tool terminal returned error (0.22s): {"output": "<3>WSL (25811 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null}
+2026-09-14 02:39:00,983 WARNING agent.tool_executor: Tool terminal returned error (0.22s): {"output": "<3>WSL (25833 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null}
+2026-09-14 02:39:04,885 WARNING agent.tool_executor: Tool terminal returned error (0.18s): {"output": "<3>WSL (25856 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null}
+
+[Tool loop warning: same_tool_failure_warning;
+2026-09-14 02:39:05,088 WARNING agent.tool_executor: Tool search_files returned error (0.20s): {"total_count": 0, "error": "Terminal environment unavailable: could not stat E:/Code (the sandbox may still be starting or was removed). Retry shortly."}
+2026-09-14 02:39:12,228 WARNING agent.tool_executor: Tool terminal returned error (0.21s): {"output": "<3>WSL (25884 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory", "exit_code": 1, "error": null}
+2026-09-14 02:40:07,128 WARNING agent.tool_executor: Tool read_file returned error (0.46s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:/Code/AideanBot/frontend/compo
+2026-09-14 02:40:07,139 WARNING agent.tool_executor: Tool read_file returned error (0.49s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:/Code/AideanBot/frontend/packa
+2026-09-14 02:40:07,146 WARNING agent.tool_executor: Tool read_file returned error (0.48s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "Terminal environment unavailable: could not stat E:/Code/AideanBot/frontend/lib/a
+2026-09-14 02:42:51,019 WARNING agent.tool_executor: Tool execute_code returned error (7.07s): {"status": "error", "output": "frontend\\lib\\api.ts:73:/** GET/POST /api/v1/spaces → data.items（B-T4 契约 v0.2：camelCase） */\nfrontend\\lib\\api.ts:119:/** POST /api/v1/spaces/{id}/links → data（批量 copy
+2026-09-14 02:46:56,390 WARNING tools.environments.base: init_session failed (session=c6365a89b836): snapshot bootstrap failed with exit code 1 — falling back to bash -l per command
+2026-09-14 02:46:56,610 WARNING agent.tool_executor: Tool patch returned error (0.62s): {"success": false, "error": "Failed to read file: E:\\Code\\AideanBot\\frontend\\lib\\api.ts"}
+2026-09-14 02:47:19,620 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:47:45,808 WARNING agent.tool_executor: Tool execute_code returned error (0.02s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"C:\\Users\\EDY\\AppData\\Local\\Temp\\hermes_kernel_fm3bhe3v\\hermes_kernel_runner.py\", line 118, in run_
+2026-09-14 02:49:41,853 WARNING agent.tool_executor: Tool write_file returned error (6.36s): {"bytes_written": 0, "dirs_created": false, "error": "Failed to write file: <3>WSL (28568 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory\n", "resolved_pa
+2026-09-14 02:57:19,814 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:57:23,232 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for session agent:main:a2a:dm:ctx-953fee7643ba4bba: streamed=False previewed=False content_delivered=False transformed=False final_len=510 — possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 03:07:19,995 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 03:09:27,936 WARNING tools.environments.base: init_session failed (session=19447a5815ab): snapshot bootstrap failed with exit code 1 — falling back to bash -l per command
+2026-09-14 03:09:29,073 WARNING agent.tool_executor: Tool write_file returned error (1.53s): {"bytes_written": 0, "dirs_created": false, "error": "Failed to write file: <3>WSL (33322 - Relay) ERROR: CreateProcessCommon:800: execvpe(/bin/bash) failed: No such file or directory\n", "resolved_pa
+2026-09-14 03:12:19,380 WARNING agent.tool_executor: Tool execute_code returned error (2.48s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"C:\\Users\\EDY\\AppData\\Local\\Temp\\hermes_kernel_fm3bhe3v\\hermes_kernel_runner.py\", line 118, in run_
+2026-09-14 03:14:26,470 WARNING tools.mcp_tool: MCP server 'chrome-devtools' keepalive failed, triggering reconnect (state: connected → degraded): MCPError: Connection closed
+2026-09-14 03:14:26,471 WARNING tools.mcp_tool: MCP server 'chrome-devtools': connection marked suspect (keepalive failed: MCPError: Connection closed); next call will health-check it
+2026-09-14 03:15:06,244 WARNING tools.mcp_tool: MCP server 'sequential-thinking' keepalive failed, triggering reconnect (state: connected → degraded): MCPError: Connection closed
+2026-09-14 03:15:06,245 WARNING tools.mcp_tool: MCP server 'sequential-thinking': connection marked suspect (keepalive failed: MCPError: Connection closed); next call will health-check it
+2026-09-14 03:17:20,174 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 03:17:29,751 WARNING tools.mcp_tool: MCP server 'chrome-devtools' keepalive failed, triggering reconnect (state: connected → degraded): MCPError: Connection closed
+2026-09-14 03:18:09,026 WARNING tools.mcp_tool: MCP server 'sequential-thinking' keepalive failed, triggering reconnect (state: connected → degraded): MCPError: Connection closed
+2026-09-14 03:19:22,414 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for session agent:main:a2a:dm:ctx-953fee7643ba4bba: streamed=False previewed=False content_delivered=False transformed=False final_len=4320 — possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 03:27:20,325 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 03:37:20,495 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 03:47:20,656 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes

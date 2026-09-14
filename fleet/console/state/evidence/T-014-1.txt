@@ -1,0 +1,9 @@
+$ grep:README.md:知识库
+[cwd] E:/Code/AideanBot
+[exit_ok] True
+[time] 2026-09-13 17:34:19
+
+[grep-gate] file=README.md size=3537B
+tokens=知识库
+missing=无
+=> PASS

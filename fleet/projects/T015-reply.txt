@@ -1,0 +1,49 @@
+pm-1 回复如下（原文照转）：
+
+---
+
+验证全部通过。以下按报告格式交付。
+
+### 结论
+**已完成，等待管理者验收。**
+
+### 执行过程
+1. 读取三份源文档：`E:/Code/AideanBot/README.md`（84 行）、`.docs/SPEC-素材资产化与公共知识库.md`（129 行）、`.docs/ADR/ADR-0004-知识库引擎可插拔.md`（98 行），锁定逐条对齐行号。
+2. 确认输出目录 `E:/Code/AideanCompany/fleet/projects/AideanBot/AB-P004` 不存在，按任务包授权创建。
+3. 撰写并落盘冻结一页纸 `freeze-scope-AB-P004.md`（110 行，10142 字节，write verified:true），逐条对齐 8 条冻结口径，默认值未擅改。
+4. 执行管理者机器验收命令：对 5 个关键字 `冻结 / ContentAsset / is_public / 30005 / builtin` 逐一 grep，全部命中。
+
+### 改动文件清单
+- **新增** `E:/Code/AideanCompany/fleet/projects/AideanBot/AB-P004/freeze-scope-AB-P004.md`（唯一交付物，单文件）。
+- 目录内确认仅 1 个文件，无其他改动。
+- 新建目录 `.../AB-P004`（任务包授权"目录不存在则创建"）。
+
+### 验证记录
+管理者指定 grep 命令（对交付文件逐关键字）退出码 `0`，各关键字命中行数：
+
+| 关键字 | 命中次数 | 代表命中行 |
+|---|---|---|
+| 冻结 | 54 | L1 标题、L12「## 冻结项（共 8 条）」 |
+| ContentAsset | 8 | L15、L24、L38、L55 |
+| is_public | 5 | L17、L35、L70、L92 |
+| 30005 | 2 | L45「30005 PARTIAL_SUCCESS（Job 级）」、L96 |
+| builtin | 6 | L25、L27、L37、L84、L93 |
+
+5 条冻结 1-8 全部落盘；文末附「冻结人：pm-1」与逐条对照表（README/SPEC/ADR 原文行号 → 冻结点，共 33 行对照）。
+
+### 证据链（命令输出原文摘录）
+- `grep -c "冻结\|ContentAsset\|is_public\|30005\|builtin"` → `64`（任一关键字命中总行数），整体 `exit_code=0`。
+- 各 `match_count`：冻结=54、ContentAsset=8、is_public=5、30005=2、builtin=6。
+- `ls -la`：目录仅 `freeze-scope-AB-P004.md`（10142 字节）。
+- `wc -l` = 110；`tail -3` 末行为 `**冻结人：pm-1**`。
+
+### 未完成事项与风险
+1. **【待确认】P5 UX 重建、全链路测试、修复闭环、报告** 在 SPEC/ADR 源文档中无对应行号（SPEC 仅到 P3，ADR 仅到 P4 SaaS 逐家），本一页纸按**任务包 T-015 口径**冻结，已在对照表标注"源文档未编号，按任务包口径"，不伪造行号。
+2. 冻结 8 的 `.workbuddy/evidence/` 目录**是否已存在于 AideanBot** 未核实——属后续阶段（P0/P1/P2/P4）执行范畴，不在本冻结文档交付范围；不影响本一页纸落盘。
+3. 工作目录白名单：本交付仅写入任务包指定的 `AB-P004` 目录，未越界改任何其他文件（README/SPEC/ADR 均为只读）。
+
+交付完毕，等待管理者机器验收。
+
+---
+
+（A2A 会话 context：ctx-4facd2435a67479a；如后续需派工/追问，沿用此 context。）

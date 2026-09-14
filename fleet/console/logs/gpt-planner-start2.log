@@ -1,0 +1,4 @@
+﻿鉁?Another gateway instance is already running (PID 45144).
+  Use 'hermes gateway restart' to replace it,
+  or 'hermes gateway stop' first.
+  Or use 'hermes gateway run --replace' to auto-replace.

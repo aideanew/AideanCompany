@@ -1,0 +1,67 @@
+﻿hermes.exe : 2026-09-14 00:12:05,874 WARNING gateway.lifecycle_ledger: Previous gateway life (pid=45144, started_at=202
+6-09-13T16:05:24.363972+00:00) exited UNCLEANLY (no exit path ran 鈥?SIGKILL / OOM / VM death). last_heartbeat_at=2026-0
+9-13T16:11:54.932787+00:00 last_mem=None suspected_oom=False
+所在位置 行:1 字符: 1
++ & 'C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-09-14 00:1...ected_oom=False:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-09-14 00:12:05,907 WARNING gateway.run: No env user allowlists configured. Messaging platforms default to pairing/
+allowlist policies and will deny unknown senders unless you configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS
+=your_id) or explicitly opt in with GATEWAY_ALLOW_ALL_USERS=true plus dm_policy/group_policy: open on the platform.
+2026-09-14 00:12:06,051 WARNING gateway.platforms.base: [Weixin] Weixin bot token was held by gateway PID 44080 鈥?expli
+cit --replace handoff completed
+2026-09-14 00:12:06,083 WARNING gateway.platforms.weixin: [Weixin] WEIXIN_GROUP_POLICY=pairing is set, but QR-login con
+nects an iLink bot identity (e.g. ...@im.bot) which typically cannot be invited into ordinary WeChat groups. iLink usua
+lly does not deliver ordinary-group events for these accounts, so group messages may never reach Hermes regardless of t
+his policy. If group delivery doesn't work, the limitation is on the iLink side, not in Hermes.
+2026-09-14 00:12:06,240 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:12:06,241 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:12:06,243 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:12:06,244 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools wil
+l be unavailable this turn
+2026-09-14 00:12:06,245 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:12:06,249 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:12:06,251 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:12:06,252 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:12:06,253 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:12:06,254 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:12:06,256 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:12:06,265 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:12:06,266 WARNING tools.registry: check_fn check_discord_tool_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:12:06,268 WARNING tools.registry: check_fn _check_feishu returned False; dependent tools will be unavaila
+ble this turn
+2026-09-14 00:12:06,269 WARNING tools.registry: check_fn _check_ha_available returned False; dependent tools will be un
+available this turn
+2026-09-14 00:12:06,272 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:12:06,273 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:12:06,274 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:12:06,279 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:12:06,280 WARNING tools.registry: check_fn check_react_requirements returned False; dependent tools will 
+be unavailable this turn
+2026-09-14 00:12:06,282 WARNING tools.registry: check_fn _check_spotify_available returned False; dependent tools will 
+be unavailable this turn
+2026-09-14 00:12:06,304 WARNING tools.registry: check_fn check_video_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:12:06,312 WARNING tools.registry: check_fn check_x_search_requirements returned False; dependent tools wi
+ll be unavailable this turn
+2026-09-14 00:12:06,313 WARNING tools.registry: check_fn _check_xai_video_requirements returned False; dependent tools 
+will be unavailable this turn
+2026-09-14 00:12:06,318 WARNING tools.registry: check_fn _check_yuanbao returned False; dependent tools will be unavail
+able this turn

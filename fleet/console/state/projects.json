@@ -1,0 +1,29 @@
+{
+  "projects": [
+    {
+      "pid": "P-001",
+      "name": "Test0912-贪吃蛇",
+      "workspace": "E:\\Demo\\Test0912",
+      "created_at": "2026-09-12 14:44:00"
+    },
+    {
+      "pid": "P-002",
+      "name": "Test091220-待办清单",
+      "workspace": "E:\\Demo\\Test091220",
+      "created_at": "2026-09-12 20:42:45"
+    },
+    {
+      "pid": "P-003",
+      "name": "脚手架自检",
+      "workspace": "E:\\Demo\\zz-scaffold-selftest",
+      "created_at": "2026-09-13 01:04:37"
+    },
+    {
+      "pid": "P-004",
+      "name": "AideanBot-KnowledgeBasePlatform",
+      "workspace": "E:/Code/AideanBot",
+      "created_at": "2026-09-13 22:55:00"
+    }
+  ],
+  "next_id": 5
+}

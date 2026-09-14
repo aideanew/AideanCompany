@@ -1,0 +1,92 @@
+2026-09-12 14:42:18,034 WARNING hermes_state: state.db: on-disk journal_mode was delete and has been switched to WAL. This rewrites the database header and persists after this process exits. If delete was a deliberate choice (for example the mitigation for the SQLite WAL-reset bug, or a WAL-unsafe filesystem), setting it with PRAGMA on the file will not survive -- every open re-applies the configured mode. Set `database.journal_mode: delete` in config.yaml to make it stick. This message fires once per process per database.
+2026-09-12 14:42:33,796 WARNING tools.mcp_tool: MCP server 'context7' failed initial connection after 3 attempts, parking until a reconnect is requested (state: connecting → parked): MCPError: Connection closed
+2026-09-12 14:42:33,797 WARNING tools.mcp_tool: Failed to connect to MCP server 'context7' (command=npx): Connection closed
+2026-09-12 14:42:33,814 WARNING gateway.run: No env user allowlists configured. Messaging platforms default to pairing/allowlist policies and will deny unknown senders unless you configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id) or explicitly opt in with GATEWAY_ALLOW_ALL_USERS=true plus dm_policy/group_policy: open on the platform.
+2026-09-12 14:42:33,914 ERROR gateway.platforms.base: [Weixin] Weixin bot token already in use by the 'default' profile gateway (PID 58116). Stop that gateway first (hermes --profile default gateway stop).
+2026-09-12 14:42:33,932 WARNING gateway.run: ✗ weixin failed to connect
+2026-09-12 14:42:34,360 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,360 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,362 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,364 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,364 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,366 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,370 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,372 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,374 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,375 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,377 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,386 WARNING tools.registry: check_fn check_discord_tool_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,390 WARNING tools.registry: check_fn _check_feishu returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,390 WARNING tools.registry: check_fn _check_ha_available returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,394 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,395 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,396 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,402 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,404 WARNING tools.registry: check_fn check_react_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,406 WARNING tools.registry: check_fn _check_spotify_available returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,433 WARNING tools.registry: check_fn check_video_generation_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,453 WARNING tools.registry: check_fn check_x_search_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,454 WARNING tools.registry: check_fn _check_xai_video_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:34,459 WARNING tools.registry: check_fn _check_yuanbao returned False; dependent tools will be unavailable this turn
+2026-09-12 14:42:36,243 WARNING agent.model_metadata: Could not determine context length for model 'agnes-3.0-flash' (base_url=https://apihub.agnes-ai.com/v1) — falling back to 256,000 tokens. Set model.context_length in config.yaml to override.
+2026-09-12 14:46:45,905 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,906 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,906 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,906 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,906 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,910 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,914 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,914 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,914 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,914 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,918 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,931 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,932 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,933 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tools will be unavailable this turn
+2026-09-12 14:46:45,936 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be unavailable this turn
+2026-09-12 14:47:50,337 WARNING tools.mcp_tool: MCP server 'context7' failed initial connection after 3 attempts, parking until a reconnect is requested (state: connecting → parked): MCPError: Connection closed
+2026-09-12 14:48:52,737 WARNING agent.tool_executor: Tool terminal returned error (0.26s): {"output": "FINDSTR: �޷��� docsplayer-guide.md", "exit_code": 1, "error": null, "cwd": "E:\\Demo\\Test0912"}
+2026-09-12 14:49:19,425 WARNING agent.tool_executor: Tool terminal returned error (0.26s): {"output": "FINDSTR: �޷��� \"E:\\Demo\\Test0912\\docs\\player-guide.md\"", "exit_code": 1, "error": null}
+2026-09-12 14:54:06,429 WARNING tools.mcp_tool: MCP server 'context7' failed initial connection after 3 attempts, parking until a reconnect is requested (state: connecting → parked): MCPError: Connection closed
+2026-09-12 14:55:05,694 WARNING agent.tool_executor: Tool terminal returned error (0.26s): {"output": "FINDSTR: �޷��� E:player-guide.md", "exit_code": 1, "error": null}
+2026-09-12 15:00:08,313 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,314 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,315 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,316 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,317 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,320 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,321 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,323 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,324 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,325 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,327 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,340 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,340 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,342 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:08,345 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be unavailable this turn
+2026-09-12 15:00:38,703 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for session agent:main:a2a:dm:ctx-a9a0a9a6fb584f7d: streamed=False previewed=False content_delivered=False transformed=False final_len=2 — possible duplicate send (see wecom ack-timeout RCA).
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 59917)
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\socketserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\socketserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\socketserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\http\server.py", line 440, in handle
+    self.handle_one_request()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\http\server.py", line 428, in handle_one_request
+    method()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\plugins\platforms\a2a\adapter.py", line 239, in do_POST
+    self._json(200, adapter._rpc_message_send(req_id, params, identity, agent=agent, v1_response=is_v1))
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\plugins\platforms\a2a\adapter.py", line 162, in _json
+    self.end_headers()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\http\server.py", line 542, in end_headers
+    self.flush_headers()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\http\server.py", line 546, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\socketserver.py", line 834, in write
+    self._sock.sendall(b)
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+----------------------------------------

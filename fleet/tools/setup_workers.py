@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+"""Configure worker-a/b/c profiles: ModelScope model, A2A port, env names."""
+import pathlib, sys
+
+MS_KEY = "<KEY-见.env><见.env>"
+HOME = pathlib.Path(r"C:\Users\EDY\AppData\Local\hermes\profiles")
+PORTS = {"worker-a": 9901, "worker-b": 9902, "worker-c": 9903}
+NAMES = {"worker-a": "Worker-A", "worker-b": "Worker-B", "worker-c": "Worker-C"}
+
+REPLACEMENTS = [
+    ("  default: gpt-6-astra", "  default: deepseek-ai/DeepSeek-V4.1-Flash"),
+    ("  base_url: https://api.gpt.ge/v1", "  base_url: https://api-inference.modelscope.cn/v1"),
+    ("  api_key: ${HERMES_CUSTOM_API_GPT_GE_API_KEY}", "  api_key: ${HERMES_CUSTOM_API_MODELSCOPE_API_KEY}"),
+    ("gateway:\n  strict: false\n", "gateway:\n  strict: false\n  platforms:\n    a2a:\n      enabled: true\n      extra:\n        port: {port}\n"),
+]
+
+for prof, port in PORTS.items():
+    pdir = HOME / prof
+    cfg = pdir / "config.yaml"
+    text = cfg.read_text(encoding="utf-8-sig")
+    orig = text
+    for old, new in REPLACEMENTS:
+        new_s = new.format(port=port) if "{port}" in new else new
+        if old not in text:
+            print(f"[FAIL] {prof}: pattern not found: {old!r}")
+            sys.exit(1)
+        text = text.replace(old, new_s, 1)
+    cfg.write_text(text, encoding="utf-8")
+    # env: key + agent name (append, avoid dup)
+    env = pdir / ".env"
+    etext = env.read_text(encoding="utf-8-sig") if env.exists() else ""
+    for line in (f"HERMES_CUSTOM_API_MODELSCOPE_API_KEY={MS_KEY}", f"A2A_AGENT_NAME={NAMES[prof]}"):
+        k = line.split("=", 1)[0]
+        lines = [l for l in etext.splitlines() if not l.startswith(k + "=")]
+        lines.append(line)
+        etext = "\n".join(lines) + "\n"
+    env.write_text(etext, encoding="utf-8")
+    print(f"[OK] {prof}: port={port}, model=ModelScope DeepSeek-V4.1-Flash, name={NAMES[prof]}")
+print("ALL DONE")

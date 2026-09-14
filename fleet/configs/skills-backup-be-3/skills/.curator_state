@@ -1,0 +1,9 @@
+{
+  "last_report_path": "C:\\Users\\EDY\\AppData\\Local\\hermes\\logs\\curator\\20260911-094459",
+  "last_run_at": "2026-09-11T09:44:59.712755+00:00",
+  "last_run_duration_seconds": 4.866876,
+  "last_run_summary": "auto: 3 archived; llm: skipped (consolidation off)",
+  "last_run_summary_shown_at": "2026-05-21T01:36:00.805930+00:00",
+  "paused": false,
+  "run_count": 1
+}

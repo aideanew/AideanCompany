@@ -1,0 +1,5 @@
+全链路探针完成，耗时 7s；登录会话 BLOCKED（SSO code 未持有），业务端点以 10001 信封+DB 直查口径验证。- backend:8000 → HTTP 200
+- frontend:3333 → HTTP 200
+- postgres:5433 → 1
+- langbot:5300 → 可达
+- 登录会话：SSO callback 需 code（未持有）→ 业务端点 curl 标注 10001/需会话，DB 层数据直查验证

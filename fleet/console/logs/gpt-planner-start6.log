@@ -1,0 +1,166 @@
+﻿hermes.exe : 2026-09-14 00:15:07,271 WARNING gateway.lifecycle_ledger: Previous gateway life (pid=20160, started_at=202
+6-09-13T16:12:05.874551+00:00) exited UNCLEANLY (no exit path ran 鈥?SIGKILL / OOM / VM death). last_heartbeat_at=2026-0
+9-13T16:14:36.343478+00:00 last_mem=None suspected_oom=False
+所在位置 行:1 字符: 1
++ & 'C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-09-14 00:1...ected_oom=False:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-09-14 00:15:07,307 WARNING gateway.run: No env user allowlists configured. Messaging platforms default to pairing/
+allowlist policies and will deny unknown senders unless you configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS
+=your_id) or explicitly opt in with GATEWAY_ALLOW_ALL_USERS=true plus dm_policy/group_policy: open on the platform.
+2026-09-14 00:15:07,417 WARNING gateway.platforms.weixin: [Weixin] WEIXIN_GROUP_POLICY=pairing is set, but QR-login con
+nects an iLink bot identity (e.g. ...@im.bot) which typically cannot be invited into ordinary WeChat groups. iLink usua
+lly does not deliver ordinary-group events for these accounts, so group messages may never reach Hermes regardless of t
+his policy. If group delivery doesn't work, the limitation is on the iLink side, not in Hermes.
+2026-09-14 00:15:07,577 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:15:07,578 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:15:07,578 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:15:07,579 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools wil
+l be unavailable this turn
+2026-09-14 00:15:07,580 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:15:07,585 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:15:07,586 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:15:07,587 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:15:07,588 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:15:07,589 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:15:07,591 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:15:07,601 WARNING tools.registry: check_fn check_discord_tool_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:15:07,601 WARNING tools.registry: check_fn _check_feishu returned False; dependent tools will be unavaila
+ble this turn
+2026-09-14 00:15:07,601 WARNING tools.registry: check_fn _check_ha_available returned False; dependent tools will be un
+available this turn
+2026-09-14 00:15:07,605 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:15:07,605 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:15:07,609 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:15:07,613 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:15:07,614 WARNING tools.registry: check_fn check_react_requirements returned False; dependent tools will 
+be unavailable this turn
+2026-09-14 00:15:07,616 WARNING tools.registry: check_fn _check_spotify_available returned False; dependent tools will 
+be unavailable this turn
+2026-09-14 00:15:07,620 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:15:07,637 WARNING tools.registry: check_fn check_video_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:15:07,643 WARNING tools.registry: check_fn check_x_search_requirements returned False; dependent tools wi
+ll be unavailable this turn
+2026-09-14 00:15:07,645 WARNING tools.registry: check_fn _check_xai_video_requirements returned False; dependent tools 
+will be unavailable this turn
+2026-09-14 00:15:07,648 WARNING tools.registry: check_fn _check_yuanbao returned False; dependent tools will be unavail
+able this turn
+2026-09-14 00:25:07,799 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:32:13,297 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:32:13,301 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:32:13,306 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:32:13,309 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools wil
+l be unavailable this turn
+2026-09-14 00:32:13,312 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:32:13,326 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:32:13,331 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:32:13,335 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:32:13,339 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:32:13,343 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:32:13,350 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:32:13,415 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:32:13,418 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:32:13,423 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:32:13,436 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:32:33,843 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for sessio
+n agent:main:a2a:dm:ctx-53135e58eb214b7e: streamed=False previewed=False content_delivered=False transformed=False fina
+l_len=94 鈥?possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 00:33:14,598 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for sessio
+n agent:main:a2a:dm:ctx-be0dd65002584709: streamed=False previewed=False content_delivered=False transformed=False fina
+l_len=27 鈥?possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 00:34:18,696 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for sessio
+n agent:main:a2a:dm:ctx-663c38acdc0e4305: streamed=False previewed=False content_delivered=False transformed=False fina
+l_len=38 鈥?possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 00:34:35,827 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for sessio
+n agent:main:a2a:dm:ctx-663c38acdc0e4305: streamed=False previewed=False content_delivered=False transformed=False fina
+l_len=50 鈥?possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 00:34:52,188 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for sessio
+n agent:main:a2a:dm:ctx-663c38acdc0e4305: streamed=False previewed=False content_delivered=False transformed=False fina
+l_len=142 鈥?possible duplicate send (see wecom ack-timeout RCA).
+2026-09-14 00:35:07,979 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:35:28,054 WARNING tools.skills_tool: Skill name collision for 'systematic-debugging': 2 candidates 鈥?C:\U
+sers\EDY\AppData\Local\hermes\profiles\gpt-planner\skills\openclaw-imports\systematic-debugging\SKILL.md; C:\Users\EDY\
+AppData\Local\hermes\profiles\gpt-planner\skills\software-development\systematic-debugging\SKILL.md
+2026-09-14 00:35:28,061 WARNING agent.tool_executor: Tool skill_view returned error (0.29s): {"success": false, "error"
+: "Ambiguous skill name 'systematic-debugging': 2 skills match across your local skills dir and external_dirs. Refusing
+ to guess 鈥?load one explicitly by its categorized path
+2026-09-14 00:36:32,416 WARNING agent.tool_executor: Tool terminal returned error (1.48s): {"output": "================
+=================== ERRORS ====================================\r\n________________ ERROR collecting tests/test_p0_asse
+t_cache.py ________________\r\nImportError while impo
+2026-09-14 00:37:38,082 WARNING gateway.run: Normal final-send NOT suppressed despite active stream consumer for sessio
+n agent:main:a2a:dm:ctx-663c38acdc0e4305: streamed=False previewed=False content_delivered=False transformed=False fina
+l_len=510 鈥?possible duplicate send (see wecom ack-timeout RCA).
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 50438)
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\sock
+etserver.py", line 691, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\sock
+etserver.py", line 361, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\sock
+etserver.py", line 755, in __init__
+    self.handle()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\http
+\server.py", line 440, in handle
+    self.handle_one_request()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\http
+\server.py", line 428, in handle_one_request
+    method()
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\plugins\platforms\a2a\adapter.py", line 239, in do_POST
+    self._json(200, adapter._rpc_message_send(req_id, params, identity, agent=agent, v1_response=is_v1))
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\plugins\platforms\a2a\adapter.py", line 163, in _json
+    self.wfile.write(body)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\.hermes-runtime\python\cpython-3.11-windows-x86_64-none\Lib\sock
+etserver.py", line 834, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] 浣犵殑涓绘満涓殑杞欢涓浜嗕竴涓凡寤虹珛鐨勮繛鎺ャ€?
+----------------------------------------
+2026-09-14 00:45:08,157 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 00:55:08,350 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:05:08,542 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:15:08,716 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:25:08,899 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:35:09,075 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:45:09,200 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 01:55:09,365 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:05:09,508 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:15:09,727 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:25:09,910 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:35:10,077 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:45:10,294 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 02:55:10,469 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes
+2026-09-14 03:05:10,648 ERROR gateway.platforms.weixin: [Weixin] Session expired; pausing for 10 minutes

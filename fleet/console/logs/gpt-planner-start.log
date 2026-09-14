@@ -1,0 +1,65 @@
+﻿hermes.exe : 2026-09-14 00:05:24,187 WARNING hermes_state: state.db: on-disk journal_mode was delete and has been switc
+hed to WAL. This rewrites the database header and persists after this process exits. If delete was a deliberate choice 
+(for example the mitigation for the SQLite WAL-reset bug, or a WAL-unsafe filesystem), setting it with PRAGMA on the fi
+le will not survive -- every open re-applies the configured mode. Set `database.journal_mode: delete` in config.yaml to
+ make it stick. This message fires once per process per database.
+所在位置 行:1 字符: 1
++ & 'C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-09-14 00:0...s per database.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-09-14 00:05:24,398 WARNING gateway.run: No env user allowlists configured. Messaging platforms default to pairing/
+allowlist policies and will deny unknown senders unless you configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS
+=your_id) or explicitly opt in with GATEWAY_ALLOW_ALL_USERS=true plus dm_policy/group_policy: open on the platform.
+2026-09-14 00:05:24,503 ERROR gateway.platforms.base: [Weixin] Weixin bot token already in use by the 'default' profile
+ gateway (PID 44080). Stop that gateway first (hermes --profile default gateway stop).
+2026-09-14 00:05:24,519 WARNING gateway.run: 鉁?weixin failed to connect
+2026-09-14 00:05:24,944 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:05:24,945 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:05:24,947 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:05:24,947 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools wil
+l be unavailable this turn
+2026-09-14 00:05:24,949 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:05:24,954 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:05:24,955 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 00:05:24,956 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:05:24,957 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:05:24,958 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:05:24,960 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 00:05:24,969 WARNING tools.registry: check_fn check_discord_tool_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:05:24,971 WARNING tools.registry: check_fn _check_feishu returned False; dependent tools will be unavaila
+ble this turn
+2026-09-14 00:05:24,972 WARNING tools.registry: check_fn _check_ha_available returned False; dependent tools will be un
+available this turn
+2026-09-14 00:05:24,975 WARNING tools.registry: check_fn check_image_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:05:24,976 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be una
+vailable this turn
+2026-09-14 00:05:24,977 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 00:05:24,982 WARNING tools.registry: check_fn _connectors_available returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 00:05:24,983 WARNING tools.registry: check_fn check_react_requirements returned False; dependent tools will 
+be unavailable this turn
+2026-09-14 00:05:24,985 WARNING tools.registry: check_fn _check_spotify_available returned False; dependent tools will 
+be unavailable this turn
+2026-09-14 00:05:25,009 WARNING tools.registry: check_fn check_video_generation_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 00:05:25,019 WARNING tools.registry: check_fn check_x_search_requirements returned False; dependent tools wi
+ll be unavailable this turn
+2026-09-14 00:05:25,020 WARNING tools.registry: check_fn _check_xai_video_requirements returned False; dependent tools 
+will be unavailable this turn
+2026-09-14 00:05:25,025 WARNING tools.registry: check_fn _check_yuanbao returned False; dependent tools will be unavail
+able this turn
