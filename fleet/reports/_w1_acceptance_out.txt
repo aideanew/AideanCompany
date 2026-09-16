@@ -1,0 +1,52 @@
+=== py_compile ===
+PY_COMPILE_OK
+=== 隔离测试(45项) ===
+✅ PASS plan_api 返回 total/done/remaining 正确 | (3, 1, 2)
+✅ PASS plan_api progress 与 project_metrics 口径一致（百分比取整） | (40, 1.2)
+✅ PASS plan_api 任务含 state/detail/assignee/reviewer/verify_cmd/rework_count 
+✅ PASS plan_api 每任务与项目带 URL | http://127.0.0.1:5000/tasks/T-901
+✅ PASS plan_api 未知项目返回 None 
+✅ PASS plan_api editable 门：DONE/DOING 不可编辑、DRAFT 可编辑 
+✅ PASS 状态迁移写入事件含 from/to/actor/taskId | [{'seq': 1, 'timestamp': '2026-09-14 13:08:26', 'actor': 'tester', 'action': 'state:ASSIGNED', 'taskId': 'T-903', 'from': 'DRAFT', 'to': 'ASSIGNED', 'assignee':
+✅ PASS 事件自带任务详情 URL | http://127.0.0.1:5000/tasks/T-903
+✅ PASS 机器验收写入事件 actor=machine-gate | [{'seq': 2, 'timestamp': '2026-09-14 13:08:26', 'actor': 'machine-gate', 'action': 'verify', 'taskId': 'T-902', 'from': '', 'to': '', 'assignee': 'w-test', 'rev
+✅ PASS since 增量只返回新事件 | [3]
+✅ PASS 无 project 过滤时可见 audit 全量（含他处写入） 
+✅ PASS read_events 按 project 过滤 
+✅ PASS 事件摘要脱敏疑似 Key | [REDACTED]
+✅ PASS DONE 态禁止编辑（状态机门） | 状态 DONE 下禁止编辑计划（执行中/审查中/DONE 受状态机门保护）
+✅ PASS 提交 state 字段被白名单拒绝 | 禁止修改字段：['state']（仅允许 title/detail/verify_cmd/assignee/reviewer/order）
+✅ PASS 提交 project 字段被白名单拒绝 | 禁止修改字段：['project']（仅允许 title/detail/verify_cmd/assignee/reviewer/order）
+✅ PASS 提交 id 字段被白名单拒绝 | 禁止修改字段：['id']（仅允许 title/detail/verify_cmd/assignee/reviewer/order）
+✅ PASS 执行者必须是 worker 角色（权限门） | 执行者必须是流程权限=执行的角色（r-test 不合法）
+✅ PASS 审查者必须是 reviewer 角色（权限门） | 审查者必须是流程权限=审查的角色（w-test 不合法）
+✅ PASS 危险 verify_cmd 被黑名单拒绝 | verify_cmd 命中危险命令黑名单
+✅ PASS title 不允许清空（必填校验） | title 不允许为空
+✅ PASS title 超长被拒 | title 超长（上限 200）
+✅ PASS 任务不存在返回失败 | 任务不存在
+✅ PASS 合法字段更新成功且落盘 | 计划已更新：detail, reviewer
+✅ PASS 修改前审计字节不变（append-only 可回放） 
+✅ PASS plan_updated 事件含 actor/fields/URL | [{'seq': 6, 'timestamp': '2026-09-14 13:08:26', 'actor': 'tester', 'action': 'plan_updated', 'taskId': 'T-903', 'from': '', 'to': '', 'assignee': 'w-test', 'rev
+✅ PASS order 重排生效（0 起插入） | ['T-913', 'T-911', 'T-912']
+✅ PASS order 非整数被拒 | order 必须是整数
+✅ PASS 全程无任务被删除 
+✅ PASS HTTP GET /api/plan 200+JSON 结构齐全 | 200
+✅ PASS HTTP GET /api/plan 缺 project → 400 | 400
+✅ PASS HTTP GET /api/plan 未知项目 → 400 | 400
+✅ PASS HTTP GET /api/events 200 且含 seq/events 
+✅ PASS 事件字段齐全 timestamp/actor/action/taskId/from/to/assignee/reviewer/summary/url 
+✅ PASS HTTP /api/events since 非整数 → 400 | 400
+✅ PASS since=当前 seq 增量返回空 
+✅ PASS 网页编辑入口 200 且含表单/白名单说明 
+✅ PASS HTTP POST 计划更新：夹带 state 被拒并回显原因 | <!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+✅ PASS HTTP POST 计划更新：合法修改成功 | <!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+✅ PASS HTTP 修改后状态源同步（tasks.json 已更新） 
+✅ PASS HTTP POST：危险 verify_cmd 经网页路径同样被拒 | <!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+✅ PASS /projects 页计划行含编辑入口链接 
+✅ PASS 派工成功提示含事件流+任务 URL 
+✅ PASS 送审成功提示含事件流+任务 URL 
+✅ PASS CONSOLE_BASE 指向 5000 且 task_event_url 生成 /tasks/<id> 
+
+===== 结果：45 通过 / 0 失败 =====
+=== git diff --check ===
+DIFF_CHECK_OK

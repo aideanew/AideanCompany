@@ -1,0 +1,41 @@
+{
+  "claude": {
+    "binary": "claude",
+    "mode": "non-interactive-print",
+    "command_template": "claude -p \"@{PROMPT_FILE}\" --output-format text --model {MODEL} --add-dir {WORKDIR}",
+    "max_permission_flag": "--dangerously-skip-permissions",
+    "posture": {
+      "full-write": ["--dangerously-skip-permissions"],
+      "review_read_only": ["--permission-mode", "plan"]
+    },
+    "calibrated_from": "claude --help (本机 2026-09-15)"
+  },
+  "codex": {
+    "binary": "codex",
+    "mode": "exec",
+    "command_template": "codex exec --skip-git-repo-check -C {WORKDIR} -s workspace-write --model {MODEL} - < \"{PROMPT_FILE}\"",
+    "max_permission_flag": "--dangerously-bypass-approvals-and-sandbox",
+    "posture": {
+      "full-write": ["-s", "workspace-write"],
+      "review_read_only": ["-s", "read-only"]
+    },
+    "calibrated_from": "codex exec --help (本机 2026-09-15)：PROMPT 位置参数支持 `-` 从 stdin 读；@file 非文档语法，故用 stdin 重定向"
+  },
+  "opencode": {
+    "binary": "opencode",
+    "mode": "run-once",
+    "command_template": "opencode run --dir {WORKDIR} -m {MODEL} \"@{PROMPT_FILE}\"",
+    "max_permission_flag": "--dangerously-skip-permissions",
+    "posture": {
+      "full-write": [],
+      "review_read_only": []
+    },
+    "calibrated_from": "opencode --help (本机 2026-09-15)"
+  },
+  "_notes": {
+    "shape": "flat cli->template map，与 runner/command_registry.DEFAULT_REGISTRY 同形",
+    "prompt_file": "{WORKDIR}/{TASK_ID}.prompt.txt 由派工方写入，runner 不改写业务文件",
+    "parallel_rule": "同 workdir 禁止并发写；不同 workdir 才可并行",
+    "test_env": "TEST_FLEET_ENV=1 时 registry 解析须拒绝 gpt-6-astra"
+  }
+}

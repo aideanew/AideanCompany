@@ -1,0 +1,265 @@
+# -*- coding: utf-8 -*-
+"""Domain services: TaskPack build/validate, gate policy, transcript index.
+
+Single source of truth modules shared by console routes and runner.
+No HTTP code lives here; routes call these and must handle rejections.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Iterable
+
+CONSOLE_STATE = Path("E:/Code/AideanCompany/fleet/console/state")
+EVIDENCE = CONSOLE_STATE / "evidence"
+CLI_DELEGATION_FILE = Path("E:/Code/AideanCompany/fleet/configs/cli-delegation.md")
+MODEL_POOL_FILE = Path("E:/Code/AideanCompany/fleet/configs/model-pool.json")
+COMMAND_REGISTRY_FILE = Path("E:/Code/AideanCompany/fleet/configs/providers/cli-registry.json")
+
+ALLOWED_ROOTS = [
+    Path("E:/Demo"),
+    Path("E:/Code/AideanCompany/fleet/projects"),
+    Path("E:/Code/AideanBot"),
+]
+DOC_GATE_RE = re.compile(r"^grep:[^:]+/task-package-[^:]+:", re.I)
+ASSIGNED_RE = re.compile(r"\[ASSIGNED\]|\bASSIGNED\b", re.I)
+ROLE_CLI_MAP = {
+    "worker-b": "claude",
+    "be-2": "codex",
+    "be-3": "codex",
+    "worker-a": "opencode",
+    "fe-2": "opencode",
+    "worker-c": "opencode",
+    "reviewer-1": "",
+    "pm-1": "",
+}
+
+
+def workspace_allowed(path: str | Path) -> bool:
+    p = Path(path).resolve()
+    return any(p == root or str(p).lower().startswith(str(root).lower()) for root in ALLOWED_ROOTS)
+
+
+def load_json_or(path: Path, default):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def cli_for_role(role_id: str) -> str:
+    return ROLE_CLI_MAP.get(role_id, "")
+
+
+def model_for_role(role_id: str) -> str:
+    pool = load_json_or(MODEL_POOL_FILE, {})
+    entry = (pool.get("role_model_map_default") or {}).get(role_id) or {}
+    return str(entry.get("primary", "") or "")
+
+
+def is_hard_retry_output(text: str) -> bool:
+    pool = load_json_or(MODEL_POOL_FILE, {})
+    sigs = pool.get("retry", {}).get("hard_signals") or []
+    lowered = (text or "").lower()
+    for sig in sigs:
+        s = str(sig).lower()
+        s = s.split("(", 1)[0].strip()
+        if s and s in lowered:
+            return True
+    return False
+
+
+def load_retry_policy() -> dict:
+    pool = load_json_or(MODEL_POOL_FILE, {})
+    retry = dict(pool.get("retry") or {})
+    retry.setdefault("interval_seconds", 10)
+    retry.setdefault("max_attempts", 10)
+    retry.setdefault("backoff_jitter_seconds", 2)
+    retry.setdefault("hard_signals", ["401", "402", "403", "model_not_found",
+                                      "quota_exhausted", "insufficient_credits"])
+    return retry
+
+
+def load_command_registry() -> dict:
+    data = load_json_or(COMMAND_REGISTRY_FILE, {})
+    if data:
+        return data
+    try:
+        from fleet.runner.command_registry import DEFAULT_REGISTRY
+        return dict(DEFAULT_REGISTRY)
+    except Exception:
+        try:
+            import sys
+            root = str(COMMAND_REGISTRY_FILE.parents[2])  # .../fleet
+            for p in (root, str(Path(root).parent), str(Path(root) / "runner")):
+                if p not in sys.path:
+                    sys.path.insert(0, p)
+            from command_registry import DEFAULT_REGISTRY
+            return dict(DEFAULT_REGISTRY)
+        except Exception:
+            return {}
+
+
+def build_task_pack(task: dict) -> dict:
+    role_id = str(task.get("assignee") or "")
+    cli = cli_for_role(role_id)
+    model = model_for_role(role_id)
+    registry = load_command_registry()
+    template = str((registry.get(cli) or {}).get("command_template", "")) if cli else ""
+    workdir = str(task.get("workspace") or "")
+    evidence_dir = str(EVIDENCE)
+    pack = {
+        "id": str(task.get("id", "")),
+        "title": str(task.get("title", "")),
+        "project": str(task.get("project", "")),
+        "workdir": workdir,
+        "detail": str(task.get("detail", "")),
+        "verify_cmd": str(task.get("verify_cmd", "")),
+        "evidence_dir": evidence_dir,
+        "executor": {"cli": cli, "model": model, "command_template": template},
+        "max_runtime_sec": int(task.get("max_runtime_sec", 1800) or 1800),
+        "max_attempts": int(task.get("max_attempts", load_retry_policy().get("max_attempts", 10)) or 10),
+        "after": list(task.get("after") or []),
+        "write_set": list(task.get("write_set") or []),
+        "transcript": str(EVIDENCE / f"{task.get('id','T-unknown')}-cli.log"),
+    }
+    return pack
+
+
+def validate_dispatch_pack(task: dict, pack: dict | None = None) -> list[str]:
+    errors: list[str] = []
+    required = ["id", "title", "project", "workspace", "detail", "verify_cmd", "assignee", "reviewer"]
+    for key in required:
+        if not task.get(key):
+            errors.append(f"missing {key}")
+    if not workspace_allowed(str(task.get("workspace") or "")):
+        errors.append("workspace outside allowlist")
+    verify_cmd = str(task.get("verify_cmd", ""))
+    if DOC_GATE_RE.match(verify_cmd.strip()):
+        errors.append("verify_cmd is a task-package document grep gate")
+    if verify_cmd.strip() and verify_cmd.strip().startswith("grep:"):
+        _, rel, _tokens = (verify_cmd.split(":", 2) + ["", "", ""])[:3]
+        p = Path(str(task.get("workspace") or "")) / rel
+        if "task-package" in rel or str(task.get("id", "")).lower() in rel.lower() and "task-package" in rel.lower():
+            pass  # already flagged above
+        elif not p.exists():
+            errors.append(f"grep gate target missing: {rel}")
+    pack = pack if pack is not None else build_task_pack(task)
+    executor = pack.get("executor") or {}
+    if executor.get("cli") not in ("claude", "codex", "opencode"):
+        errors.append("executor.cli must be claude/codex/opencode")
+    if not executor.get("model"):
+        errors.append("executor.model required")
+    if not executor.get("command_template"):
+        errors.append("executor.command_template required")
+    return errors
+
+
+def transcript_path(task_id: str) -> Path:
+    return EVIDENCE / f"{task_id}-cli.log"
+
+
+def transcript_record(task_id: str) -> dict:
+    p = transcript_path(task_id)
+    if not p.exists():
+        return {"exists": False, "path": str(p)}
+    text = p.read_text(encoding="utf-8", errors="replace")
+    fields = {}
+    for tag in ("cwd", "cli", "model", "pid", "exit", "started", "ended"):
+        m = re.search(rf"^\[{tag}\]\s*(.+)$", text, re.M)
+        if m:
+            fields[tag] = m.group(1).strip()
+    return {
+        "exists": True,
+        "path": str(p),
+        "sha256": hashlib.sha256(p.read_bytes()).hexdigest(),
+        "size_bytes": p.stat().st_size,
+        "mtime": datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d %H:%M:%S"),
+        "fields": fields,
+    }
+
+
+def validate_transcript_against_pack(task_id: str, pack: dict,
+                                     assigned_ts: str = "") -> tuple[bool, str, dict]:
+    rec = transcript_record(task_id)
+    if not rec["exists"]:
+        return False, "missing CLI transcript", rec
+    fields = rec["fields"]
+    if fields.get("cli") != pack["executor"]["cli"]:
+        return False, f"transcript cli {fields.get('cli')!r} != pack {pack['executor']['cli']!r}", rec
+    if fields.get("model") != pack["executor"]["model"]:
+        return False, f"transcript model {fields.get('model')!r} != pack {pack['executor']['model']!r}", rec
+    if str(fields.get("cwd", "")).lower() != str(pack.get("workdir", "")).lower():
+        return False, "transcript cwd mismatch with pack workdir", rec
+    exit_raw = str(fields.get("exit", ""))
+    if exit_raw != "0":
+        return False, f"transcript exit={exit_raw!r}", rec
+    if assigned_ts:
+        try:
+            assigned_dt = datetime.strptime(assigned_ts, "%Y-%m-%d %H:%M:%S")
+            started = datetime.strptime(str(fields.get("started", "")), "%Y-%m-%d %H:%M:%S")
+            if started < assigned_dt:
+                return False, "transcript started before ASSIGNED time", rec
+        except Exception:
+            return False, "transcript/assigned timestamp unparsable", rec
+    return True, "transcript valid", rec
+
+
+def assigned_timestamp(task: dict) -> str:
+    for ev in reversed(task.get("history") or []):
+        if ev.get("to") == "ASSIGNED":
+            return str(ev.get("ts", ""))
+    return ""
+
+
+def done_gate_reasons(task: dict, evidence_required: bool = True) -> list[str]:
+    reasons: list[str] = []
+    if task.get("state") != "REVIEWING":
+        reasons.append(f"state must be REVIEWING, got {task.get('state')}")
+    if task.get("verify_ok") is not True:
+        reasons.append("verify_ok is not True")
+    review_report = str(task.get("review_report") or "")
+    m = re.search(r"\b(PASS|PARTIAL|REWORK|BLOCKED)\b", review_report, re.I)
+    if not m:
+        reasons.append("reviewer verdict missing")
+    elif m.group(1).upper() != "PASS":
+        reasons.append(f"reviewer verdict is {m.group(1).upper()}")
+    if task.get("manual_override"):
+        if not task.get("approval_id"):
+            reasons.append("manual_override requires approval_id")
+        return reasons
+    pack = build_task_pack(task)
+    ok, msg, _rec = validate_transcript_against_pack(
+        str(task.get("id", "")), pack, assigned_timestamp(task))
+    if not ok and evidence_required:
+        reasons.append(f"CLI transcript: {msg}")
+    ev = str(task.get("evidence") or "")
+    if not re.fullmatch(r"T-\d+-\d+\.txt", ev):
+        reasons.append("verify evidence filename invalid")
+    else:
+        ev_path = EVIDENCE / ev
+        if not ev_path.exists():
+            reasons.append(f"evidence file missing on disk: {ev}")
+    if not (EVIDENCE / f"{task.get('id')}-execution.json").exists():
+        reasons.append("missing execution record JSON (task never executed by runner)")
+    return reasons
+
+
+def write_execution_record(pack: dict, result: dict) -> Path:
+    EVIDENCE.mkdir(parents=True, exist_ok=True)
+    path = EVIDENCE / f"{pack['id']}-execution.json"
+    payload = {"task_pack": pack, **result}
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return path
+
+
+def resolve_completion_mode(task: dict) -> str:
+    reasons = done_gate_reasons(task)
+    if not reasons:
+        return "machine_and_review"
+    if task.get("manual_override") and task.get("approval_id"):
+        return "manual_override"
+    return "invalid"

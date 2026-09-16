@@ -1,0 +1,128 @@
+{
+  "schema": "aidean-fleet/model-pool-v2",
+  "pool_version": 2,
+  "state_file": "console/state/model_pool_state.json",
+  "probe_tool": "tools/probe_pool.py",
+  "note": "Key 一律 key_env/key_file 间接引用（hermes .env / codex auth.json / opencode.json），池文件禁止明文。健康按 端点+模型 记（bai 的 codex_auth 401 已实测：同端点不同 key 结果不同）。探活 python fleet/tools/probe_pool.py，机器可读加 --json。",
+  "env_policy": {
+    "test": "TEST_FLEET_ENV=1 时禁用 v3(gpt-6-astra)——测试环境最高管理员用 agnes-3.0-flash",
+    "prod": "生产提示词允许 v3 参与规划/管理（quota=expensive，仅 pm/manager 类角色）"
+  },
+  "rotation": {
+    "preferred": ["same_endpoint_cooling", "cli_reissue", "cross_endpoint"],
+    "cross_endpoint_policy": "同任务包全量重发，报告模型自述记实际 from->to",
+    "hermes_profile_swap": "需用户授权或预批重启槽"
+  },
+  "retry": {
+    "rule": "429/5xx/超时/网络错误：默认 10s 后重试，最多 10 次；10 次仍败判模型不可用 → 换下一候选",
+    "interval_seconds": 10,
+    "max_attempts": 10,
+    "hard_signals": ["quota_exhausted", "insufficient_credits", "402", "401(密钥无效)", "403", "model_not_found"],
+    "hard_action": "跳过退避直接换候选（401 重试无意义）",
+    "backoff_jitter_seconds": 2
+  },
+  "providers": {
+    "bai": {
+      "priority": 1,
+      "via": ["cli-codex"],
+      "base_url": "https://api.b.ai/v1",
+      "key_file": "codex:auth.json",
+      "models": ["qwen3.8-flash"],
+      "families": ["backend", "general"],
+      "quota": "limited",
+      "proxy": "http://127.0.0.1:10808",
+      "proxy_required": true,
+      "note": "实测 codex_auth 401：需用户更新 BAI key 或换 key 来源；代理 10808 必须先起",
+      "env_scope": ["prod"]
+    },
+    "amd": {
+      "priority": 2,
+      "via": ["cli-opencode"],
+      "base_url": "https://developer.amd.com.cn/radeon/api/v1",
+      "key_file": "opencode:amd",
+      "models": ["DeepSeek-V4-Flash", "Qwen3.8-Flash-Next"],
+      "families": ["backend", "test", "general"],
+      "quota": "limited",
+      "reset_window": "daily",
+      "env_scope": ["test", "prod"]
+    },
+    "nvidia": {
+      "priority": 3,
+      "via": ["cli-opencode"],
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "key_env": "NVIDIA_API_KEY",
+      "models": ["nvidia/nemotron-3-ultra-550b-a55b", "openai/gpt-oss-120b", "stepfun-ai/step-3.7-flash", "z-ai/glm-5.2"],
+      "families": ["frontend", "backend", "general"],
+      "env_scope": ["test", "prod"]
+    },
+    "modelscope": {
+      "priority": 3,
+      "via": ["cli-opencode", "cli-claude(经 openai 兼容端点)"],
+      "base_url": "https://api-inference.modelscope.cn/v1",
+      "key_file": "opencode:modelscope",
+      "models": ["ZhipuAI/GLM-5.2", "ZhipuAI/GLM-4.7-Flash", "deepseek-ai/DeepSeek-V4-Flash-0731"],
+      "families": ["product", "test", "backend", "general"],
+      "quota": "limited",
+      "reset_window": "daily",
+      "env_scope": ["test", "prod"]
+    },
+    "sensenova": {
+      "priority": 4,
+      "via": ["cli-opencode"],
+      "base_url": "https://token.sensenova.cn/v1",
+      "key_file": "opencode:sensenova",
+      "models": ["sensenova-6.8-flash-lite", "deepseek-v4-flash", "kimi-k3"],
+      "families": ["frontend", "general"],
+      "env_scope": ["test", "prod"]
+    },
+    "agnes": {
+      "priority": 5,
+      "via": ["cli-opencode"],
+      "base_url": "https://apihub.agnes-ai.com/v1",
+      "key_env": "AGNES_API_KEY",
+      "models": ["agnes-3.0-flash"],
+      "families": ["supervisor", "review", "backend", "general"],
+      "note": "测试环境(TEST_FLEET_ENV=1)最高管理员/监督者默认模型；实测 12 模型可用",
+      "env_scope": ["test", "prod"]
+    },
+    "v3": {
+      "priority": 9,
+      "via": ["cli-opencode"],
+      "base_url": "https://api.gpt.ge/v1",
+      "key_env": "V3_API_KEY",
+      "models": ["gpt-6-astra"],
+      "families": ["planning", "management"],
+      "quota": "expensive",
+      "note": "仅生产环境；仅任务规划与管理角色（pm-1/manager 辅助）；测试环境硬禁",
+      "env_scope": ["prod"]
+    }
+  },
+  "supervisor_model": {
+    "zcode": {"role": "每角色任务检查与校验（额外监督者，独立于流程内 reviewer-1/Manager）", "when": "始终启用，不改流程内监督结构"},
+    "test_env_admin": "agnes/agnes-3.0-flash",
+    "prod_env_admin": "v3/gpt-6-astra（允许时）或 agnes"
+  },
+  "role_model_map_default": {
+    "pm-1":       {"primary": "modelscope/ZhipuAI/GLM-5.2", "fallback_chain": ["amd/DeepSeek-V4-Flash", "agnes/agnes-3.0-flash"]},
+    "worker-b":   {"primary": "agnes/agnes-3.0-flash",     "fallback_chain": ["amd/DeepSeek-V4-Flash", "modelscope/deepseek-ai/DeepSeek-V4-Flash-0731"]},
+    "be-2":       {"primary": "agnes/agnes-3.0-flash",     "fallback_chain": ["amd/DeepSeek-V4-Flash", "modelscope/ZhipuAI/GLM-4.7-Flash"]},
+    "be-3":       {"primary": "amd/DeepSeek-V4-Flash",     "fallback_chain": ["amd/Qwen3.8-Flash-Next", "sensenova/deepseek-v4-flash"]},
+    "worker-a":   {"primary": "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "fallback_chain": ["sensenova/sensenova-6.8-flash-lite"]},
+    "fe-2":       {"primary": "nvidia/nvidia/nemotron-3-ultra-550b-a55b", "fallback_chain": ["sensenova/sensenova-6.8-flash-lite"]},
+    "worker-c":   {"primary": "modelscope/deepseek-ai/DeepSeek-V4-Flash-0731", "fallback_chain": ["modelscope/ZhipuAI/GLM-4.7-Flash", "amd/Qwen3.8-Flash-Next"]},
+    "reviewer-1": {"primary": "agnes/agnes-3.0-flash",     "fallback_chain": ["modelscope/ZhipuAI/GLM-5.2"]}
+  },
+  "switch_event_contract": {
+    "emit_to": "POST /api/launch-event",
+    "action_name": "launch:model_switch",
+    "fields_required": ["project", "role", "task_id", "from", "to", "reason", "attempts", "window_reset"],
+    "also_append_to_audit": true
+  },
+  "final_report_contract": {
+    "section": "第七节 完成度报告（模板 §14）",
+    "columns": ["角色", "平台", "模型", "任务", "评分"],
+    "grade_scale": ["圆满", "有返工", "部分完成有缺口", "受阻未产出", "未派工"],
+    "grade_basis": "机器门证据 + 返工次数 + 评审判定，禁止自评",
+    "emit_action": "launch:final_report"
+  }
+}

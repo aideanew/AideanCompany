@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 """Append ModelScope key + agent name to worker .env files (encoding-safe)."""
+import os
 import pathlib
 
-MS_KEY = "ms-c38ad95d-0b4b-4863-bb08-7d01ff1884f5"
+MS_KEY = os.environ.get("MODELSCOPE_API_KEY", "")
+if not MS_KEY:
+    raise SystemExit("MODELSCOPE_API_KEY missing; set it in secrets/.env, never hardcode")
 HOME = pathlib.Path(r"C:\Users\EDY\AppData\Local\hermes\profiles")
 NAMES = {"worker-a": "Worker-A", "worker-b": "Worker-B", "worker-c": "Worker-C"}
 

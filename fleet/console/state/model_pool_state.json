@@ -1,0 +1,16 @@
+{
+  "providers": {
+    "bai": {
+      "priority": 1,
+      "base_url": "https://api.b.ai/v1",
+      "models": [
+        "qwen3.8-flash"
+      ],
+      "key_source": "codex_auth",
+      "note": "需 10808 代理；仅生产",
+      "status": "unreachable",
+      "detail": "http_401"
+    }
+  },
+  "checked_at": "2026-09-15 13:29:20"
+}

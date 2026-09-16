@@ -1,0 +1,90 @@
+{
+  "providers": {
+    "bai": {
+      "priority": 1,
+      "base_url": "https://api.b.ai/v1",
+      "models": [
+        "qwen3.8-flash"
+      ],
+      "key_source": "codex_auth",
+      "note": "需 10808 代理；仅生产",
+      "status": "unreachable",
+      "detail": "http_401"
+    },
+    "amd": {
+      "priority": 2,
+      "base_url": "https://developer.amd.com.cn/radeon/api/v1",
+      "models": [
+        "DeepSeek-V4-Flash",
+        "Qwen3.8-Flash-Next"
+      ],
+      "key_source": "opencode_cfg",
+      "note": "有限额度",
+      "status": "ok",
+      "detail": "models=7",
+      "available_models": [
+        "DeepSeek-V4-Flash",
+        "Qwen3.8-Flash-Next"
+      ]
+    },
+    "nvidia": {
+      "priority": 3,
+      "base_url": "https://integrate.api.nvidia.com/v1",
+      "models": [
+        "nvidia/nemotron-3-ultra-550b-a55b"
+      ],
+      "key_source": "env",
+      "note": "",
+      "status": "ok",
+      "detail": "models=81",
+      "available_models": [
+        "nvidia/nemotron-3-ultra-550b-a55b"
+      ]
+    },
+    "modelscope": {
+      "priority": 3,
+      "base_url": "https://api-inference.modelscope.cn/v1",
+      "models": [
+        "ZhipuAI/GLM-5.2",
+        "ZhipuAI/GLM-4.7-Flash"
+      ],
+      "key_source": "opencode_cfg",
+      "note": "有限额度",
+      "status": "ok",
+      "detail": "models=49",
+      "available_models": [
+        "ZhipuAI/GLM-5.2",
+        "ZhipuAI/GLM-4.7-Flash"
+      ]
+    },
+    "sensenova": {
+      "priority": 4,
+      "base_url": "https://token.sensenova.cn/v1",
+      "models": [
+        "sensenova-6.8-flash-lite"
+      ],
+      "key_source": "opencode_cfg",
+      "note": "",
+      "status": "ok",
+      "detail": "models=8",
+      "available_models": [
+        "sensenova-6.8-flash-lite"
+      ]
+    },
+    "agnes": {
+      "priority": 5,
+      "base_url": "https://apihub.agnes-ai.com/v1",
+      "models": [
+        "agnes-3.0-flash"
+      ],
+      "key_source": "hermes_env:HERMES_CUSTOM_API_AGNES_API_KEY",
+      "note": "测试环境最高管理员模型",
+      "status": "ok",
+      "detail": "models=12",
+      "available_models": [
+        "agnes-3.0-flash"
+      ]
+    }
+  },
+  "checked_at": "2026-09-15 07:20:39"
+}

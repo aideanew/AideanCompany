@@ -1,0 +1,9 @@
+$ cd E:/Code/AideanBot && python -m pytest backend/tests/test_be01_subscription_run.py -q
+[cwd] E:/Code/AideanBot
+[exit_ok] False
+[time] 2026-09-15 13:22:18
+
+ERROR: file or directory not found: backend/tests/test_be01_subscription_run.py
+
+
+no tests ran in 0.00s

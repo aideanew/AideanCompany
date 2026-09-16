@@ -39,10 +39,10 @@
 1. **先探后动**：任何派工/送审操作前，先探目标角色端口（`http://127.0.0.1:<port>/.well-known/agent-card.json`）是否 200；离线先启动，不要绕过拦截。
 2. **派工只经 Manager**：网页控制台或 `hermes --yolo -z`（Manager a2a_call），绝不直连 Worker 执行任务。
 3. **机器门判定**：任务 PASS 与否只看验收命令退出码（`grep:相对路径:令牌` 模式优先）；员工自述只作参考。
-4. **状态机不可跳步**：DRAFT→ASSIGNED→DOING→SUBMITTED→REVIEWING→DONE/PARTIAL/REWORK/BLOCKED；非法迁移直接拒绝。
+4. **状态机不可跳步**：DRAFT→ASSIGNED→DOING→SUBMITTED→REVIEWING→DONE/PARTIAL/REWORK/BLOCKED；非法迁移直接拒绝。依赖门已由 DAG 调度器接管（`fleet\dispatcher\scheduler.py` 的 `topological_ready` + 控制台 `/api/ready-wave`，推荐波每角色 1 并发，循环依赖/脏引用自动检出）——调度器只推荐、不自动派工，派工仍需人工点按钮走 `/tasks/<id>/dispatch` 完整拦截链（离线/依赖/状态机）。
 5. **429 处置**：控制台派工线程自带退避重试（60s→120s 共 2 次）；手动操作遇到 429 等 60-120 秒再试；ModelScope 免费档当日配额耗尽则换角色/次日再跑。
 6. **高危动作必须停下等用户批准**：删文件/删库、git push --force、发布生产、修改 Hermes 自身配置、任何花钱操作。
-7. **报告纪律**：项目收口必须产出六节报告（任务清单/改动文件/验收命令记录含失败/返工记录/未完成事项/结论）到 `fleet\reports\`，并附执行就绪总表。
+7. **报告纪律**：项目收口必须产出六节报告（任务清单/改动文件/验收命令记录含失败/返工记录/未完成事项/结论）到 `fleet\reports\`，并附执行就绪总表；六节之后必须附加**完成度报告**——逐角色（含 Manager 自身与补位执行者）列出「角色 | 模型提供商 | 模型 | 任务 | 评价」五列表格，评价只允许五档：圆满完成无返工 / 完成有返工 / 部分完成有缺口 / 受阻未产出 / 未派工（判定依据=机器门证据，模型信息=员工自述+名册交叉核对）。详见 manager-SOUL.md 工作循环第 8 条。
 
 ## 六、PowerShell 5.1 坑位备忘（写脚本前必读）
 - 无 BOM 的 UTF-8 脚本中文会按 GBK 解析 → `.ps1` 必须 UTF-8 **带 BOM**。

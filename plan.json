@@ -1,0 +1,76 @@
+{
+  "plan": [
+    {
+      "id": "T-030",
+      "name": "S1-LOGIN",
+      "package": "S1-LOGIN",
+      "after": [],
+      "role": "backend_a·worker-b(qwen3.8-flash)",
+      "acceptance": "浏览器登录→callback 200→/me 200→建空间 201；3000 单实例；无 0.0.0.0 跳转"
+    },
+    {
+      "id": "T-031",
+      "name": "S2-COLLECT",
+      "package": "S2-COLLECT",
+      "after": ["T-030"],
+      "role": "backend_b·be-2(qwen3.8-flash→amd→modelscope)",
+      "acceptance": "注册→Redfox清单→Job→JobItem>0→多篇成功→SUCCEEDED/PARTIAL→retry 生效→无 fixture"
+    },
+    {
+      "id": "T-032",
+      "name": "S3-CACHE",
+      "package": "S3-CACHE",
+      "after": ["T-031"],
+      "role": "backend_a·worker-b(qwen3.8-flash)",
+      "acceptance": "首抓微信 1 次/重复 0 次/短长链 0 次/改文生新版本不覆盖；同空间 READY 不重复上传"
+    },
+    {
+      "id": "T-033",
+      "name": "S4-CAT-BE",
+      "package": "S4-CAT-BE",
+      "after": ["T-032"],
+      "role": "backend_b·be-2(qwen3.8-flash)",
+      "acceptance": "公共+私人分类、多分类、权限隔离、自动分类阈值、人工不被覆盖"
+    },
+    {
+      "id": "T-034",
+      "name": "S4-CAT-FE",
+      "package": "S4-CAT-FE",
+      "after": ["T-033"],
+      "role": "frontend_b·fe-2(sensenova-6.8-flash-lite)",
+      "acceptance": "标签/筛选/分类管理/引用含 categories/他人不可见私人分类"
+    },
+    {
+      "id": "T-035",
+      "name": "S5-RAGFLOW",
+      "package": "S5-RAGFLOW",
+      "after": ["T-030"],
+      "role": "backend_c·be-3(amd→sensenova)",
+      "acceptance": "探测真实路径→六方法→临时空间全链→citations.engine=main→删除无残留"
+    },
+    {
+      "id": "T-036",
+      "name": "S5-ENG-FE",
+      "package": "S5-ENG-FE",
+      "after": ["T-035"],
+      "role": "frontend_a·worker-a(sensenova-6.8-flash-lite)",
+      "acceptance": "五引擎卡片+configured/allowlisted/available/implemented/health+置灰+切换确认"
+    },
+    {
+      "id": "T-037",
+      "name": "QA-REG",
+      "package": "QA-REG",
+      "after": ["T-030","T-031","T-032","T-034","T-036"],
+      "role": "qa·worker-c(modelscope)",
+      "acceptance": "全量 verify.backend/frontend/integration 退出码全 0"
+    },
+    {
+      "id": "T-038",
+      "name": "PM-DOC",
+      "package": "PM-DOC",
+      "after": [],
+      "role": "pm·pm-1(modelscope→amd)",
+      "acceptance": "落盘 PRD、acceptance 灌入、终局完成度表"
+    }
+  ]
+}

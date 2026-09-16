@@ -1,0 +1,32 @@
+{
+  "schema": "evidence",
+  "value": {
+    "cli_transcript": {
+      "filename": "<TID>-cli.log",
+      "must_contain": [
+        "$ <完整启动命令>",
+        "[cwd]",
+        "[cli]",
+        "[model]",
+        "[pid]",
+        "[exit]",
+        "[started]",
+        "[ended]"
+      ],
+      "integrity": "sha256 记录在 runner 返回与 evidence 索引"
+    },
+    "verify_output": {
+      "filename": "<TID>-<n>.txt",
+      "must_contain": [
+        "$ <verify_cmd>",
+        "[cwd]",
+        "[exit_ok]",
+        "[time]"
+      ]
+    },
+    "forbidden": [
+      "agent 手写摘要代替 CLI 原始输出",
+      "自由文本代替证据文件名"
+    ]
+  }
+}

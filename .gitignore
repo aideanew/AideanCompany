@@ -1,0 +1,14 @@
+.env
+secrets/.env
+secrets/*.key
+secrets/*.pem
+fleet/state/fleet.db*
+fleet/console/state/evidence/*-cli.log
+__pycache__/
+*.pyc
+nul
+.tmp_*
+*.log
+.workbuddy/
+.zcode/
+2026-09-15-65c141ce/

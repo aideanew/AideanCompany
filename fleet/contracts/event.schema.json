@@ -1,0 +1,41 @@
+{
+  "schema": "event",
+  "value": {
+    "required": [
+      "ts",
+      "actor",
+      "action",
+      "task",
+      "detail"
+    ],
+    "optional": [
+      "project",
+      "phase",
+      "role",
+      "cli",
+      "model",
+      "pid",
+      "attempt",
+      "percent",
+      "eta",
+      "reason",
+      "from",
+      "to",
+      "url",
+      "evidence"
+    ],
+    "business_channel": [
+      "launch:dispatch",
+      "launch:worker_progress",
+      "launch:model_switch",
+      "launch:final_report",
+      "verify",
+      "review",
+      "state:*"
+    ],
+    "probe_channel": [
+      "third_party_probe_DO_NOT_TRUST"
+    ],
+    "note": "进度条只消费 business_channel；probe_channel 单列不进进度"
+  }
+}

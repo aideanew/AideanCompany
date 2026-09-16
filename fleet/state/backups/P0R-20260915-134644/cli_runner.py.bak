@@ -1,0 +1,205 @@
+# -*- coding: utf-8 -*-
+"""Runner: deterministic external CLI executor.
+
+Reads a TaskPack dict, resolves the CLI command from an explicit registry,
+spawns the CLI as a subprocess, stores the raw transcript and returns a
+machine-readable evidence record.
+
+No natural-language decision is allowed here: everything executed,
+recorded and verified must come from the TaskPack fields.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import shlex
+import subprocess
+import time
+from dataclasses import dataclass
+from pathlib import Path
+
+UNKNOWN_MODEL_RE = "|".join(
+    [
+        r"isn't described by this version",
+        r"not supported by this model",
+        r"unknown model",
+        r"model not found",
+        r"unsupported model",
+        r"invalid model",
+        r"provider_model_error",
+        r"404 model not found",
+        r"model_not_found",
+    ]
+)
+
+
+@dataclass
+class RunnerResult:
+    ok: bool
+    pid: int
+    exit_code: int | None
+    cli: str
+    model: str
+    command: str
+    cwd: str
+    transcript_path: str
+    transcript_sha256: str
+    started_at: str
+    ended_at: str
+    timed_out: bool = False
+    error: str = ""
+
+
+def load_command_registry(path: str | Path) -> dict:
+    p = Path(path)
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def _prompt_text(task_pack: dict) -> str:
+    """Render a non-interactive task prompt from TaskPack fields only (no LLM)."""
+    lines = [
+        f"【舰队任务包 {task_pack.get('id','?')}】",
+        f"标题：{task_pack.get('title','')}",
+        f"工作目录：{task_pack.get('workdir','')}",
+        "要求与约束：",
+        str(task_pack.get("detail", "")).strip(),
+        "",
+        f"机器验收命令（完成后必须能通过）：{task_pack.get('verify_cmd','')}",
+        "完成后直接停止；不要写 review、不要改任务状态；必须保留可机器检查的真实产物或测试通过证据。",
+    ]
+    return "\n".join(lines).strip() + "\n"
+
+
+def write_prompt_file(task_pack: dict) -> Path:
+    """Write deterministic task prompt file referenced by command templates."""
+    workdir = Path(str(task_pack.get("workdir") or "."))
+    workdir.mkdir(parents=True, exist_ok=True)
+    path = workdir / f"{task_pack.get('id','T-unknown')}.prompt.txt"
+    path.write_text(_prompt_text(task_pack), encoding="utf-8")
+    return path
+
+
+def _prompt_cli_arg(path: Path) -> str:
+    p = str(path)
+    if os.name == "nt":
+        return p.replace("\\", "/")
+    return p
+
+
+def _resolve_command(task_pack: dict, registry: dict) -> tuple[str, str, str, Path]:
+    executor = task_pack.get("executor") or {}
+    cli = str(executor.get("cli", "")).strip()
+    model = str(executor.get("model", "")).strip()
+    if cli not in registry:
+        raise ValueError(f"unknown cli: {cli!r}")
+    if not model:
+        raise ValueError("task_pack.executor.model is required")
+    template = str(registry[cli].get("command_template", ""))
+    if "{MODEL}" not in template:
+        raise ValueError(f"command_template for cli={cli} must contain {{MODEL}}")
+    task_id = str(task_pack.get("id", "T-unknown"))
+    workdir = str(task_pack.get("workdir", ""))
+    if not workdir:
+        raise ValueError("task_pack.workdir is required")
+    prompt_file = write_prompt_file(task_pack)
+    if "{PROMPT_FILE}" in template:
+        command = template.replace("{PROMPT_FILE}", _prompt_cli_arg(prompt_file))
+    else:
+        command = f"{template} {shlex.quote(_prompt_cli_arg(prompt_file))}"
+    command = (
+        command.replace("{MODEL}", model)
+        .replace("{WORKDIR}", workdir)
+        .replace("{TASK_ID}", task_id)
+    )
+    return cli, model, command, prompt_file
+
+
+def build_cli_command(task_pack: dict, registry: dict) -> tuple[str, str, str]:
+    cli, model, command, _prompt_file = _resolve_command(task_pack, registry)
+    return cli, model, command
+
+
+def detect_model_error(output: str) -> bool:
+    import re
+    return bool(re.search(UNKNOWN_MODEL_RE, output or "", re.I))
+
+
+def execute_task_pack(
+    task_pack: dict,
+    registry: dict,
+    evidence_dir: str | Path,
+    timeout_sec: int = 1800,
+) -> RunnerResult:
+    cli, model, command, prompt_file = _resolve_command(task_pack, registry)
+    evidence_dir = Path(evidence_dir)
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+    task_id = str(task_pack.get("id", "T-unknown"))
+    started = time.strftime("%Y-%m-%d %H:%M:%S")
+    transcript_path = evidence_dir / f"{task_id}-cli.log"
+    proc = subprocess.Popen(
+        command,
+        shell=True,
+        cwd=str(task_pack.get("workdir")),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    try:
+        out, _ = proc.communicate(timeout=timeout_sec)
+        timed_out = False
+        exit_code: int | None = proc.returncode
+        err = ""
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        out, _ = proc.communicate()
+        timed_out = True
+        exit_code = proc.returncode
+        err = f"timeout after {timeout_sec}s"
+    ended = time.strftime("%Y-%m-%d %H:%M:%S")
+    if exit_code == 0 and detect_model_error(out or ""):
+        exit_code = 78
+        err = "unknown/invalid model detected despite CLI exit=0"
+    header = (
+        f"$ {command}\n[cwd] {task_pack.get('workdir')}\n"
+        f"[cli] {cli}\n[model] {model}\n[pid] {proc.pid}\n"
+        f"[exit] {exit_code}\n[started] {started}\n[ended] {ended}\n"
+        f"[prompt_file] {prompt_file}\n\n"
+    )
+    transcript_path.write_text(header + (out or ""), encoding="utf-8")
+    digest = hashlib.sha256(transcript_path.read_bytes()).hexdigest()
+    return RunnerResult(
+        ok=(exit_code == 0 and not timed_out),
+        pid=proc.pid,
+        exit_code=exit_code,
+        cli=cli,
+        model=model,
+        command=command,
+        cwd=str(task_pack.get("workdir")),
+        transcript_path=str(transcript_path),
+        transcript_sha256=digest,
+        started_at=started,
+        ended_at=ended,
+        timed_out=timed_out,
+        error=err,
+    )
+
+
+def record_to_json(result: RunnerResult) -> dict:
+    return {
+        "ok": result.ok,
+        "pid": result.pid,
+        "exit_code": result.exit_code,
+        "cli": result.cli,
+        "model": result.model,
+        "command": result.command,
+        "cwd": result.cwd,
+        "transcript_path": result.transcript_path,
+        "transcript_sha256": result.transcript_sha256,
+        "started_at": result.started_at,
+        "ended_at": result.ended_at,
+        "timed_out": result.timed_out,
+        "error": result.error,
+    }

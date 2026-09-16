@@ -1,0 +1,153 @@
+{
+  "roles": [
+    {
+      "id": "worker-a",
+      "type": "worker",
+      "card": "Worker-A",
+      "port": 9901,
+      "duty": "前端开发",
+      "workspace": "E:\\Code\\AideanBot",
+      "model": {
+        "base_url": "https://token.sensenova.cn/v1",
+        "model_id": "sensenova-6.8-flash-lite",
+        "key_env": "HERMES_CUSTOM_API_SENSENOVA_API_KEY",
+        "proxy": ""
+      },
+      "status": "online",
+      "created_at": "2026-09-12",
+      "ftype": "worker"
+    },
+    {
+      "id": "worker-b",
+      "type": "worker",
+      "card": "Worker-B",
+      "port": 9902,
+      "duty": "后端开发",
+      "workspace": "E:\\Demo\\Test0912",
+      "model": {
+        "base_url": "https://api.b.ai/v1",
+        "model_id": "qwen3.8-flash",
+        "key_env": "HERMES_CUSTOM_API_BAI_API_KEY",
+        "proxy": "http://127.0.0.1:10808"
+      },
+      "status": "online",
+      "created_at": "2026-09-12",
+      "ftype": "worker"
+    },
+    {
+      "id": "worker-c",
+      "type": "worker",
+      "card": "Worker-C",
+      "port": 9903,
+      "duty": "测试工程师",
+      "workspace": "E:\\Demo\\Test0912",
+      "model": {
+        "base_url": "https://api-inference.modelscope.cn/v1",
+        "model_id": "deepseek-ai/DeepSeek-V4-Flash-0731",
+        "key_env": "HERMES_CUSTOM_API_MODELSCOPE_API_KEY",
+        "proxy": ""
+      },
+      "status": "online",
+      "created_at": "2026-09-12",
+      "ftype": "worker"
+    },
+    {
+      "id": "pm-1",
+      "ftype": "worker",
+      "duty": "产品经理",
+      "card": "PM-1",
+      "port": 9907,
+      "workspace": "",
+      "model": {
+        "base_url": "https://apihub.agnes-ai.com/v1",
+        "model_id": "agnes-3.0-flash",
+        "key_env": "HERMES_CUSTOM_API_PM_1_KEY",
+        "proxy": ""
+      },
+      "status": "online",
+      "created_at": "2026-09-12 19:12:03"
+    },
+    {
+      "id": "fe-2",
+      "ftype": "worker",
+      "duty": "前端开发",
+      "card": "FE-2",
+      "port": 9908,
+      "workspace": "E:\\Demo\\Test0912",
+      "model": {
+        "base_url": "https://token.sensenova.cn/v1",
+        "model_id": "sensenova-6.8-flash-lite",
+        "key_env": "HERMES_CUSTOM_API_FE_2_KEY",
+        "proxy": ""
+      },
+      "status": "online",
+      "created_at": "2026-09-12 19:12:07"
+    },
+    {
+      "id": "be-2",
+      "ftype": "worker",
+      "duty": "后端开发",
+      "card": "BE-2",
+      "port": 9909,
+      "workspace": "E:\\Demo\\Test0912",
+      "model": {
+        "base_url": "https://api.b.ai/v1",
+        "model_id": "qwen3.8-flash",
+        "key_env": "HERMES_CUSTOM_API_BE_2_KEY",
+        "proxy": "http://127.0.0.1:10808"
+      },
+      "status": "online",
+      "created_at": "2026-09-12 19:12:24"
+    },
+    {
+      "id": "be-3",
+      "ftype": "worker",
+      "duty": "后端开发",
+      "card": "BE-3",
+      "port": 9910,
+      "workspace": "E:\\Demo\\Test0912",
+      "model": {
+        "base_url": "https://api.b.ai/v1",
+        "model_id": "qwen3.8-flash",
+        "key_env": "HERMES_CUSTOM_API_BE_3_KEY",
+        "proxy": "http://127.0.0.1:10808"
+      },
+      "status": "online",
+      "created_at": "2026-09-12 19:12:28"
+    },
+    {
+      "id": "reviewer-1",
+      "ftype": "reviewer",
+      "duty": "项目审查（以机器证据判定PASS/PARTIAL/REWORK/BLOCKED）",
+      "card": "Reviewer-1",
+      "port": 9911,
+      "workspace": "",
+      "model": {
+        "base_url": "https://apihub.agnes-ai.com/v1",
+        "model_id": "agnes-3.0-flash",
+        "key_env": "HERMES_CUSTOM_API_REVIEWER_1_KEY",
+        "proxy": ""
+      },
+      "status": "online",
+      "created_at": "2026-09-12 21:43:33"
+    },
+    {
+      "id": "gpt-planner",
+      "type": "worker",
+      "card": "GptPlanner",
+      "port": 9912,
+      "duty": "gpt-6-astra 规划/监督（任务分析+派工建议）",
+      "workspace": "E:\\Code\\AideanBot",
+      "model": {
+        "base_url": "https://api.gpt.ge/v1",
+        "model_id": "gpt-6-astra",
+        "key_env": "HERMES_CUSTOM_API_GPT_ASTRA_API_KEY",
+        "proxy": ""
+      },
+      "status": "offline",
+      "created_at": "2026-09-14",
+      "ftype": "worker"
+    }
+  ],
+  "next_port": 9912
+}

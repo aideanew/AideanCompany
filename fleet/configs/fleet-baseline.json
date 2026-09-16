@@ -1,0 +1,28 @@
+{
+  "schema": "aidean-fleet/baseline-v1",
+  "template_version": 2,
+  "console_url": "http://127.0.0.1:5000",
+  "manager_url": "http://127.0.0.1:9900",
+  "hermes_home": "C:/Users/EDY/AppData/Local/hermes",
+  "state_machine": "DRAFT>ASSIGNED>DOING>SUBMITTED>REVIEWING>{DONE|PARTIAL|REWORK|BLOCKED}; REWORK->ASSIGNED; BLOCKED->ASSIGNED(依赖真正清除时)",
+  "retry": {
+    "max_rework": 3,
+    "backoff_429_seconds": [60, 120],
+    "escalate_after": "ESCALATED"
+  },
+  "interrupts": ["project_ambiguous", "plan_gate", "final_report"],
+  "paths": {
+    "model_pool": "configs/model-pool.json",
+    "model_pool_state": "console/state/model_pool_state.json",
+    "cli_delegation": "configs/cli-delegation.md",
+    "executor_template": "prompts/executor.template.md",
+    "launch_profile": "projects/{project_id}/project.json",
+    "reports": "reports"
+  },
+  "policies": {
+    "write_via": "console_api_only",
+    "secret_policy": "keys_only_in_cli_or_profile_env_no_plaintext_in_fleet_files",
+    "machine_gate": "exit_code_authoritative",
+    "concurrency": "one_run_mode_launcher_per_project"
+  }
+}

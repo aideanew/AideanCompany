@@ -1,0 +1,21 @@
+项目代号 xiaohongshu_create（CTXHS）。当前基线：HEAD 7eb3514 + 未提交工作区（Settings 467 pass / 0 fail 已验收）。
+目标：完成收尾报告「五、未完成事项」中的 4 项修复（第 5 项真实 POST 201 验证继续冻结，禁止执行）。
+
+工作包 W1（后端，允许改 apps/web/src/server/app.ts + 新增测试）：
+(A) 把 evaluateWorkflowReadiness 接入 POST /api/tasks 创建门禁：创建任务时按所选 workflow 加载 WorkflowDefinition，若 evaluateWorkflowReadiness 不 satisfied 则拒绝创建（错误码建议 WORKFLOW_NOT_READY，HTTP 400，错误信息含 workflowId 与 issues 摘要），并在 createTask 扣次（consumeUse）之前判定，保证校验失败不扣额度；同时在 GET /api/models 的 .readiness[] 里附上每个已加载 workflow 的 evaluateWorkflowReadiness 视图（字段名建议 workflowReadiness[]，不破坏既有 readiness[] 契约）。
+(B) 同步更新 CTXHS_文档索引.md 与 CTXHS_验证清单.md：R3 受阻状态改为已完成（violation-check 双半边全闭环）。
+
+工作包 W2（工作流+运行时，允许改 workflows/*.yaml + packages/runtime-native/src/sample-skills.ts + packages/runtime-native/src 相关测试）：
+(C) 为 image-text.yaml 与 prompt-only.yaml 增加 collect Step（id: collect，skill: collect，置于 topic-generation 之前或之后按你判断，入参含 dataSource 与 credentialRef，从任务 input 透传），并用 when 条件实现 dataSource=none 时跳过（参考 duplicate-check 的 when.$bool 写法；none 跳过可用 when.$equals {path: input.dataSource, value: "none"} 的取反语义——如果 DSL 不支持取反，允许在 sample-skills 的 collect 执行器内直接短路返回 skipped:true，并在 workflow YAML 用 $equals 控制下游依赖）。
+(D) sample-skills.ts 新增 collect 确定性执行器（artifactType 建议 CollectReport）：输出 {dataSource, skipped, materials[]}；无真实采集实现，仅按 input.dataSource 返回示例素材或 skipped。所有工作流引用的技能必须有执行器，保证 runtime-native 全链路可跑。
+
+工作包 W3（测试+验收，允许改 apps/web/test/*、packages/runtime-native/test/*、packages/workflow/test/*）：
+(E) 新增/扩展测试覆盖：collect Step 的 when 跳过语义（DSL 解析+校验）；W1 的门禁三态（不满足拒绝且不扣额度 / satisfied 放行 / workflow 无 violation-check 不受影响）；全链路 npm test / typecheck / build / lint / git diff --check 全绿，禁改项（packages/storage/src/schema.ts 既有表、license 子系统、apps/electron）零改动。
+
+分工与铁律：
+- W1 派 be-2（它写的 GET/PUT /api/settings，最熟 app.ts 现状）；W2 派 be-3；W3 集成验收派 worker-c——但先由你烟测 worker-c（a2a_list 确认在线后发一条"请只回复两个字：就绪"），若仍 Provider authentication failed 则验收工作包由 be-3 兼任并在报告中注明。
+- 允许并行 W1 与 W2（文件不相交）；W3 在 W1+W2 回执后串行。
+- 禁止 git commit/push；禁止真实 POST /api/tasks 到 1994 活体（额度冻结）；禁止改 license 子系统与 electron；禁止任何 API Key 明文。
+- 每个任务包要求员工六节报告 + 模型自述（提供商/model_id/兜底），落盘 E:\Code\NPX\xiaohongshu_create\reports\<员工ID>\报告.md。
+- 你亲自跑验收命令判定四态；REWORK 上限 3 次；全部收口后写六节报告（附第七节完成度报告表：角色|模型提供商|模型|任务|评价，五档评价）到 E:\Code\AideanCompany\fleet\reports\xiaohongshu_create-fix-20260914.md。
+Full Auto 模式：不要问我，自动派活、验收、返工直到完成或 ESCALATED。

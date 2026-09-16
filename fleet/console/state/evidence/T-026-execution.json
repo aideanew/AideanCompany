@@ -1,0 +1,34 @@
+{
+  "task_pack": {
+    "id": "T-026",
+    "title": "BE-01 订阅执行引擎端到端闭环",
+    "project": "P-004",
+    "workdir": "E:/Code/AideanBot",
+    "detail": "订阅→Job→JobItem逐篇走P0流水线→SUCCEEDED/PARTIAL_SUCCESS(30005)。详见 fleet/projects/AideanBot/BE-01/task-package-BE-01.md。CLI委托: claude。",
+    "verify_cmd": "cd E:/Code/AideanBot && python -m pytest backend/tests/test_be01_subscription_run.py -q",
+    "evidence_dir": "E:\\Code\\AideanCompany\\fleet\\console\\state\\evidence",
+    "executor": {
+      "cli": "claude",
+      "model": "agnes/agnes-3.0-flash",
+      "command_template": "claude -p \"@{PROMPT_FILE}\" --output-format text --model {MODEL} --add-dir {WORKDIR}"
+    },
+    "max_runtime_sec": 1800,
+    "max_attempts": 10,
+    "after": [],
+    "write_set": [],
+    "transcript": "E:\\Code\\AideanCompany\\fleet\\console\\state\\evidence\\T-026-cli.log"
+  },
+  "ok": false,
+  "pid": 47792,
+  "exit_code": 1,
+  "cli": "claude",
+  "model": "agnes/agnes-3.0-flash",
+  "command": "claude -p \"@E:/Code/AideanBot/T-026.prompt.txt\" --output-format text --model agnes/agnes-3.0-flash --add-dir E:/Code/AideanBot",
+  "cwd": "E:/Code/AideanBot",
+  "transcript_path": "E:\\Code\\AideanCompany\\fleet\\console\\state\\evidence\\T-026-cli.log",
+  "transcript_sha256": "82fb38b3860553bdcfc9af9f0fc5a21f2bd33c8e2bc87095a9c5a19ea39fd6be",
+  "started_at": "2026-09-15 12:37:43",
+  "ended_at": "2026-09-15 13:18:20",
+  "timed_out": true,
+  "error": "timeout after 1800s"
+}

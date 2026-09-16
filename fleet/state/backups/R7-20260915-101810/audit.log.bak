@@ -1,0 +1,221 @@
+{"ts": "2026-09-12 14:38:25", "actor": "console", "action": "console_started", "task": "", "detail": "pid=36272"}
+{"ts": "2026-09-12 14:40:51", "actor": "console", "action": "console_started", "task": "", "detail": "pid=50324"}
+{"ts": "2026-09-12 14:41:07", "actor": "console", "action": "role_add_attempt", "task": "worker-d", "detail": "profile create 失败: Error: --no-skills is mutually exclusive with --clone / --clone-from / --clone-all (cloning explicitly copies skills from the source profile)."}
+{"ts": "2026-09-12 14:41:21", "actor": "console", "action": "role_add_attempt", "task": "worker-d", "detail": "profile create 失败: Error: --no-skills is mutually exclusive with --clone / --clone-from / --clone-all (cloning explicitly copies skills from the source profile)."}
+{"ts": "2026-09-12 14:41:33", "actor": "console", "action": "console_started", "task": "", "detail": "pid=50056"}
+{"ts": "2026-09-12 14:41:45", "actor": "console", "action": "sync_registry", "task": "", "detail": "a2a_agents: |   worker-a: |     url: \"http://127.0.0.1:9901\" |     timeout: 600 |     capabilities: [general] |   worker-b: |     url: \"http://127.0.0.1:9902\" |     timeout: 600 |     capabilities: [general] |   worker-c: |     url: \"http://127.0.0.1:9903\" |     timeout: 600 |     capabilities: [gen"}
+{"ts": "2026-09-12 14:41:45", "actor": "console", "action": "role_added", "task": "worker-d", "detail": "type=worker port=9904 model=agnes-3.0-flash"}
+{"ts": "2026-09-12 14:41:45", "actor": "console", "action": "role_add_attempt", "task": "worker-d", "detail": "角色 worker-d 已创建（端口 9904），SOUL 已按 worker 模板生成，Manager 通讯录已同步"}
+{"ts": "2026-09-12 14:41:58", "actor": "console", "action": "sync_registry", "task": "", "detail": "a2a_agents: |   worker-a: |     url: \"http://127.0.0.1:9901\" |     timeout: 600 |     capabilities: [general] |   worker-b: |     url: \"http://127.0.0.1:9902\" |     timeout: 600 |     capabilities: [general] |   worker-c: |     url: \"http://127.0.0.1:9903\" |     timeout: 600 |     capabilities: [gen"}
+{"ts": "2026-09-12 14:41:58", "actor": "console", "action": "role_added", "task": "reviewer-f", "detail": "type=reviewer port=9905 model=deepseek-ai/DeepSeek-V4-Flash-0731"}
+{"ts": "2026-09-12 14:41:58", "actor": "console", "action": "role_add_attempt", "task": "reviewer-f", "detail": "角色 reviewer-f 已创建（端口 9905），SOUL 已按 reviewer 模板生成，Manager 通讯录已同步"}
+{"ts": "2026-09-12 14:42:34", "actor": "console", "action": "role_start", "task": "worker-d", "detail": "worker-d: port=9904 card=Worker-D status=online"}
+{"ts": "2026-09-12 14:42:54", "actor": "console", "action": "role_start", "task": "reviewer-f", "detail": "reviewer-f: port=9905 card=Reviewer-F status=online"}
+{"ts": "2026-09-12 14:44:07", "actor": "console", "action": "smoke", "task": "worker-d", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 14:44:27", "actor": "console", "action": "smoke", "task": "reviewer-f", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 14:44:50", "actor": "console", "action": "task_created", "task": "T-001", "detail": "玩家操作手册（Test0912 贪吃蛇）"}
+{"ts": "2026-09-12 14:44:59", "actor": "console", "action": "state:ASSIGNED", "task": "T-001", "detail": "网页派工"}
+{"ts": "2026-09-12 14:44:59", "actor": "console", "action": "state:DOING", "task": "T-001", "detail": "派发中"}
+{"ts": "2026-09-12 15:00:33", "actor": "manager", "action": "state:SUBMITTED", "task": "T-001", "detail": "worker-d 回执已收到(异常)"}
+{"ts": "2026-09-12 15:00:33", "actor": "manager", "action": "dispatch_reply", "task": "T-001", "detail": "target=worker-d ok=False"}
+{"ts": "2026-09-12 15:01:03", "actor": "console", "action": "console_started", "task": "", "detail": "pid=53820"}
+{"ts": "2026-09-12 15:01:11", "actor": "machine-gate", "action": "verify", "task": "T-001", "detail": "exit_ok=False evidence=T-001-1.txt"}
+{"ts": "2026-09-12 15:02:24", "actor": "console", "action": "console_started", "task": "", "detail": "pid=30456"}
+{"ts": "2026-09-12 15:02:33", "actor": "machine-gate", "action": "verify", "task": "T-001", "detail": "exit_ok=True evidence=T-001-2.txt"}
+{"ts": "2026-09-12 15:02:33", "actor": "console", "action": "state:REVIEWING", "task": "T-001", "detail": "送审"}
+{"ts": "2026-09-12 15:07:01", "actor": "manager", "action": "review_reply", "task": "T-001", "detail": "target=reviewer-f ok=True"}
+{"ts": "2026-09-12 15:22:12", "actor": "console", "action": "console_started", "task": "", "detail": "pid=8140"}
+{"ts": "2026-09-12 15:22:49", "actor": "console", "action": "role_start", "task": "worker-d", "detail": "worker-d: port=9904 card=Worker-D status=online"}
+{"ts": "2026-09-12 15:23:12", "actor": "console", "action": "role_start", "task": "reviewer-f", "detail": "reviewer-f: port=9905 card=Reviewer-F status=online"}
+{"ts": "2026-09-12 15:24:31", "actor": "console", "action": "review_retry_allowed", "task": "T-001", "detail": "REVIEWING"}
+{"ts": "2026-09-12 15:27:54", "actor": "manager", "action": "review_reply", "task": "T-001", "detail": "target=reviewer-f ok=True"}
+{"ts": "2026-09-12 15:35:38", "actor": "console", "action": "model_updated", "task": "reviewer-f", "detail": "https://apihub.agnes-ai.com/v1 agnes-3.0-flash"}
+{"ts": "2026-09-12 15:35:45", "actor": "console", "action": "role_stop", "task": "reviewer-f", "detail": "pids=['53800', '56244', '29116', '53876', '45692', '50992']"}
+{"ts": "2026-09-12 15:36:09", "actor": "console", "action": "role_start", "task": "reviewer-f", "detail": "reviewer-f: port=9905 card=Reviewer-F status=online"}
+{"ts": "2026-09-12 15:36:32", "actor": "console", "action": "smoke", "task": "reviewer-f", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 15:36:54", "actor": "console", "action": "review_retry_allowed", "task": "T-001", "detail": "REVIEWING"}
+{"ts": "2026-09-12 15:44:45", "actor": "console", "action": "state:DONE", "task": "T-001", "detail": "机器验收PASS 人工复核通过；reviewer-f因ModelScope配额中断审查，按升级原则人工收口，F补审挂起"}
+{"ts": "2026-09-12 15:50:21", "actor": "manager", "action": "review_reply", "task": "T-001", "detail": "target=reviewer-f ok=True"}
+{"ts": "2026-09-12 18:28:09", "actor": "console", "action": "smoke", "task": "worker-a", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 18:43:33", "actor": "console", "action": "console_started", "task": "", "detail": "pid=25356"}
+{"ts": "2026-09-12 18:45:08", "actor": "console", "action": "console_started", "task": "", "detail": "pid=30588"}
+{"ts": "2026-09-12 18:45:30", "actor": "console", "action": "role_added", "task": "worker-t1", "detail": "ftype=worker port=9906 model=agnes-3.0-flash"}
+{"ts": "2026-09-12 18:45:43", "actor": "console", "action": "role_edited", "task": "worker-t1", "detail": "duty=临时测试角色（已改） model=agnes-3.0-flash"}
+{"ts": "2026-09-12 18:45:48", "actor": "console", "action": "role_deleted", "task": "worker-t1", "detail": "duty=临时测试角色（已改）"}
+{"ts": "2026-09-12 19:11:31", "actor": "console", "action": "console_started", "task": "", "detail": "pid=55368"}
+{"ts": "2026-09-12 19:11:49", "actor": "console", "action": "common_config_applied", "task": "", "detail": "worker-a: ok; worker-b: ok; worker-c: ok"}
+{"ts": "2026-09-12 19:11:49", "actor": "console", "action": "role_edited", "task": "worker-a", "detail": "duty=前端开发 model=sensenova-6.8-flash-lite"}
+{"ts": "2026-09-12 19:11:49", "actor": "console", "action": "role_edited", "task": "worker-b", "detail": "duty=后端开发 model=qwen3.8-flash"}
+{"ts": "2026-09-12 19:11:49", "actor": "console", "action": "role_edited", "task": "worker-c", "detail": "duty=测试工程师 model=deepseek-ai/DeepSeek-V4-Flash-0731"}
+{"ts": "2026-09-12 19:12:06", "actor": "console", "action": "role_added", "task": "pm-1", "detail": "ftype=worker port=9907 model=agnes-3.0-flash"}
+{"ts": "2026-09-12 19:12:09", "actor": "console", "action": "role_added", "task": "fe-2", "detail": "ftype=worker port=9908 model=sensenova-6.8-flash-lite"}
+{"ts": "2026-09-12 19:12:27", "actor": "console", "action": "role_added", "task": "be-2", "detail": "ftype=worker port=9909 model=qwen3.8-flash"}
+{"ts": "2026-09-12 19:12:31", "actor": "console", "action": "role_added", "task": "be-3", "detail": "ftype=worker port=9910 model=qwen3.8-flash"}
+{"ts": "2026-09-12 19:17:14", "actor": "console", "action": "smoke", "task": "pm-1", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 19:17:46", "actor": "console", "action": "smoke", "task": "fe-2", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 19:18:18", "actor": "console", "action": "smoke", "task": "be-2", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 19:18:39", "actor": "console", "action": "smoke", "task": "be-3", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 20:29:46", "actor": "console", "action": "console_started", "task": "", "detail": "pid=56944"}
+{"ts": "2026-09-12 20:31:48", "actor": "console", "action": "smoke", "task": "worker-a", "detail": "pass=False out=就�绪"}
+{"ts": "2026-09-12 20:32:59", "actor": "console", "action": "smoke", "task": "worker-b", "detail": "pass=False out=API call failed after 3 retries: Connection error."}
+{"ts": "2026-09-12 20:33:07", "actor": "console", "action": "smoke", "task": "worker-c", "detail": "pass=False out=就�绪"}
+{"ts": "2026-09-12 20:34:37", "actor": "console", "action": "console_started", "task": "", "detail": "pid=47504"}
+{"ts": "2026-09-12 20:35:42", "actor": "console", "action": "smoke", "task": "worker-a", "detail": "pass=False out=就�绪"}
+{"ts": "2026-09-12 20:36:59", "actor": "console", "action": "smoke", "task": "worker-b", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 20:37:11", "actor": "console", "action": "smoke", "task": "worker-c", "detail": "pass=False out=就�绪"}
+{"ts": "2026-09-12 20:37:51", "actor": "console", "action": "console_started", "task": "", "detail": "pid=43144"}
+{"ts": "2026-09-12 20:38:12", "actor": "console", "action": "smoke", "task": "worker-a", "detail": "pass=True out=就�绪"}
+{"ts": "2026-09-12 20:38:19", "actor": "console", "action": "smoke", "task": "worker-c", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 21:43:35", "actor": "console", "action": "role_added", "task": "reviewer-1", "detail": "ftype=reviewer port=9911 model=agnes-3.0-flash"}
+{"ts": "2026-09-12 21:43:47", "actor": "console", "action": "smoke", "task": "reviewer-1", "detail": "pass=True out=就绪"}
+{"ts": "2026-09-12 21:44:46", "actor": "console", "action": "console_started", "task": "", "detail": "pid=33532"}
+{"ts": "2026-09-12 21:47:01", "actor": "console", "action": "console_started", "task": "", "detail": "pid=39616"}
+{"ts": "2026-09-12 22:49:19", "actor": "console", "action": "console_started", "task": "", "detail": "pid=24184"}
+{"ts": "2026-09-13 01:21:27", "actor": "console", "action": "console_started", "task": "", "detail": "pid=57464"}
+{"ts": "2026-09-13 12:47:20", "actor": "console", "action": "console_started", "task": "", "detail": "pid=53208"}
+{"ts": "2026-09-13 12:49:00", "actor": "console", "action": "console_started", "task": "", "detail": "pid=59164"}
+{"ts": "2026-09-13 12:51:51", "actor": "console", "action": "console_started", "task": "", "detail": "pid=55936"}
+{"ts": "2026-09-13 12:54:53", "actor": "console", "action": "console_started", "task": "", "detail": "pid=55768"}
+{"ts": "2026-09-13 12:57:35", "actor": "console", "action": "console_started", "task": "", "detail": "pid=29420"}
+{"ts": "2026-09-13 13:03:06", "actor": "console", "action": "console_started", "task": "", "detail": "pid=44640"}
+{"ts": "2026-09-13 13:04:03", "actor": "console", "action": "console_started", "task": "", "detail": "pid=44732"}
+{"ts": "2026-09-13 13:07:41", "actor": "console", "action": "task_created", "task": "T-002", "detail": "阶段1 一致性审计：全功能清单+五处一致核对 project=P-002"}
+{"ts": "2026-09-13 13:07:41", "actor": "console", "action": "state:ASSIGNED", "task": "T-002", "detail": "网页派工"}
+{"ts": "2026-09-13 13:07:41", "actor": "console", "action": "state:DOING", "task": "T-002", "detail": "派发中"}
+{"ts": "2026-09-13 13:22:42", "actor": "manager", "action": "state:SUBMITTED", "task": "T-002", "detail": "pm-1 回执已收到(异常)"}
+{"ts": "2026-09-13 13:22:42", "actor": "manager", "action": "dispatch_reply", "task": "T-002", "detail": "target=pm-1 ok=False"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "task_created", "task": "T-003", "detail": "后端接口清单+spaces域五处一致核对 project=—"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "task_created", "task": "T-004", "detail": "用户旅程模拟×3（API 层实测） project=—"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "task_created", "task": "T-005", "detail": "前端视角遗漏清单 project=—"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "task_created", "task": "T-006", "detail": "后端视角遗漏清单 project=—"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "task_created", "task": "T-007", "detail": "破坏者视角渗透清单 project=—"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-003", "detail": "网页派工"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:DOING", "task": "T-003", "detail": "派发中"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-004", "detail": "网页派工"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:DOING", "task": "T-004", "detail": "派发中"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-005", "detail": "网页派工"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:DOING", "task": "T-005", "detail": "派发中"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-006", "detail": "网页派工"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:DOING", "task": "T-006", "detail": "派发中"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-007", "detail": "网页派工"}
+{"ts": "2026-09-13 13:25:43", "actor": "console", "action": "state:DOING", "task": "T-007", "detail": "派发中"}
+{"ts": "2026-09-13 13:28:18", "actor": "manager", "action": "state:SUBMITTED", "task": "T-004", "detail": "worker-c 回执已收到(ok)"}
+{"ts": "2026-09-13 13:28:18", "actor": "manager", "action": "dispatch_reply", "task": "T-004", "detail": "target=worker-c ok=True"}
+{"ts": "2026-09-13 13:36:50", "actor": "console", "action": "state:REWORK", "task": "T-004", "detail": "首次派工遇 Provider 瞬时认证失败，直连复测 GLM-5.2 已恢复"}
+{"ts": "2026-09-13 13:36:50", "actor": "console", "action": "state:ASSIGNED", "task": "T-004", "detail": "第1次返工"}
+{"ts": "2026-09-13 13:37:24", "actor": "manager", "action": "state:SUBMITTED", "task": "T-006", "detail": "worker-b 回执已收到(ok)"}
+{"ts": "2026-09-13 13:37:24", "actor": "manager", "action": "dispatch_reply", "task": "T-006", "detail": "target=worker-b ok=True"}
+{"ts": "2026-09-13 13:40:46", "actor": "manager", "action": "state:SUBMITTED", "task": "T-005", "detail": "worker-a 回执已收到(异常)"}
+{"ts": "2026-09-13 13:40:46", "actor": "manager", "action": "state:SUBMITTED", "task": "T-003", "detail": "pm-1 回执已收到(异常)"}
+{"ts": "2026-09-13 13:40:46", "actor": "manager", "action": "dispatch_reply", "task": "T-005", "detail": "target=worker-a ok=False"}
+{"ts": "2026-09-13 13:40:46", "actor": "manager", "action": "dispatch_reply", "task": "T-003", "detail": "target=pm-1 ok=False"}
+{"ts": "2026-09-13 13:51:11", "actor": "console", "action": "console_started", "task": "", "detail": "pid=39296"}
+{"ts": "2026-09-13 13:51:55", "actor": "console", "action": "console_started", "task": "", "detail": "pid=47592"}
+{"ts": "2026-09-13 13:52:28", "actor": "console", "action": "task_created", "task": "T-008", "detail": "AB-T12 P0安全修复：ingest 路由 IDOR 归属校验 + 输入长度防护 project=—"}
+{"ts": "2026-09-13 13:52:28", "actor": "console", "action": "state:ASSIGNED", "task": "T-008", "detail": "网页派工"}
+{"ts": "2026-09-13 13:52:28", "actor": "console", "action": "state:DOING", "task": "T-008", "detail": "派发中"}
+{"ts": "2026-09-13 13:56:00", "actor": "console", "action": "console_started", "task": "", "detail": "pid=47368"}
+{"ts": "2026-09-13 13:56:23", "actor": "console", "action": "state:DOING", "task": "T-004", "detail": "派发中"}
+{"ts": "2026-09-13 13:56:23", "actor": "console", "action": "state:DOING", "task": "T-005", "detail": "派发中"}
+{"ts": "2026-09-13 13:56:23", "actor": "console", "action": "state:DOING", "task": "T-007", "detail": "派发中"}
+{"ts": "2026-09-13 13:57:22", "actor": "console", "action": "state:REWORK", "task": "T-003", "detail": "超时拆小重派"}
+{"ts": "2026-09-13 13:57:22", "actor": "console", "action": "state:ASSIGNED", "task": "T-003", "detail": "第1次返工"}
+{"ts": "2026-09-13 13:57:22", "actor": "console", "action": "state:DOING", "task": "T-003", "detail": "派发中"}
+{"ts": "2026-09-13 13:57:52", "actor": "manager", "action": "state:SUBMITTED", "task": "T-007", "detail": "be-2 回执已收到(ok)"}
+{"ts": "2026-09-13 13:57:52", "actor": "manager", "action": "dispatch_reply", "task": "T-007", "detail": "target=be-2 ok=True"}
+{"ts": "2026-09-13 14:02:33", "actor": "manager", "action": "state:SUBMITTED", "task": "T-004", "detail": "worker-c 回执已收到(ok)"}
+{"ts": "2026-09-13 14:02:33", "actor": "manager", "action": "dispatch_reply", "task": "T-004", "detail": "target=worker-c ok=True"}
+{"ts": "2026-09-13 14:07:29", "actor": "manager", "action": "state:SUBMITTED", "task": "T-005", "detail": "worker-a 回执已收到(ok)"}
+{"ts": "2026-09-13 14:07:29", "actor": "manager", "action": "dispatch_reply", "task": "T-005", "detail": "target=worker-a ok=True"}
+{"ts": "2026-09-13 14:12:06", "actor": "console", "action": "state:REWORK", "task": "T-004", "detail": "worker-c 网关已重启修复凭据"}
+{"ts": "2026-09-13 14:12:06", "actor": "console", "action": "state:ASSIGNED", "task": "T-004", "detail": "第2次返工"}
+{"ts": "2026-09-13 14:12:07", "actor": "console", "action": "dispatch_blocked_offline", "task": "T-004", "detail": "worker-c 网关离线"}
+{"ts": "2026-09-13 14:12:23", "actor": "manager", "action": "state:SUBMITTED", "task": "T-003", "detail": "pm-1 回执已收到(异常)"}
+{"ts": "2026-09-13 14:12:23", "actor": "manager", "action": "dispatch_reply", "task": "T-003", "detail": "target=pm-1 ok=False"}
+{"ts": "2026-09-13 14:16:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-004", "detail": "网页派工"}
+{"ts": "2026-09-13 14:16:43", "actor": "console", "action": "state:DOING", "task": "T-004", "detail": "派发中"}
+{"ts": "2026-09-13 14:16:43", "actor": "console", "action": "state:ASSIGNED", "task": "T-008", "detail": "网页派工"}
+{"ts": "2026-09-13 14:16:43", "actor": "console", "action": "state:DOING", "task": "T-008", "detail": "派发中"}
+{"ts": "2026-09-13 14:17:31", "actor": "console", "action": "state:ASSIGNED", "task": "T-005", "detail": "网页派工"}
+{"ts": "2026-09-13 14:17:31", "actor": "console", "action": "state:DOING", "task": "T-005", "detail": "派发中"}
+{"ts": "2026-09-13 14:17:31", "actor": "console", "action": "state:ASSIGNED", "task": "T-007", "detail": "网页派工"}
+{"ts": "2026-09-13 14:17:31", "actor": "console", "action": "state:DOING", "task": "T-007", "detail": "派发中"}
+{"ts": "2026-09-13 14:19:47", "actor": "console", "action": "task_created", "task": "T-009", "detail": "spaces 域五处一致核对（pm-1 超时改派） project=—"}
+{"ts": "2026-09-13 14:19:47", "actor": "console", "action": "state:ASSIGNED", "task": "T-009", "detail": "网页派工"}
+{"ts": "2026-09-13 14:19:47", "actor": "console", "action": "state:DOING", "task": "T-009", "detail": "派发中"}
+{"ts": "2026-09-13 14:25:48", "actor": "manager", "action": "state:SUBMITTED", "task": "T-007", "detail": "be-2 回执已收到(ok)"}
+{"ts": "2026-09-13 14:25:48", "actor": "manager", "action": "dispatch_reply", "task": "T-007", "detail": "target=be-2 ok=True"}
+{"ts": "2026-09-13 14:31:39", "actor": "manager", "action": "state:SUBMITTED", "task": "T-005", "detail": "worker-a 回执已收到(ok)"}
+{"ts": "2026-09-13 14:31:39", "actor": "manager", "action": "dispatch_reply", "task": "T-005", "detail": "target=worker-a ok=True"}
+{"ts": "2026-09-13 14:31:45", "actor": "manager", "action": "state:SUBMITTED", "task": "T-008", "detail": "worker-b 回执已收到(异常)"}
+{"ts": "2026-09-13 14:31:45", "actor": "manager", "action": "dispatch_reply", "task": "T-008", "detail": "target=worker-b ok=False"}
+{"ts": "2026-09-13 14:31:45", "actor": "manager", "action": "state:SUBMITTED", "task": "T-004", "detail": "be-3 回执已收到(异常)"}
+{"ts": "2026-09-13 14:31:45", "actor": "manager", "action": "dispatch_reply", "task": "T-004", "detail": "target=be-3 ok=False"}
+{"ts": "2026-09-13 14:32:32", "actor": "manager", "action": "state:SUBMITTED", "task": "T-009", "detail": "worker-b 回执已收到(ok)"}
+{"ts": "2026-09-13 14:32:32", "actor": "manager", "action": "dispatch_reply", "task": "T-009", "detail": "target=worker-b ok=True"}
+{"ts": "2026-09-13 14:40:03", "actor": "console", "action": "task_created", "task": "T-010", "detail": "前端 P0/P1 修复批：404 判定码 + 死按钮 + 静默吞错（同源批次） project=—"}
+{"ts": "2026-09-13 14:40:40", "actor": "console", "action": "state:ASSIGNED", "task": "T-010", "detail": "网页派工"}
+{"ts": "2026-09-13 14:40:40", "actor": "console", "action": "state:DOING", "task": "T-010", "detail": "派发中"}
+{"ts": "2026-09-13 14:42:05", "actor": "console", "action": "task_created", "task": "T-011", "detail": "熟手旅程精简版：5条数据+排序总数+刷新重读 project=—"}
+{"ts": "2026-09-13 14:42:44", "actor": "console", "action": "state:ASSIGNED", "task": "T-011", "detail": "网页派工"}
+{"ts": "2026-09-13 14:42:44", "actor": "console", "action": "state:DOING", "task": "T-011", "detail": "派发中"}
+{"ts": "2026-09-13 14:45:16", "actor": "manager", "action": "state:SUBMITTED", "task": "T-010", "detail": "worker-a 回执已收到(ok)"}
+{"ts": "2026-09-13 14:45:16", "actor": "manager", "action": "dispatch_reply", "task": "T-010", "detail": "target=worker-a ok=True"}
+{"ts": "2026-09-13 14:55:32", "actor": "console", "action": "dispatch_blocked_offline", "task": "T-010", "detail": "worker-a 网关离线"}
+{"ts": "2026-09-13 14:57:44", "actor": "manager", "action": "state:SUBMITTED", "task": "T-011", "detail": "be-3 回执已收到(异常)"}
+{"ts": "2026-09-13 14:57:44", "actor": "manager", "action": "dispatch_reply", "task": "T-011", "detail": "target=be-3 ok=False"}
+{"ts": "2026-09-13 16:07:25", "actor": "console", "action": "console_started", "task": "", "detail": "pid=384"}
+{"ts": "2026-09-13 16:10:10", "actor": "console", "action": "console_started", "task": "", "detail": "pid=23560"}
+{"ts": "2026-09-13 16:10:28", "actor": "console", "action": "console_started", "task": "", "detail": "pid=47596"}
+{"ts": "2026-09-13 16:12:17", "actor": "console", "action": "console_started", "task": "", "detail": "pid=33332"}
+{"ts": "2026-09-13 16:12:58", "actor": "console", "action": "console_started", "task": "", "detail": "pid=16732"}
+{"ts": "2026-09-13 16:13:29", "actor": "console", "action": "console_started", "task": "", "detail": "pid=11104"}
+{"ts": "2026-09-13 16:13:59", "actor": "console", "action": "console_started", "task": "", "detail": "pid=28060"}
+{"ts": "2026-09-13 16:15:45", "actor": "console", "action": "console_started", "task": "", "detail": "pid=49268"}
+{"ts": "2026-09-13 16:16:35", "actor": "console", "action": "console_started", "task": "", "detail": "pid=57784"}
+{"ts": "2026-09-13 16:18:20", "actor": "console", "action": "console_started", "task": "", "detail": "pid=53108"}
+{"ts": "2026-09-13 16:20:34", "actor": "console", "action": "console_started", "task": "", "detail": "pid=25880"}
+{"ts": "2026-09-13 16:22:12", "actor": "console", "action": "console_started", "task": "", "detail": "pid=46700"}
+{"ts": "2026-09-13 16:23:52", "actor": "console", "action": "console_started", "task": "", "detail": "pid=54488"}
+{"ts": "2026-09-13 16:27:23", "actor": "console", "action": "state:REWORK", "task": "T-010", "detail": "SOUL 白名单已更新为 E:/Code/AideanBot，网关已重启，重派执行修复"}
+{"ts": "2026-09-13 16:27:23", "actor": "console", "action": "state:ASSIGNED", "task": "T-010", "detail": "第1次返工"}
+{"ts": "2026-09-13 16:27:23", "actor": "console", "action": "state:DOING", "task": "T-010", "detail": "派发中"}
+{"ts": "2026-09-13 16:42:25", "actor": "manager", "action": "state:SUBMITTED", "task": "T-010", "detail": "worker-a 回执已收到(异常)"}
+{"ts": "2026-09-13 16:42:25", "actor": "manager", "action": "dispatch_reply", "task": "T-010", "detail": "target=worker-a ok=False"}
+{"ts": "2026-09-13 16:54:52", "actor": "console", "action": "task_created", "task": "T-012", "detail": "T-012 回归：T-008 IDOR修复 + T-010 前端修复 复测 + 阶段1/2 抽样 project=—"}
+{"ts": "2026-09-13 16:54:52", "actor": "console", "action": "state:ASSIGNED", "task": "T-012", "detail": "网页派工"}
+{"ts": "2026-09-13 16:54:52", "actor": "console", "action": "state:DOING", "task": "T-012", "detail": "派发中"}
+{"ts": "2026-09-13 17:07:11", "actor": "manager", "action": "state:SUBMITTED", "task": "T-012", "detail": "be-3 回执已收到(ok)"}
+{"ts": "2026-09-13 17:07:11", "actor": "manager", "action": "dispatch_reply", "task": "T-012", "detail": "target=be-3 ok=True"}
+{"ts": "2026-09-13 17:11:09", "actor": "console", "action": "task_created", "task": "T-013", "detail": "T-013 复测：IDOR 修复部署后 A 组回归 project=—"}
+{"ts": "2026-09-13 17:11:09", "actor": "console", "action": "state:ASSIGNED", "task": "T-013", "detail": "网页派工"}
+{"ts": "2026-09-13 17:11:09", "actor": "console", "action": "state:DOING", "task": "T-013", "detail": "派发中"}
+{"ts": "2026-09-13 17:17:08", "actor": "manager", "action": "state:SUBMITTED", "task": "T-013", "detail": "be-3 回执已收到(ok)"}
+{"ts": "2026-09-13 17:17:08", "actor": "manager", "action": "dispatch_reply", "task": "T-013", "detail": "target=be-3 ok=True"}
+{"ts": "2026-09-13 17:18:48", "actor": "console", "action": "task_created", "task": "T-014", "detail": "T-014 修复闭环前置确认（供 reviewer-1 独立审查） project=—"}
+{"ts": "2026-09-13 17:18:48", "actor": "console", "action": "state:ASSIGNED", "task": "T-014", "detail": "网页派工"}
+{"ts": "2026-09-13 17:18:48", "actor": "console", "action": "state:DOING", "task": "T-014", "detail": "派发中"}
+{"ts": "2026-09-13 17:33:49", "actor": "manager", "action": "state:SUBMITTED", "task": "T-014", "detail": "worker-b 回执已收到(异常)"}
+{"ts": "2026-09-13 17:33:49", "actor": "manager", "action": "dispatch_reply", "task": "T-014", "detail": "target=worker-b ok=False"}
+{"ts": "2026-09-13 17:34:19", "actor": "machine-gate", "action": "verify", "task": "T-014", "detail": "exit_ok=True evidence=T-014-1.txt"}
+{"ts": "2026-09-13 17:34:19", "actor": "console", "action": "state:REVIEWING", "task": "T-014", "detail": "送审"}
+{"ts": "2026-09-13 17:45:20", "actor": "reviewer", "action": "state:BLOCKED", "task": "T-014", "detail": "reviewer-1 判定（机器提取）"}
+{"ts": "2026-09-13 17:45:20", "actor": "manager", "action": "review_reply", "task": "T-014", "detail": "target=reviewer-1 ok=True"}
+{"ts": "2026-09-13 17:46:46", "actor": "console", "action": "state:REVIEWING", "task": "T-014", "detail": "送审"}
+{"ts": "2026-09-13 18:01:47", "actor": "manager", "action": "review_reply", "task": "T-014", "detail": "target=reviewer-1 ok=False"}
+
+{"ts": "2026-09-13 23:40:00", "actor": "reviewer", "action": "state:DONE", "task": "T-015", "detail": "reviewer-1 判定 PASS"}{"ts": "2026-09-14 13:53:30", "actor": "console", "action": "console_started", "task": "", "detail": "pid=58552"}
+{"ts": "2026-09-14 13:56:30", "actor": "console", "action": "console_started", "task": "", "detail": "pid=28812"}
+{"ts": "2026-09-14 13:57:40", "actor": "console", "action": "console_started", "task": "", "detail": "pid=28112"}
+{"ts": "2026-09-14 14:00:31", "actor": "console", "action": "console_started", "task": "", "detail": "pid=17440"}
+{"ts": "2026-09-14 16:09:36", "actor": "console", "action": "console_started", "task": "", "detail": "pid=27196"}
+{"ts": "2026-09-14 16:14:19", "actor": "console", "action": "console_started", "task": "", "detail": "pid=25776"}
+{"ts": "2026-09-14 23:46:40", "actor": "console", "action": "console_started", "task": "", "detail": "pid=21728"}
+{"ts": "2026-09-14 23:51:49", "actor": "console", "action": "console_started", "task": "", "detail": "pid=42168"}
+{"ts": "2026-09-14 23:56:16", "actor": "console", "action": "console_started", "task": "", "detail": "pid=51056"}
+{"ts": "2026-09-15 00:02:47", "actor": "console", "action": "console_started", "task": "", "detail": "pid=21236"}
+{"ts": "2026-09-15 00:04:37", "actor": "launcher", "action": "launch:third_party_probe", "task": "", "detail": "third_party_probe_DO_NOT_TRUST", "project": "P-004", "phase": "third_party_probe", "role": "worker-b", "cli": "claude", "model": "claude-default", "percent": "0"}
+{"ts": "2026-09-15 00:27:58", "actor": "launcher", "action": "launch:third_party_probe", "task": "", "detail": "third_party_probe_DO_NOT_TRUST", "project": "P-004", "phase": "third_party_probe", "role": "worker-b", "cli": "claude", "model": "claude-default", "percent": "0"}
+{"ts": "2026-09-15 07:27:06", "actor": "launcher", "action": "launch:launch", "task": "", "detail": "phase=launch", "project": "P-004", "phase": "launch", "model": "auto"}
+{"ts": "2026-09-15 09:08:26", "actor": "console", "action": "console_started", "task": "", "detail": "pid=19312"}
+{"ts": "2026-09-15 09:30:16", "actor": "console", "action": "console_started", "task": "", "detail": "pid=50756"}

@@ -1,0 +1,31 @@
+针对 AideanCompany 的 Hermes 自动化体系（与 xiaohongshu_create 无关），修复网页管理端任务计划与进度同步缺口。工作目录：E:\Code\AideanCompany\fleet，控制台源码 fleet/console/console.py，项目白名单可使用 fleet/projects 下测试项目。
+
+现状已确认：console.py 已有 project_metrics、project_plan、plan_task_row；/projects 页面已有纵向任务计划、整体完成百分比、已完成/总数/剩余数、details 点击展开执行者/审查者/规划目标/验收标准/当前说明；但仍有以下缺口：
+1) 计划与任务状态变化后主要依赖整页访问/15秒 meta refresh，没有统一实时事件/API同步；
+2) 没有支持用户在计划大纲上直接修改计划/流程的安全接口与页面；
+3) IDE/CLI/控制台输出没有统一附带可访问 URL；
+4) 要确保调用方→执行者→审查者的事件与任务计划共用同一状态源。
+
+请按 Full Auto、不询问用户执行：
+
+W1（后端，优先派 be-2 或 worker-b）：
+- 在 fleet/console/console.py 新增只读 GET /api/plan?project=<pid>，返回 project、total、done、remaining、progress、tasks（按当前任务顺序）及每项 state/detail/assignee/reviewer/verify_cmd/rework_count。
+- 新增 GET /api/events?project=<pid>&since=<序号> 或等价轻量增量接口，基于现有 audit.log/任务状态源，返回结构化事件：timestamp、actor、action、taskId、from/to、assignee、reviewer、summary、url。严禁泄漏 API Key。
+- dispatch、机器验收、送审、返工、收口、状态迁移等现有路径写入统一事件；每个事件必须能生成任务详情 URL（http://127.0.0.1:5000/tasks/<id>）或项目 URL（http://127.0.0.1:5000/projects）。
+- 用户可修改计划：新增安全的 POST/PUT 计划更新接口（只允许 title/detail/verify_cmd/assignee/reviewer/order 等字段，复用角色权限、目录白名单、危险命令黑名单、状态机门；禁止改 task id、state、project、审计记录），网页提供编辑入口。修改必须 audit 且可回放；不得删除任务，新增任务沿用既有创建校验。
+
+W2（前端，优先派 fe-2 或 worker-a）：
+- /projects 页面通过 EventSource SSE 或 2秒增量轮询 /api/plan + /api/events 实时刷新整体百分比、已完成/总数/剩余数、每个进度条和展开详情，不依赖整页刷新；断线自动重连/退避，并显示“同步中/已断线/最后更新时间”。
+- 点击大纲仍可展开完整规划；增加符合现有权限的“编辑计划”表单，保存后局部更新并显示成功/失败原因。
+- 所有由控制台返回的派工/验收/送审/返工/收口提示均附可访问 URL；若 CLI 转发无法修改 Hermes 本体，则新增 fleet 工具包装器输出 URL，并在文档说明。
+
+W3（测试，优先 worker-c；若认证失败由 be-3 兼任）：
+- 测试 GET /api/plan 的总数/完成数/剩余数/百分比与任务明细；
+- 测试事件增量 since、事件含 from/to/actor/taskId/url；
+- 测试计划字段可编辑但禁止改 state/project/id、危险 verify_cmd 被拒绝、角色权限校验；
+- 测试页面含 EventSource/轮询、整体百分比、details、编辑入口、同步状态和 URL；
+- 跑全量测试、静态检查；禁止真实发布、删除文件/数据库、git commit/push；不得改 Hermes 模型 Key；不能发送真实业务写请求到 xiaohongshu_create 1994。
+
+验收门：npm test（如控制台是 Python，则执行 python -m py_compile fleet/console/console.py 和针对 API 的隔离测试）；npm run build/typecheck/lint（若项目适用）；git diff --check；报告落盘 E:\Code\AideanCompany\fleet\reports\fleet-plan-sync-fix-<员工ID>.md，必须包含六节报告和模型自述。
+
+Manager 必须串行：先探活员工，再派 W1/W2（文件边界不重叠），收到报告后机器验收，再派 W3；失败则返工最多3次。最终报告落盘 E:\Code\AideanCompany\fleet\reports\fleet-plan-sync-fix-20260914.md，六节后附第七节完成度报告，表头固定：角色 | 模型提供商 | 模型 | 任务 | 评价。

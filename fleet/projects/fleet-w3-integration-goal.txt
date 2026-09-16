@@ -1,0 +1,13 @@
+项目代号 fleet-console（AideanCompany 舰队控制台）。需求背景：网页管理端以从上到下进度条展示全部任务计划，点击大纲可展开流程说明，计划可随时修改，整体进度可见（一共多少/做了多少/还剩多少/整体完成百分比），且前后端与事件流必须连通相关联。
+
+当前实测缺口（W1 后端与 W2 前端组件均已交付并通过隔离测试，但缺最后集成接线，属部署/联调缺陷）：
+G1 集成：console.py 的 project_plan() 无 data-pid；page_projects() 无 <script src="/static/js/plan-sync-client.js">；Handler 无 /static/js/ 静态路由 → 已交付的前端同步组件 plan-sync-client.js 永远不会被加载，网页实际零实时同步。
+G2 同步：console.py 无 GET /api/stream SSE 端点 → plan-sync-client.js 的 SSE 通道退化为轮询。需补最小 SSE：长连接 + 心跳 15s + audit.log 增量推送（纯标准库）。
+G3 测试：新增 tests/test_plan_integration_w3.py：断言 /projects 含 data-pid、script 引入、.plan 区块结构；GET /static/js/plan-sync-client.js 200 且 Content-Type 正确；路径穿越拒绝；GET /api/stream 可建连并收到心跳/事件帧。另修复 node --test plan-sync-client.test.mjs 疑似挂死缺陷（允许改 plan-sync-client.test.mjs 与 plan-sync-client.js 的测试接缝，禁止破坏既有导出契约）。
+G4 部署：重启控制台（杀 console.py 进程树→以 python console.py 后台重启→等待 5000 端口就绪），重启后线上实测 GET /api/plan?project=P-004 返回 JSON、GET /api/events?since=0 返回 JSON。
+G5 回归：python tests/test_plan_api_w1.py 14/14、python tests/test_plan_events_w1.py 全过、node 测试套件全过、python -m py_compile console.py 通过，全部尾行原样进报告。
+
+允许改动文件（白名单）：fleet/console/console.py、fleet/console/tests/test_plan_integration_w3.py（新建）、fleet/console/static/js/plan-sync-client.js、fleet/console/static/js/plan-sync-client.test.mjs。禁改：state/ 数据文件、audit.log、roles 配置、SOUL；禁止删除任务；禁止引入任何第三方依赖。
+
+铁律：禁止 git commit/push；禁止改 E:\Code\NPX\xiaohongshu_create 项目；六节报告+模型自述（提供商/model_id/兜底）落盘 E:\Code\AideanCompany\fleet\console\reports\w3\报告.md；一切结论附真实命令输出。
+Full Auto：需求已明确，跳过 pm-1 与需求澄清，不要问我，直接派 be-2 执行 G1+G2+G4 与 G5 后端回归，派 fe-2 执行 G3 前端测试与 node 缺陷修复，两者文件不相交可并行；全部收口后亲自跑 G5 全量回归判定四态，REWORK 上限 3 次，写六节收口报告到 E:\Code\AideanCompany\fleet\reports\w3-integration-close-20260914.md。若 A2A 回执超时，等待 60s 后最多重发一次同一 context；仍失败则如实 BLOCKED，禁止伪造员工交付。

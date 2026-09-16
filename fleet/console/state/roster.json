@@ -23,7 +23,7 @@
       "card": "Worker-B",
       "port": 9902,
       "duty": "后端开发",
-      "workspace": "E:\\Demo\\Test0912",
+      "workspace": "E:/Code/AideanBot",
       "model": {
         "base_url": "https://api.b.ai/v1",
         "model_id": "qwen3.8-flash",
@@ -40,14 +40,14 @@
       "card": "Worker-C",
       "port": 9903,
       "duty": "测试工程师",
-      "workspace": "E:\\Demo\\Test0912",
+      "workspace": "E:/Code/AideanBot",
       "model": {
         "base_url": "https://api-inference.modelscope.cn/v1",
         "model_id": "deepseek-ai/DeepSeek-V4-Flash-0731",
         "key_env": "HERMES_CUSTOM_API_MODELSCOPE_API_KEY",
         "proxy": ""
       },
-      "status": "online",
+      "status": "edited(待重启烟测)",
       "created_at": "2026-09-12",
       "ftype": "worker"
     },
@@ -73,14 +73,14 @@
       "duty": "前端开发",
       "card": "FE-2",
       "port": 9908,
-      "workspace": "E:\\Demo\\Test0912",
+      "workspace": "E:/Code/AideanBot",
       "model": {
         "base_url": "https://token.sensenova.cn/v1",
         "model_id": "sensenova-6.8-flash-lite",
         "key_env": "HERMES_CUSTOM_API_FE_2_KEY",
         "proxy": ""
       },
-      "status": "online",
+      "status": "edited(待重启烟测)",
       "created_at": "2026-09-12 19:12:07"
     },
     {
@@ -89,14 +89,14 @@
       "duty": "后端开发",
       "card": "BE-2",
       "port": 9909,
-      "workspace": "E:\\Demo\\Test0912",
+      "workspace": "E:/Code/AideanBot",
       "model": {
         "base_url": "https://api.b.ai/v1",
         "model_id": "qwen3.8-flash",
         "key_env": "HERMES_CUSTOM_API_BE_2_KEY",
         "proxy": "http://127.0.0.1:10808"
       },
-      "status": "online",
+      "status": "edited(待重启烟测)",
       "created_at": "2026-09-12 19:12:24"
     },
     {
@@ -105,14 +105,14 @@
       "duty": "后端开发",
       "card": "BE-3",
       "port": 9910,
-      "workspace": "E:\\Demo\\Test0912",
+      "workspace": "E:/Code/AideanBot",
       "model": {
         "base_url": "https://api.b.ai/v1",
         "model_id": "qwen3.8-flash",
         "key_env": "HERMES_CUSTOM_API_BE_3_KEY",
         "proxy": "http://127.0.0.1:10808"
       },
-      "status": "online",
+      "status": "edited(待重启烟测)",
       "created_at": "2026-09-12 19:12:28"
     },
     {

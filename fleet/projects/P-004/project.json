@@ -1,0 +1,85 @@
+{
+  "schema": "aidean-fleet/project-v1",
+  "profile_version": 2,
+  "id": "P-004",
+  "name": "AideanBot-KnowledgeBasePlatform",
+  "workspace": "E:/Code/AideanBot",
+  "requirements_sources": ["README.md", ".docs/PRD.md"],
+  "ui_url": "http://127.0.0.1:3333",
+  "ports": {
+    "frontend_unique": 3333,
+    "forbid": ["3334", "3335", "3000"],
+    "note": "3000 主平台专属；3333 唯一前端端口；并行临时 3334 须在汇报注明"
+  },
+  "allowed_roots": ["E:/Code/AideanBot"],
+  "evidence_dir": ".workbuddy/evidence",
+  "packages_dir": "fleet/projects/AideanBot",
+  "tasks_filter_project": "P-004",
+  "roles": {
+    "backend_a": "worker-b",
+    "backend_b": "be-2",
+    "backend_c": "be-3",
+    "frontend_a": "worker-a",
+    "frontend_b": "fe-2",
+    "qa": "worker-c",
+    "pm": "pm-1",
+    "reviewer": "reviewer-1"
+  },
+  "plan": [
+    {"id": "T-026", "pkg": "BE-01", "after": [], "role": "backend_a", "review": "reviewer-1"},
+    {"id": "T-028", "pkg": "FE-01", "after": [], "role": "frontend_a", "review": "reviewer-1"},
+    {"id": "T-029", "pkg": "FE-02", "after": [], "role": "frontend_b", "review": "reviewer-1"},
+    {"id": "T-027", "pkg": "BE-03", "after": ["T-026"], "role": "backend_b", "review": "reviewer-1"}
+  ],
+  "acceptance": [
+    {"ac": "订阅执行引擎端到端闭环", "task": "T-026", "verify_cmd": "grep:fleet/projects/AideanBot/BE-01/task-package-BE-01.md:订阅执行引擎端到端闭环"},
+    {"ac": "SaaS 集成 P3 引擎路由", "task": "T-027", "verify_cmd": "grep:fleet/projects/AideanBot/BE-03/task-package-BE-03.md:SaaS 集成 P3"},
+    {"ac": "onboarding 与提问流程", "task": "T-028", "verify_cmd": "grep:fleet/projects/AideanBot/FE-01/task-package-FE-01.md:onboarding 与提问流程"},
+    {"ac": "交易管理页体系", "task": "T-029", "verify_cmd": "grep:E:/Code/AideanBot/frontend/app/subscriptions/page.tsx:订阅"}
+  ],
+  "verify": {
+    "backend_python": "E:/Code/AideanBot/backend/.venv/Scripts/python.exe",
+    "backend_cwd": "E:/Code/AideanBot",
+    "backend": [
+      "{backend_python} -m ruff check backend",
+      "{backend_python} -m pytest backend/tests -q"
+    ],
+    "frontend_cwd": "E:/Code/AideanBot/frontend",
+    "frontend": ["npx tsc --noEmit", "npx vitest run"],
+    "integration": [
+      "curl -s http://127.0.0.1:3333/",
+      "curl -s http://127.0.0.1:8000/api/v1/health"
+    ]
+  },
+  "mode_default": "plan",
+  "mode_allowlist": ["plan", "run", "intake", "audit", "discuss"],
+  "discuss_seats": {
+    "product": "opencode/modelscope/ZhipuAI/GLM-5.2",
+    "frontend": "claude",
+    "backend": "codex/agnes-3.0-flash"
+  },
+  "discuss": {"round_cap": 3, "read_only": true, "user_in_loop": true},
+  "audit_views": ["frontend", "backend", "saboteur", "qa"],
+  "model_pool": "fleet/configs/model-pool.json",
+  "test_env": {"TEST_FLEET_ENV": true, "admin_model": "agnes/agnes-3.0-flash", "blocklist": ["v3/gpt-6-astra"]},
+  "cli_overrides": {
+    "flags": {"codex": ["--skip-git-repo-check", "-s", "workspace-write"], "claude": ["--permission-mode", "acceptEdits", "--add-dir", "E:/Code/AideanBot"]},
+    "max_permission_launch": {
+      "claude": "claude --dangerously-skip-permissions",
+      "codex": "codex --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check",
+      "opencode": "opencode run --dangerously-skip-permissions",
+      "note": "用户口径：一律最高权限启动，flags 仅作权限不足回退"
+    },
+    "note": "仅允许覆写 CLI 旗标，不允许重排 cli-delegation.md 的角色-CLI 映射"
+  },
+  "precheck": [
+    {"name": "workspace_exists", "cmd": "test -d E:/Code/AideanBot"},
+    {"name": "evidence_dir_writable", "cmd": "mkdir -p E:/Code/AideanBot/.workbuddy/evidence && touch E:/Code/AideanBot/.workbuddy/evidence/.probe"},
+    {"name": "packages_present", "cmd": "ls fleet/projects/AideanBot"},
+    {"name": "manager_reachable", "cmd": "curl -s http://127.0.0.1:9900/.well-known/agent-card.json"},
+    {"name": "console_reachable", "cmd": "curl -s http://127.0.0.1:5000/api/health"},
+    {"name": "pool_probe", "cmd": "python fleet/tools/probe_pool.py --json"}
+  ],
+  "risk": {"allow_git_commit": false, "allow_docker_rebuild": false, "spend_approval": "always"},
+  "report_dir": "fleet/reports"
+}

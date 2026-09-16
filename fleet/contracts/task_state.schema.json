@@ -1,0 +1,30 @@
+{
+  "schema": "task_state",
+  "value": {
+    "states": [
+      "DRAFT",
+      "READY",
+      "ASSIGNED",
+      "RUNNING",
+      "SUBMITTED",
+      "VERIFYING",
+      "REVIEWING",
+      "DONE",
+      "PARTIAL",
+      "REWORK",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "terminal": [
+      "DONE",
+      "PARTIAL",
+      "BLOCKED",
+      "FAILED"
+    ],
+    "done_requires": [
+      "verify_ok=true",
+      "transcript 存在且 mtime>ASSIGNED 时间",
+      "reviewer PASS 或 显式 MANUAL_OVERRIDE+审批记录号"
+    ]
+  }
+}

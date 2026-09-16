@@ -1,0 +1,27 @@
+项目代号 xiaohongshu_create（CTXHS）。当前基线：HEAD 7eb3514 + 未提交工作区（Settings 467 pass / 0 fail 已验收）。
+目标：完成收尾报告「五、未完成事项」中的 4 项修复（第 5 项真实 POST 201 验证继续冻结）。
+
+重要流程约束：这是「代码修复轮」，需求已完全明确，严禁派 pm-1 写 PRD/分析（pm-1 不参与本轮）。直接按下列工作包拆解派工给后端/前端/测试。
+
+工作包 W1（后端，指派 be-2）：
+允许改动：apps/web/src/server/app.ts、apps/web/src/server/model-readiness.ts（如需）、apps/web/test/新增或 phase4.test.ts、CTXHS_文档索引.md、CTXHS_验证清单.md。
+(A) 把 evaluateWorkflowReadiness 接入 POST /api/tasks 创建门禁：创建任务时按所选 workflow 加载并评估，不满足则拒绝创建（HTTP 400，错误码建议 WORKFLOW_NOT_READY，信息含 workflowId 与 issues 摘要）；必须在 createTask 的 consumeUse 扣次之前判定，保证校验失败不扣额度。
+(B) 在 GET /api/models 的响应里为每个已加载 workflow 附 evaluateWorkflowReadiness 视图（建议字段 workflowReadiness[]，不破坏既有 readiness[] 契约）。
+(C) 测试：覆盖 拒绝不扣额度 / satisfied 放行 / 无 violation-check 工作流不受影响 / readiness 视图新增字段。
+(D) 同步更新 CTXHS_文档索引.md 与 CTXHS_验证清单.md：R3 违规检测半边状态改为已完成。
+
+工作包 W2（工作流+运行时，指派 be-3）：
+允许改动：workflows/*.yaml、packages/runtime-native/src/sample-skills.ts、packages/runtime-native/test/*、packages/workflow/test/*。
+(E) 为 image-text.yaml 与 prompt-only.yaml 增加 collect Step（id: collect，skill: collect），入参含 dataSource 与 credentialRef，从任务 input 透传；用 when 条件实现 dataSource=none 时跳过（参照 duplicate-check 的 when 写法；若 DSL 需取反可据实处理）。若该 yaml 的 topic-generation 已用 benchmarkAccounts 做采集语义，可让 collect 与其互补而非重复，按你对工作流语义的判断落位。
+(F) sample-skills.ts 新增 collect 确定性执行器（artifactType 建议 CollectReport）：输出 {dataSource, skipped, materials[]}；无真实采集，dataSource=none 返回 skipped:true。确保 runtime-native 全链路可跑。
+
+工作包 W3（测试+验收，先由你烟测 worker-c；若 worker-c Provider authentication failed 则改由 be-3 兼任）：
+允许改动：apps/web/test/*、packages/runtime-native/test/*、packages/workflow/test/*。
+(G) 覆盖 collect 的 when 跳过语义（DSL 解析+校验+运行时 skipped）；W1 门禁三态；全链路 npm test/typecheck/build/lint/git diff --check 全绿；禁改项（packages/storage/src/schema.ts 既有表、license 子系统、apps/electron）零改动。
+
+铁律：
+- 禁止 git commit/push；禁止对 1994 活体真实 POST /api/tasks（额度冻结）；禁止改 license 子系统与 electron；禁止任何 API Key 明文进代码/报告。
+- 员工六节报告 + 模型自述落盘 E:\Code\NPX\xiaohongshu_create\reports\<员工ID>\报告.md；报告内容以真实命令输出为据，不得伪造。
+- 你亲自跑验收命令判定 PASS/PARTIAL/REWORK/BLOCKED；REWORK 上限 3 次。
+- 全部收口后写六节报告（附第七节完成度报告表：角色|模型提供商|模型|任务|评价，评价五档）到 E:\Code\AideanCompany\fleet\reports\xiaohongshu_create-fix-20260914.md。
+Full Auto 模式：不要问我，自动派活、验收、返工直到完成或 ESCALATED。

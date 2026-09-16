@@ -63,3 +63,485 @@ ll be unavailable this turn
 will be unavailable this turn
 2026-09-13 22:52:08,424 WARNING tools.registry: check_fn _check_yuanbao returned False; dependent tools will be unavail
 able this turn
+2026-09-14 03:13:06,507 WARNING tools.mcp_tool: MCP server 'chrome-devtools' keepalive failed, triggering reconnect (st
+ate: connected 鈫?degraded): MCPError: Connection closed
+2026-09-14 03:13:06,507 WARNING tools.mcp_tool: MCP server 'chrome-devtools': connection marked suspect (keepalive fail
+ed: MCPError: Connection closed); next call will health-check it
+2026-09-14 03:13:06,916 WARNING tools.mcp_tool: MCP server 'sequential-thinking' keepalive failed, triggering reconnect
+ (state: connected 鈫?degraded): MCPError: Connection closed
+2026-09-14 03:13:06,916 WARNING tools.mcp_tool: MCP server 'sequential-thinking': connection marked suspect (keepalive 
+failed: MCPError: Connection closed); next call will health-check it
+2026-09-14 03:13:08,772 WARNING tools.mcp_tool: MCP server 'exa' keepalive failed, triggering reconnect (state: connect
+ed 鈫?degraded): MCPError: Connection closed
+2026-09-14 03:13:08,774 WARNING tools.mcp_tool: MCP server 'exa': connection marked suspect (keepalive failed: MCPError
+: Connection closed); next call will health-check it
+2026-09-14 03:19:08,598 WARNING tools.mcp_tool: MCP server 'chrome-devtools' keepalive failed, triggering reconnect (st
+ate: connected 鈫?degraded): MCPError: Connection closed
+2026-09-14 03:19:08,753 WARNING tools.mcp_tool: MCP server 'sequential-thinking' keepalive failed, triggering reconnect
+ (state: connected 鈫?degraded): MCPError: Connection closed
+2026-09-14 03:19:10,444 WARNING tools.mcp_tool: MCP server 'exa' keepalive failed, triggering reconnect (state: connect
+ed 鈫?degraded): MCPError: Connection closed
+2026-09-14 10:30:55,800 WARNING tools.registry: check_fn check_browser_back_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 10:30:55,803 WARNING tools.registry: check_fn _browser_cdp_check returned False; dependent tools will be una
+vailable this turn
+2026-09-14 10:30:55,807 WARNING tools.registry: check_fn check_browser_click_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 10:30:55,811 WARNING tools.registry: check_fn check_browser_requirements returned False; dependent tools wil
+l be unavailable this turn
+2026-09-14 10:30:55,815 WARNING tools.registry: check_fn _browser_dialog_check returned False; dependent tools will be 
+unavailable this turn
+2026-09-14 10:30:55,831 WARNING tools.registry: check_fn check_browser_navigate_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 10:30:55,834 WARNING tools.registry: check_fn check_browser_press_requirements returned False; dependent too
+ls will be unavailable this turn
+2026-09-14 10:30:55,839 WARNING tools.registry: check_fn check_browser_scroll_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 10:30:55,844 WARNING tools.registry: check_fn check_browser_snapshot_requirements returned False; dependent 
+tools will be unavailable this turn
+2026-09-14 10:30:55,851 WARNING tools.registry: check_fn check_browser_type_requirements returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 10:30:55,856 WARNING tools.registry: check_fn check_browser_vision_requirements returned False; dependent to
+ols will be unavailable this turn
+2026-09-14 10:30:55,864 WARNING tools.registry: check_fn _check_kanban_mode returned False; dependent tools will be una
+vailable this turn
+2026-09-14 10:30:55,868 WARNING tools.registry: check_fn _check_kanban_orchestrator_mode returned False; dependent tool
+s will be unavailable this turn
+2026-09-14 10:30:59,115 ERROR agent.chat_completion_helpers: Streaming failed before delivery: Error code: 401 - {'erro
+r': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 20260914023101471214049c955d5689jqwjEk7)
+', 'type': 'api_error'}}
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3166, in _call
+    self.result["response"] = _with_stream_emitters(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2265, in _with_stream_em
+itters
+    response = run()
+               ^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3167, in <lambda>
+    self.agent, lambda: self._call_wire(stream_attempt_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3149, in _call_wire
+    return self._call_chat_completions(stream_attempt_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2776, in _call_chat_comp
+letions
+    stream = self._set_managed_stream(relay_llm.stream(self.api_kwargs, _open_stream,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 297, in __init__
+    self._start_unmanaged(request)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 303, in _start_unmanaged
+    raw_stream = self._stream_factory(request)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2767, in _open_stream
+    return self._open_chat_stream({**next_api_kwargs, "stream": True, "timeout": timeout})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2704, in _open_chat_stre
+am
+    return request_client.chat.completions.create(**stream_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wr
+apper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\resources\chat\completions\complet
+ions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1297, in po
+st
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1070, in re
+quest
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (
+request id: 20260914023101471214049c955d5689jqwjEk7)', 'type': 'api_error'}}
+2026-09-14 10:30:59,142 WARNING agent.conversation_loop: API call failed (attempt 1/3) error_type=AuthenticationError t
+hread=hermes-gateway_0:39148 provider=custom base_url=https://api.b.ai/v1 model=qwen3.8-flash summary=HTTP 401: 閴存潈鏈嶅姟璇
+锋眰澶辫触: Invalid api_key format (request id: 20260914023101471214049c955d5689jqwjEk7)
+2026-09-14 10:30:59,913 ERROR agent.chat_completion_helpers: Streaming failed before delivery: Error code: 401 - {'stat
+us': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed'}
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3166, in _call
+    self.result["response"] = _with_stream_emitters(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2265, in _with_stream_em
+itters
+    response = run()
+               ^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3167, in <lambda>
+    self.agent, lambda: self._call_wire(stream_attempt_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3149, in _call_wire
+    return self._call_chat_completions(stream_attempt_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2776, in _call_chat_comp
+letions
+    stream = self._set_managed_stream(relay_llm.stream(self.api_kwargs, _open_stream,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 297, in __init__
+    self._start_unmanaged(request)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 303, in _start_unmanaged
+    raw_stream = self._stream_factory(request)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2767, in _open_stream
+    return self._open_chat_stream({**next_api_kwargs, "stream": True, "timeout": timeout})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2704, in _open_chat_stre
+am
+    return request_client.chat.completions.create(**stream_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wr
+apper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\resources\chat\completions\complet
+ions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1297, in po
+st
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1070, in re
+quest
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'status': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed
+'}
+2026-09-14 10:30:59,942 WARNING agent.conversation_loop: API call failed (attempt 1/3) error_type=AuthenticationError t
+hread=hermes-gateway_0:39148 provider=custom base_url=https://integrate.api.nvidia.com/v1/ model=nvidia/nemotron-3-ultr
+a-550b-a55b summary=HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+馃Ь Request debug dump written to: C:\Users\EDY\AppData\Local\hermes\profiles\worker-c\sessions\request_dump_20260914_10
+3054_897fb25e_20260914_103059_945105.json
+鈿狅笍  API call failed (attempt 1/3): AuthenticationError [HTTP 401]
+   馃攲 Provider: custom  Model: qwen3.8-flash
+   馃寪 Endpoint: https://api.b.ai/v1
+   馃摑 Error: HTTP 401: 閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 20260914023101471214049c955d5689jqwjEk7)
+   馃搵 Details: {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 20260914023101471214049c955d5
+689jqwjEk7)', 'type': 'api_error'}
+   鈴憋笍  Elapsed: 1.14s  Context: 2 msgs, ~5,426 tokens
+馃攼 Authentication failed and could not be refreshed 鈥?switching to fallback provider...
+鈿狅笍 Model fallback: qwen3.8-flash via custom unavailable (authentication failed); using nvidia/nemotron-3-ultra-550b-a5
+5b via custom.
+鈿狅笍  API call failed (attempt 1/3): AuthenticationError [HTTP 401]
+   馃攲 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   馃寪 Endpoint: https://integrate.api.nvidia.com/v1/
+   馃摑 Error: HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+   馃搵 Details: {'status': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed'}
+   鈴憋笍  Elapsed: 0.78s  Context: 2 msgs, ~5,431 tokens
+鉂?Non-retryable error (HTTP 401): HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+鉂?Non-retryable client error (HTTP 401). Aborting.
+   馃攲 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   馃寪 Endpoint: https://integrate.api.nvidia.com/v1/
+   馃挕 Your API key was rejected by the provider. Check:
+      鈥?Is the key valid? Run: hermes setup
+      鈥?Does your account have access to nvidia/nemotron-3-ultra-550b-a55b?
+2026-09-14 10:31:00,052 ERROR agent.conversation_loop: Non-retryable client error: Error code: 401 - {'status': 401, 't
+itle': 'Unauthorized', 'detail': 'Authentication failed'}
+2026-09-14 10:31:00,887 WARNING agent.auxiliary_client: Auxiliary: marking local/custom unhealthy for 600s (payment / c
+redit error). Subsequent auxiliary calls will skip it until 10:41:00.
+2026-09-14 10:31:00,888 WARNING agent.auxiliary_client: Auxiliary title_generation: fallback candidate main-agent(custo
+m) has a stale/unrefreshable credential (Error code: 401 - {'error': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api
+_key format (request id: 20260914023103295396502c955d568VX0riFwV)', 'type': 'api_error'}}) 鈥?skipping to next fallback
+2026-09-14 10:31:00,894 WARNING agent.auxiliary_client: Auxiliary title_generation: main provider custom is unavailable
+ and no fallback_chain / fallback_providers is configured 鈥?refusing to guess another logged-in provider. Re-authentica
+te (`hermes model`) or declare a fallback.
+2026-09-14 10:31:00,896 WARNING agent.auxiliary_client: Auxiliary title_generation: invalid provider response on custom
+ and all fallbacks exhausted (fallback_chain + main agent model). Raising original error.
+2026-09-14 10:31:00,897 WARNING agent.title_generator: Title generation failed: Auxiliary title_generation: LLM returne
+d invalid response (type=ChatCompletion): 'ChatCompletion(id=None, choices=None, created=None, model=None, object=None,
+ service_tier=None, system_fingerprint=None,'. Expected object with .choices[0].message 鈥?check provider adapter or cus
+tom endpoint compatibility.
+2026-09-14 12:11:49,438 ERROR agent.chat_completion_helpers: Streaming failed before delivery: Error code: 401 - {'erro
+r': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 2026091404115217823933c955d568YhpzWi2l)'
+, 'type': 'api_error'}}
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3166, in _call
+    self.result["response"] = _with_stream_emitters(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2265, in _with_stream_em
+itters
+    response = run()
+               ^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3167, in <lambda>
+    self.agent, lambda: self._call_wire(stream_attempt_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3149, in _call_wire
+    return self._call_chat_completions(stream_attempt_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2776, in _call_chat_comp
+letions
+    stream = self._set_managed_stream(relay_llm.stream(self.api_kwargs, _open_stream,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 297, in __init__
+    self._start_unmanaged(request)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 303, in _start_unmanaged
+    raw_stream = self._stream_factory(request)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2767, in _open_stream
+    return self._open_chat_stream({**next_api_kwargs, "stream": True, "timeout": timeout})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2704, in _open_chat_stre
+am
+    return request_client.chat.completions.create(**stream_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wr
+apper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\resources\chat\completions\complet
+ions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1297, in po
+st
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1070, in re
+quest
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (
+request id: 2026091404115217823933c955d568YhpzWi2l)', 'type': 'api_error'}}
+2026-09-14 12:11:49,446 WARNING agent.conversation_loop: API call failed (attempt 1/3) error_type=AuthenticationError t
+hread=hermes-gateway_1:46884 provider=custom base_url=https://api.b.ai/v1 model=qwen3.8-flash summary=HTTP 401: 閴存潈鏈嶅姟璇
+锋眰澶辫触: Invalid api_key format (request id: 2026091404115217823933c955d568YhpzWi2l)
+2026-09-14 12:11:50,175 ERROR agent.chat_completion_helpers: Streaming failed before delivery: Error code: 401 - {'stat
+us': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed'}
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3166, in _call
+    self.result["response"] = _with_stream_emitters(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2265, in _with_stream_em
+itters
+    response = run()
+               ^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3167, in <lambda>
+    self.agent, lambda: self._call_wire(stream_attempt_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3149, in _call_wire
+    return self._call_chat_completions(stream_attempt_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2776, in _call_chat_comp
+letions
+    stream = self._set_managed_stream(relay_llm.stream(self.api_kwargs, _open_stream,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 297, in __init__
+    self._start_unmanaged(request)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 303, in _start_unmanaged
+    raw_stream = self._stream_factory(request)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2767, in _open_stream
+    return self._open_chat_stream({**next_api_kwargs, "stream": True, "timeout": timeout})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2704, in _open_chat_stre
+am
+    return request_client.chat.completions.create(**stream_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wr
+apper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\resources\chat\completions\complet
+ions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1297, in po
+st
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1070, in re
+quest
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'status': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed
+'}
+2026-09-14 12:11:50,182 WARNING agent.conversation_loop: API call failed (attempt 1/3) error_type=AuthenticationError t
+hread=hermes-gateway_1:46884 provider=custom base_url=https://integrate.api.nvidia.com/v1/ model=nvidia/nemotron-3-ultr
+a-550b-a55b summary=HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+馃Ь Request debug dump written to: C:\Users\EDY\AppData\Local\hermes\profiles\worker-c\sessions\request_dump_20260914_12
+1147_e8e741f8_20260914_121150_182698.json
+鈿狅笍  API call failed (attempt 1/3): AuthenticationError [HTTP 401]
+   馃攲 Provider: custom  Model: qwen3.8-flash
+   馃寪 Endpoint: https://api.b.ai/v1
+   馃摑 Error: HTTP 401: 閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 2026091404115217823933c955d568YhpzWi2l)
+   馃搵 Details: {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 2026091404115217823933c955d56
+8YhpzWi2l)', 'type': 'api_error'}
+   鈴憋笍  Elapsed: 0.55s  Context: 2 msgs, ~5,590 tokens
+馃攼 Authentication failed and could not be refreshed 鈥?switching to fallback provider...
+鈿狅笍 Model fallback: qwen3.8-flash via custom unavailable (authentication failed); using nvidia/nemotron-3-ultra-550b-a5
+5b via custom.
+鈿狅笍  API call failed (attempt 1/3): AuthenticationError [HTTP 401]
+   馃攲 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   馃寪 Endpoint: https://integrate.api.nvidia.com/v1/
+   馃摑 Error: HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+   馃搵 Details: {'status': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed'}
+   鈴憋笍  Elapsed: 0.73s  Context: 2 msgs, ~5,595 tokens
+鉂?Non-retryable error (HTTP 401): HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+鉂?Non-retryable client error (HTTP 401). Aborting.
+   馃攲 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   馃寪 Endpoint: https://integrate.api.nvidia.com/v1/
+   馃挕 Your API key was rejected by the provider. Check:
+      鈥?Is the key valid? Run: hermes setup
+      鈥?Does your account have access to nvidia/nemotron-3-ultra-550b-a55b?
+2026-09-14 12:11:50,216 ERROR agent.conversation_loop: Non-retryable client error: Error code: 401 - {'status': 401, 't
+itle': 'Unauthorized', 'detail': 'Authentication failed'}
+2026-09-14 12:11:50,881 WARNING agent.auxiliary_client: Auxiliary: marking local/custom unhealthy for 600s (payment / c
+redit error). Subsequent auxiliary calls will skip it until 12:21:50.
+2026-09-14 12:11:50,881 WARNING agent.auxiliary_client: Auxiliary title_generation: fallback candidate main-agent(custo
+m) has a stale/unrefreshable credential (Error code: 401 - {'error': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api
+_key format (request id: 20260914041153526175153c955d568pvq9EM8Q)', 'type': 'api_error'}}) 鈥?skipping to next fallback
+2026-09-14 12:11:50,882 WARNING agent.auxiliary_client: Auxiliary title_generation: main provider custom is unavailable
+ and no fallback_chain / fallback_providers is configured 鈥?refusing to guess another logged-in provider. Re-authentica
+te (`hermes model`) or declare a fallback.
+2026-09-14 12:11:50,882 WARNING agent.auxiliary_client: Auxiliary title_generation: invalid provider response on custom
+ and all fallbacks exhausted (fallback_chain + main agent model). Raising original error.
+2026-09-14 12:11:50,883 WARNING agent.title_generator: Title generation failed: Auxiliary title_generation: LLM returne
+d invalid response (type=ChatCompletion): 'ChatCompletion(id=None, choices=None, created=None, model=None, object=None,
+ service_tier=None, system_fingerprint=None,'. Expected object with .choices[0].message 鈥?check provider adapter or cus
+tom endpoint compatibility.
+2026-09-14 12:47:38,368 ERROR agent.chat_completion_helpers: Streaming failed before delivery: Error code: 401 - {'erro
+r': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 2026091404474124779973c955d568ML9G5jF0)'
+, 'type': 'api_error'}}
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3166, in _call
+    self.result["response"] = _with_stream_emitters(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2265, in _with_stream_em
+itters
+    response = run()
+               ^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3167, in <lambda>
+    self.agent, lambda: self._call_wire(stream_attempt_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3149, in _call_wire
+    return self._call_chat_completions(stream_attempt_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2776, in _call_chat_comp
+letions
+    stream = self._set_managed_stream(relay_llm.stream(self.api_kwargs, _open_stream,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 297, in __init__
+    self._start_unmanaged(request)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 303, in _start_unmanaged
+    raw_stream = self._stream_factory(request)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2767, in _open_stream
+    return self._open_chat_stream({**next_api_kwargs, "stream": True, "timeout": timeout})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2704, in _open_chat_stre
+am
+    return request_client.chat.completions.create(**stream_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wr
+apper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\resources\chat\completions\complet
+ions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1297, in po
+st
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1070, in re
+quest
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'error': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (
+request id: 2026091404474124779973c955d568ML9G5jF0)', 'type': 'api_error'}}
+2026-09-14 12:47:38,395 WARNING agent.conversation_loop: API call failed (attempt 1/3) error_type=AuthenticationError t
+hread=hermes-gateway_1:46884 provider=custom base_url=https://api.b.ai/v1 model=qwen3.8-flash summary=HTTP 401: 閴存潈鏈嶅姟璇
+锋眰澶辫触: Invalid api_key format (request id: 2026091404474124779973c955d568ML9G5jF0)
+2026-09-14 12:47:39,232 ERROR agent.chat_completion_helpers: Streaming failed before delivery: Error code: 401 - {'stat
+us': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed'}
+Traceback (most recent call last):
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3166, in _call
+    self.result["response"] = _with_stream_emitters(
+                              ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2265, in _with_stream_em
+itters
+    response = run()
+               ^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3167, in <lambda>
+    self.agent, lambda: self._call_wire(stream_attempt_id))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 3149, in _call_wire
+    return self._call_chat_completions(stream_attempt_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2776, in _call_chat_comp
+letions
+    stream = self._set_managed_stream(relay_llm.stream(self.api_kwargs, _open_stream,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 297, in __init__
+    self._start_unmanaged(request)
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\relay_llm.py", line 303, in _start_unmanaged
+    raw_stream = self._stream_factory(request)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2767, in _open_stream
+    return self._open_chat_stream({**next_api_kwargs, "stream": True, "timeout": timeout})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\agent\chat_completion_helpers.py", line 2704, in _open_chat_stre
+am
+    return request_client.chat.completions.create(**stream_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_utils\_utils.py", line 286, in wr
+apper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\resources\chat\completions\complet
+ions.py", line 1204, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1297, in po
+st
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\EDY\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\openai\_base_client.py", line 1070, in re
+quest
+    raise self._make_status_error_from_response(err.response) from None
+openai.AuthenticationError: Error code: 401 - {'status': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed
+'}
+2026-09-14 12:47:39,245 WARNING agent.conversation_loop: API call failed (attempt 1/3) error_type=AuthenticationError t
+hread=hermes-gateway_1:46884 provider=custom base_url=https://integrate.api.nvidia.com/v1/ model=nvidia/nemotron-3-ultr
+a-550b-a55b summary=HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+馃Ь Request debug dump written to: C:\Users\EDY\AppData\Local\hermes\profiles\worker-c\sessions\request_dump_20260914_12
+4736_0a718759_20260914_124739_245136.json
+鈿狅笍  API call failed (attempt 1/3): AuthenticationError [HTTP 401]
+   馃攲 Provider: custom  Model: qwen3.8-flash
+   馃寪 Endpoint: https://api.b.ai/v1
+   馃摑 Error: HTTP 401: 閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 2026091404474124779973c955d568ML9G5jF0)
+   馃搵 Details: {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api_key format (request id: 2026091404474124779973c955d56
+8ML9G5jF0)', 'type': 'api_error'}
+   鈴憋笍  Elapsed: 0.66s  Context: 2 msgs, ~5,429 tokens
+馃攼 Authentication failed and could not be refreshed 鈥?switching to fallback provider...
+鈿狅笍 Model fallback: qwen3.8-flash via custom unavailable (authentication failed); using nvidia/nemotron-3-ultra-550b-a5
+5b via custom.
+鈿狅笍  API call failed (attempt 1/3): AuthenticationError [HTTP 401]
+   馃攲 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   馃寪 Endpoint: https://integrate.api.nvidia.com/v1/
+   馃摑 Error: HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+   馃搵 Details: {'status': 401, 'title': 'Unauthorized', 'detail': 'Authentication failed'}
+   鈴憋笍  Elapsed: 0.82s  Context: 2 msgs, ~5,434 tokens
+鉂?Non-retryable error (HTTP 401): HTTP 401: {"status":401,"title":"Unauthorized","detail":"Authentication failed"}
+鉂?Non-retryable client error (HTTP 401). Aborting.
+   馃攲 Provider: custom  Model: nvidia/nemotron-3-ultra-550b-a55b
+   馃寪 Endpoint: https://integrate.api.nvidia.com/v1/
+   馃挕 Your API key was rejected by the provider. Check:
+      鈥?Is the key valid? Run: hermes setup
+      鈥?Does your account have access to nvidia/nemotron-3-ultra-550b-a55b?
+2026-09-14 12:47:39,348 ERROR agent.conversation_loop: Non-retryable client error: Error code: 401 - {'status': 401, 't
+itle': 'Unauthorized', 'detail': 'Authentication failed'}
+2026-09-14 12:47:40,222 WARNING agent.auxiliary_client: Auxiliary: marking local/custom unhealthy for 600s (payment / c
+redit error). Subsequent auxiliary calls will skip it until 12:57:40.
+2026-09-14 12:47:40,223 WARNING agent.auxiliary_client: Auxiliary title_generation: fallback candidate main-agent(custo
+m) has a stale/unrefreshable credential (Error code: 401 - {'error': {'code': '', 'message': '閴存潈鏈嶅姟璇锋眰澶辫触: Invalid api
+_key format (request id: 20260914044742939799885c955d568hcWhKLsJ)', 'type': 'api_error'}}) 鈥?skipping to next fallback
+2026-09-14 12:47:40,228 WARNING agent.auxiliary_client: Auxiliary title_generation: main provider custom is unavailable
+ and no fallback_chain / fallback_providers is configured 鈥?refusing to guess another logged-in provider. Re-authentica
+te (`hermes model`) or declare a fallback.
+2026-09-14 12:47:40,230 WARNING agent.auxiliary_client: Auxiliary title_generation: invalid provider response on custom
+ and all fallbacks exhausted (fallback_chain + main agent model). Raising original error.
+2026-09-14 12:47:40,232 WARNING agent.title_generator: Title generation failed: Auxiliary title_generation: LLM returne
+d invalid response (type=ChatCompletion): 'ChatCompletion(id=None, choices=None, created=None, model=None, object=None,
+ service_tier=None, system_fingerprint=None,'. Expected object with .choices[0].message 鈥?check provider adapter or cus
+tom endpoint compatibility.

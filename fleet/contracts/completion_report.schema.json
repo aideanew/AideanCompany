@@ -1,0 +1,21 @@
+{
+  "schema": "completion_report",
+  "value": {
+    "columns": [
+      "角色",
+      "平台",
+      "模型",
+      "任务",
+      "评分"
+    ],
+    "grade_scale": [
+      "圆满完成无返工",
+      "完成有返工",
+      "部分完成有缺口",
+      "受阻未产出",
+      "未派工"
+    ],
+    "grade_basis": "程序按 state+verify_ok+rework_count 合成，禁止 LLM 自评",
+    "cross_check": "平台/模型必须与 transcript 自述 + model_pool_state 探活三方一致，对不上以事件流为准"
+  }
+}
